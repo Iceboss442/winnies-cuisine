@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reservations & Contact | Winnie's Cuisine & Events — Fine Dining, Enugu</title>
+  <meta name="description" content="Reserve a table, book our event space, or enquire about catering at Winnie's Cuisine & Events, Nwabude Mall, Centenary City Estate, Enugu. We respond within 24 hours." />
+  <meta name="keywords" content="Winnie's Cuisine Enugu, restaurant reservation Enugu, event catering Enugu, fine dining booking, Centenary City Estate restaurant" />
+  <link rel="canonical" href="https://winniescuisine.com/contact.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://winniescuisine.com/contact.html" />
+  <meta property="og:title" content="Reservations & Contact | Winnie's Cuisine & Events" />
+  <meta property="og:description" content="Reserve a table, book our event space, or enquire about catering at Winnie's Cuisine & Events, Enugu. We respond within 24 hours." />
+  <!-- OWNER: Replace with your actual OG image URL (1200×630px) -->
+  <meta property="og:image" content="https://winniescuisine.com/images/og-contact.jpg" />
+  <meta property="og:locale" content="en_NG" />
+  <meta property="og:site_name" content="Winnie's Cuisine & Events" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Reservations & Contact | Winnie's Cuisine & Events" />
+  <meta name="twitter:description" content="Reserve a table or book our event space in Enugu. We respond within 24 hours." />
+  <meta name="twitter:image" content="https://winniescuisine.com/images/og-contact.jpg" />
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Winnie's Cuisine & Events",
+    "url": "https://winniescuisine.com",
+    "telephone": "+2348000000000",
+    "email": "hello@winniescuisine.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Nwabude Mall, Centenary City Estate",
+      "addressLocality": "Enugu",
+      "addressCountry": "NG"
+    },
+    "openingHours": "Mo-Su 11:00-22:00",
+    "servesCuisine": ["Nigerian", "Continental", "International"],
+    "priceRange": "₦₦₦"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            burgundy: { DEFAULT: '#6B1A2A', light: '#8B2438', dark: '#4A1020' },
+            gold:     { DEFAULT: '#C9A84C', light: '#E2C36E', dark: '#A8873A' },
+            cream:    { DEFAULT: '#FAF6F0', warm: '#F5EDE0', deep: '#EAE0D0' },
+            charcoal: { DEFAULT: '#2C2C2C', light: '#444444', soft: '#6B6B6B' },
+          },
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+            sans:  ['Inter', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: #FAF6F0; color: #2C2C2C; }
+
+    /* ── Navbar ── */
+    #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding: 1.25rem 0; transition: background 0.35s, backdrop-filter 0.35s, padding 0.35s; }
+    #navbar.scrolled { background: rgba(44,18,18,0.97); backdrop-filter: blur(12px); padding: 0.75rem 0; }
+    .nav-link { position: relative; color: rgba(255,255,255,0.85); font-size: 0.8125rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; transition: color 0.2s; text-decoration: none; }
+    .nav-link::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: #C9A84C; transition: width 0.3s; }
+    .nav-link:hover, .nav-link.active { color: #C9A84C; }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+    /* ── Mobile drawer ── */
+    #drawer { position: fixed; inset: 0; z-index: 100; visibility: hidden; }
+    #drawer-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); opacity: 0; transition: opacity 0.3s; }
+    #drawer-panel { position: absolute; top: 0; right: 0; bottom: 0; width: min(320px, 85vw); background: #2C1C12; transform: translateX(100%); transition: transform 0.35s cubic-bezier(.4,0,.2,1); padding: 2rem 1.5rem; }
+    #drawer.open { visibility: visible; }
+    #drawer.open #drawer-overlay { opacity: 1; }
+    #drawer.open #drawer-panel { transform: translateX(0); }
+    .drawer-link { display: block; color: rgba(255,255,255,0.8); font-size: 1rem; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500; padding: 0.875rem 0; border-bottom: 1px solid rgba(201,168,76,0.15); transition: color 0.2s; text-decoration: none; }
+    .drawer-link:hover { color: #C9A84C; }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .stagger > *:nth-child(1) { transition-delay: 0.05s; }
+    .stagger > *:nth-child(2) { transition-delay: 0.13s; }
+    .stagger > *:nth-child(3) { transition-delay: 0.21s; }
+    .stagger > *:nth-child(4) { transition-delay: 0.29s; }
+    .stagger > *:nth-child(5) { transition-delay: 0.37s; }
+
+    /* ── Form steps ── */
+    .step-btn { border: 1px solid rgba(201,168,76,0.4); border-radius: 0.5rem; padding: 1.25rem 1rem; cursor: pointer; transition: all 0.25s; background: transparent; text-align: left; width: 100%; }
+    .step-btn:hover { border-color: #C9A84C; background: rgba(201,168,76,0.06); }
+    .step-btn.selected { border-color: #C9A84C; background: rgba(201,168,76,0.1); }
+    .step-indicator { display: flex; align-items: center; gap: 0; margin-bottom: 2.5rem; }
+    .step-dot { width: 2rem; height: 2rem; border-radius: 50%; border: 2px solid rgba(201,168,76,0.4); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; color: rgba(201,168,76,0.6); transition: all 0.3s; flex-shrink: 0; }
+    .step-dot.active { border-color: #C9A84C; background: #C9A84C; color: #2C1C12; }
+    .step-dot.done { border-color: #C9A84C; background: rgba(201,168,76,0.2); color: #C9A84C; }
+    .step-line { flex: 1; height: 1px; background: rgba(201,168,76,0.25); }
+    .step-line.done { background: rgba(201,168,76,0.7); }
+    .form-panel { display: none; }
+    .form-panel.active { display: block; }
+    .field-label { display: block; font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 0.5rem; }
+    .field-input { width: 100%; background: rgba(255,255,255,0.07); border: 1px solid rgba(201,168,76,0.25); border-radius: 0.375rem; color: #fff; font-family: 'Inter', sans-serif; font-size: 0.9375rem; padding: 0.75rem 1rem; transition: border-color 0.2s, background 0.2s; outline: none; }
+    .field-input:focus { border-color: #C9A84C; background: rgba(255,255,255,0.1); }
+    .field-input::placeholder { color: rgba(255,255,255,0.3); }
+    select.field-input option { background: #2C1C12; color: #fff; }
+    .btn-gold { display: inline-flex; align-items: center; gap: 0.5rem; background: #C9A84C; color: #2C1C12; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.875rem 2rem; border-radius: 0.375rem; border: none; cursor: pointer; transition: background 0.2s, transform 0.15s; }
+    .btn-gold:hover { background: #E2C36E; transform: translateY(-1px); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: rgba(255,255,255,0.7); font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.875rem 1.5rem; border-radius: 0.375rem; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; transition: all 0.2s; }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+
+    /* ── Testimonials ── */
+    .testi-card { background: #fff; border-radius: 0.75rem; padding: 2rem; box-shadow: 0 4px 24px rgba(107,26,42,0.07); }
+    .star { color: #C9A84C; }
+
+    /* ── Hours table ── */
+    .hours-row { display: flex; justify-content: space-between; align-items: center; padding: 0.625rem 0; border-bottom: 1px solid rgba(201,168,76,0.15); }
+    .hours-row:last-child { border-bottom: none; }
+
+    /* ── Footer ── */
+    footer a { text-decoration: none; }
+    .footer-link { color: rgba(255,255,255,0.55); font-size: 0.875rem; transition: color 0.2s; }
+    .footer-link:hover { color: #C9A84C; }
+    .social-icon { width: 2.25rem; height: 2.25rem; border-radius: 50%; border: 1px solid rgba(201,168,76,0.35); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.7); transition: all 0.2s; }
+    .social-icon:hover { border-color: #C9A84C; color: #C9A84C; background: rgba(201,168,76,0.1); }
+
+    /* ── WhatsApp FAB ── */
+    #wa-fab { position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 90; width: 3.5rem; height: 3.5rem; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.5); transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; }
+    #wa-fab:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     NAVBAR
+══════════════════════════════════ -->
+<nav id="navbar" role="navigation" aria-label="Main navigation">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+    <a href="index.html" class="font-serif text-xl font-semibold text-white tracking-wide" aria-label="Winnie's Cuisine & Events — Home">
+      Winnie's <span style="color:#C9A84C;">Cuisine</span>
+    </a>
+    <ul class="hidden md:flex items-center gap-8" role="list">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="menu.html" class="nav-link">Menu</a></li>
+      <li><a href="events.html" class="nav-link">Events</a></li>
+      <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+      <li><a href="contact.html" class="nav-link active">Contact</a></li>
+    </ul>
+    <!-- OWNER: Update this WhatsApp link with your real number: https://wa.me/234XXXXXXXXXX -->
+    <a href="https://wa.me/2348000000000" target="_blank" rel="noopener" class="hidden md:inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest px-5 py-2.5 rounded border border-gold text-gold hover:bg-gold hover:text-charcoal transition-all" style="border-color:#C9A84C;color:#C9A84C;" aria-label="Contact us on WhatsApp">
+      <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+    <button id="drawer-toggle" class="md:hidden text-white p-2 rounded focus:outline-none focus:ring-2 focus:ring-gold" aria-label="Open menu" aria-expanded="false" aria-controls="drawer" style="--tw-ring-color:#C9A84C;">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Drawer -->
+<div id="drawer" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <div id="drawer-overlay" aria-hidden="true"></div>
+  <div id="drawer-panel">
+    <div class="flex justify-between items-center mb-8">
+      <span class="font-serif text-lg text-white">Menu</span>
+      <button id="drawer-close" class="text-white p-1 rounded focus:outline-none focus:ring-2 focus:ring-gold" aria-label="Close menu" style="--tw-ring-color:#C9A84C;">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <nav aria-label="Mobile navigation">
+      <a href="index.html" class="drawer-link">Home</a>
+      <a href="menu.html" class="drawer-link">Menu</a>
+      <a href="events.html" class="drawer-link">Events</a>
+      <a href="gallery.html" class="drawer-link">Gallery</a>
+      <a href="contact.html" class="drawer-link" style="color:#C9A84C;">Contact</a>
+    </nav>
+    <!-- OWNER: Update WhatsApp link -->
+    <a href="https://wa.me/2348000000000" target="_blank" rel="noopener" class="mt-8 flex items-center gap-2 text-xs font-semibold uppercase tracking-widest px-5 py-3 rounded border justify-center" style="border-color:#C9A84C;color:#C9A84C;">
+      <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Chat on WhatsApp
+    </a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     HERO / PAGE HEADER
+══════════════════════════════════ -->
+<header class="relative flex items-end" style="height:42vh;min-height:320px;background:linear-gradient(160deg,#4A1020 0%,#6B1A2A 50%,#2C1C12 100%);">
+  <div class="absolute inset-0 opacity-20" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&auto=format&fit=crop');background-size:cover;background-position:center;" aria-hidden="true"></div>
+  <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(44,28,18,0.85) 0%,rgba(74,16,32,0.4) 100%);" aria-hidden="true"></div>
+  <div class="relative max-w-7xl mx-auto px-6 pb-14 w-full">
+    <p class="text-gold-light text-xs font-semibold tracking-widest uppercase mb-3" style="color:#E2C36E;">Get In Touch</p>
+    <h1 class="font-serif text-white font-light" style="font-size:clamp(2.25rem,5vw,3.75rem);line-height:1.1;">Reservations &amp; Enquiries</h1>
+    <p class="mt-3 text-white/70 text-lg max-w-xl">Whether you're planning a romantic dinner or a grand celebration, we're here to make it exceptional.</p>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════
+     MULTI-STEP FORM
+══════════════════════════════════ -->
+<section id="book" aria-labelledby="book-heading" style="background:linear-gradient(135deg,#2C1C12 0%,#3D1A22 50%,#1A1A1A 100%);padding:5rem 0 6rem;">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="text-center mb-12 reveal">
+      <h2 id="book-heading" class="font-serif text-white font-light" style="font-size:clamp(1.875rem,4vw,2.75rem);">Make a Reservation</h2>
+      <p class="mt-3 text-white/60 text-base">We'll confirm via WhatsApp or email within <strong class="text-white/80">24 hours</strong>.</p>
+    </div>
+
+    <!-- Step 1: Choose path -->
+    <div id="step1" class="form-panel active reveal">
+      <p class="text-xs font-semibold uppercase tracking-widest mb-6" style="color:rgba(201,168,76,0.7);">Step 1 of 3 — What can we help you with?</p>
+      <div class="grid gap-4" role="group" aria-label="Enquiry type">
+        <button class="step-btn" data-path="table" onclick="selectPath(this,'table')" aria-pressed="false">
+          <div class="flex items-start gap-4">
+            <span class="text-2xl" aria-hidden="true">🍽️</span>
+            <div>
+              <p class="font-serif text-white text-lg font-medium">Table Reservation</p>
+              <p class="text-sm mt-0.5" style="color:rgba(255,255,255,0.55);">Book a dining experience for 1–15 guests</p>
+            </div>
+          </div>
+        </button>
+        <button class="step-btn" data-path="catering" onclick="selectPath(this,'catering')" aria-pressed="false">
+          <div class="flex items-start gap-4">
+            <span class="text-2xl" aria-hidden="true">🥘</span>
+            <div>
+              <p class="font-serif text-white text-lg font-medium">Catering Enquiry</p>
+              <p class="text-sm mt-0.5" style="color:rgba(255,255,255,0.55);">Off-site catering for any occasion</p>
+            </div>
+          </div>
+        </button>
+        <button class="step-btn" data-path="event" onclick="selectPath(this,'event')" aria-pressed="false">
+          <div class="flex items-start gap-4">
+            <span class="text-2xl" aria-hidden="true">🎉</span>
+            <div>
+              <p class="font-serif text-white text-lg font-medium">Event Space / Full Event Booking</p>
+              <p class="text-sm mt-0.5" style="color:rgba(255,255,255,0.55);">Venue hire and full event management at Winnie's</p>
+            </div>
+          </div>
+        </button>
+      </div>
+      <div class="mt-8 flex justify-end">
+        <button onclick="goStep(2)" class="btn-gold" id="next1" disabled aria-disabled="true">
+          Continue
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 2: Details form -->
+    <div id="step2" class="form-panel" aria-live="polite">
+      <!-- Step indicator -->
+      <div class="step-indicator" aria-label="Step 2 of 3">
+        <div class="step-dot done" aria-label="Step 1 complete">✓</div>
+        <div class="step-line done"></div>
+        <div class="step-dot active" aria-current="step">2</div>
+        <div class="step-line"></div>
+        <div class="step-dot">3</div>
+      </div>
+
+      <form id="enquiry-form" novalidate>
+        <!-- Common fields -->
+        <div class="grid md:grid-cols-2 gap-5 mb-5">
+          <div>
+            <label for="f-name" class="field-label">Full Name <span aria-label="required" style="color:#C9A84C;">*</span></label>
+            <input type="text" id="f-name" name="name" class="field-input" placeholder="Adaeze Okonkwo" required autocomplete="name" />
+          </div>
+          <div>
+            <label for="f-phone" class="field-label">Phone / WhatsApp <span aria-label="required" style="color:#C9A84C;">*</span></label>
+            <input type="tel" id="f-phone" name="phone" class="field-input" placeholder="+234 800 000 0000" required autocomplete="tel" />
+          </div>
+        </div>
+        <div class="mb-5">
+          <label for="f-email" class="field-label">Email Address</label>
+          <input type="email" id="f-email" name="email" class="field-input" placeholder="adaeze@example.com" autocomplete="email" />
+        </div>
+
+        <!-- Table reservation fields -->
+        <div id="fields-table" class="path-fields hidden">
+          <div class="grid md:grid-cols-3 gap-5 mb-5">
+            <div>
+              <label for="t-date" class="field-label">Preferred Date <span aria-label="required" style="color:#C9A84C;">*</span></label>
+              <input type="date" id="t-date" name="res_date" class="field-input" />
+            </div>
+            <div>
+              <label for="t-time" class="field-label">Preferred Time <span aria-label="required" style="color:#C9A84C;">*</span></label>
+              <select id="t-time" name="res_time" class="field-input">
+                <option value="">Select time</option>
+                <option>11:00 AM</option><option>12:00 PM</option><option>1:00 PM</option>
+                <option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option>
+                <option>5:00 PM</option><option>6:00 PM</option><option>7:00 PM</option>
+                <option>8:00 PM</option><option>9:00 PM</option>
+              </select>
+            </div>
+            <div>
+              <label for="t-guests" class="field-label">Guests <span aria-label="required" style="color:#C9A84C;">*</span></label>
+              <select id="t-guests" name="guests" class="field-input">
+                <option value="">Select</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option>
+                <option>5–6</option><option>7–8</option><option>9–10</option><option>11–15</option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-5">
+            <label for="t-occasion" class="field-label">Occasion (optional)</label>
+            <select id="t-occasion" name="occasion" class="field-input">
+              <option value="">Select occasion</option>
+              <option>Anniversary</option><option>Birthday</option><option>Date Night</option>
+              <option>Business Dinner</option><option>Graduation Celebration</option><option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Catering fields -->
+        <div id="fields-catering" class="path-fields hidden">
+          <div class="grid md:grid-cols-2 gap-5 mb-5">
+            <div>
+              <label for="c-date" class="field-label">Event Date <span aria-label="required" style="color:#C9A84C;">*</span></label>
+              <input type="date" id="c-date" name="event_date" class="field-input" />
+            </div>
+            <div>
+              <label for="c-guests" class="field-label">Estimated Guests <span aria-label="required" style="color:#C9A84C;">*</span></label>
+              <input type="number" id="c-guests" name="catering_guests" class="field-input" placeholder="e.g. 80" min="1" />
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-5 mb-5">
+            <div>
+              <label for="c-type" class="field-label">Event Type <span aria-label="required" style="color:#C9A84C;">*</span></label>
+              <select id="c-type" name="event_type" class="field-input">
+                <option value="">Select type</option>
+                <option>Wedding</option><option>Birthday Party</option><option>Corporate Event</option>
+                <option>Naming Ceremony</option><option>Funeral/Burial</option><option>Private Dinner</option><option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="c-budget" class="field-label">Approximate Budget</label>
+              <select id="c-budget" name="budget" class="field-input">
+                <option value="">Select range</option>
+                <option>Under ₦200,000</option><option>₦200,000 – ₦500,000</option>
+                <option>₦500,000 – ₦1,000,000</option><option>Over ₦1,000,000</option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-5">
+            <label for="c-location" class="field-label">Event Location / Venue</label>
+            <input type="text" id="c-location" name="catering_location" class="field-input" placeholder="e.g. GRA, Enugu or your venue address" />
+          </div>
+        </div>
+
+        <!-- Event space fields -->
+        <div id="fields-event" class="path-fields hidden">
+          <div class="grid md:grid-cols-2 gap-5 mb-5">
+            <div>
+              <label for="e-date" class="field-label">Event Date <span aria-label="required" style="color:#C9A84C;">*</span></label>
+              <input type="date" id="e-date" name="ev_date" class="field-input" />
+            </div>
+            <div>
+              <label for="e-guests" class="field-label">Expected Guests <span aria-label="required" style="color:#C9A84C;">*</span></label>
+              <input type="number" id="e-guests" name="ev_guests" class="field-input" placeholder="Max 250" min="1" max="250" />
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-5 mb-5">
+            <div>
+              <label for="e-type" class="field-label">Event Type <span aria-label="required" style="color:#C9A84C;">*</span></label>
+              <select id="e-type" name="ev_type" class="field-input">
+                <option value="">Select type</option>
+                <option>Wedding Reception</option><option>Birthday Celebration</option>
+                <option>Corporate Dinner / Gala</option><option>Naming Ceremony</option>
+                <option>Product Launch</option><option>Private Party</option><option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="e-package" class="field-label">Package Interest</label>
+              <select id="e-package" name="ev_package" class="field-input">
+                <option value="">Not sure yet</option>
+                <option>Intimate Dining (₦95,000)</option>
+                <option>Celebration Package (₦185,000+)</option>
+                <option>Corporate Package (₦350,000+)</option>
+                <option>Grand Event (₦750,000+)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Special requests (all paths) -->
+        <div class="mb-7">
+          <label for="f-notes" class="field-label">Special Requests / Notes</label>
+          <textarea id="f-notes" name="notes" class="field-input" rows="4" placeholder="Dietary requirements, décor preferences, allergy information, anything we should know…" style="resize:vertical;"></textarea>
+        </div>
+
+        <!-- How did you hear about us -->
+        <div class="mb-7">
+          <label for="f-source" class="field-label">How did you hear about us?</label>
+          <select id="f-source" name="source" class="field-input">
+            <option value="">Select…</option>
+            <option>Instagram</option><option>Facebook</option><option>Google Search</option>
+            <option>Word of Mouth</option><option>Walk-in / Signage</option><option>Other</option>
+          </select>
+        </div>
+
+        <div class="flex items-center gap-4 flex-wrap">
+          <button type="button" onclick="goStep(1)" class="btn-ghost">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M15 18l-6-6 6-6"/></svg>
+            Back
+          </button>
+          <button type="button" onclick="goStep(3)" class="btn-gold">
+            Review &amp; Submit
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Step 3: Review & confirm -->
+    <div id="step3" class="form-panel" aria-live="polite">
+      <div class="step-indicator" aria-label="Step 3 of 3">
+        <div class="step-dot done" aria-label="Step 1 complete">✓</div>
+        <div class="step-line done"></div>
+        <div class="step-dot done" aria-label="Step 2 complete">✓</div>
+        <div class="step-line done"></div>
+        <div class="step-dot active" aria-current="step">3</div>
+      </div>
+
+      <div id="review-box" class="rounded-lg p-6 mb-6" style="background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.25);">
+        <h3 class="font-serif text-white text-xl mb-4">Your Enquiry Details</h3>
+        <dl id="review-list" class="space-y-2 text-sm" style="color:rgba(255,255,255,0.75);"></dl>
+      </div>
+
+      <p class="text-xs mb-6" style="color:rgba(255,255,255,0.45);">By submitting, you agree to be contacted via phone/WhatsApp or email to confirm your booking. We do not share your details with third parties.</p>
+
+      <div class="flex items-center gap-4 flex-wrap">
+        <button type="button" onclick="goStep(2)" class="btn-ghost">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M15 18l-6-6 6-6"/></svg>
+          Edit
+        </button>
+        <button type="button" onclick="submitForm()" class="btn-gold" id="submit-btn">
+          Submit Enquiry
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M5 13l4 4L19 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Success state -->
+    <div id="step-success" class="form-panel text-center py-8" aria-live="assertive">
+      <div class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6" style="background:rgba(201,168,76,0.15);border:2px solid #C9A84C;">
+        <svg width="36" height="36" fill="none" stroke="#C9A84C" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M5 13l4 4L19 7"/></svg>
+      </div>
+      <h3 class="font-serif text-white text-2xl mb-3">Enquiry Received!</h3>
+      <p class="text-white/60 mb-6 max-w-sm mx-auto">Thank you. Our team will review your request and reach out within <strong class="text-white/80">24 hours</strong> to confirm availability and next steps.</p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <!-- OWNER: Update WhatsApp link -->
+        <a href="https://wa.me/2348000000000?text=Hi%2C%20I%20just%20submitted%20an%20enquiry%20on%20your%20website." target="_blank" rel="noopener" class="btn-gold" style="text-decoration:none;justify-content:center;">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat on WhatsApp
+        </a>
+        <a href="index.html" class="btn-ghost" style="text-decoration:none;justify-content:center;">Return Home</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════ -->
+<section id="testimonials" aria-labelledby="testi-heading" style="background:#FAF6F0;padding:5rem 0 6rem;">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-14 reveal">
+      <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:#C9A84C;">Guest Experiences</p>
+      <h2 id="testi-heading" class="font-serif font-light" style="font-size:clamp(2rem,4vw,3rem);color:#2C2C2C;">What Our Guests Say</h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 stagger">
+      <!-- Testimonial 1: Food -->
+      <article class="testi-card reveal">
+        <div class="flex gap-1 mb-4" aria-label="5 out of 5 stars">
+          <span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span>
+        </div>
+        <blockquote>
+          <p class="font-serif text-lg leading-relaxed mb-5" style="color:#2C2C2C;font-style:italic;">"The Ofe Akwu here is unlike anything I've tasted in Enugu. Rich, balanced, and clearly made with real palm fruit — not the shortcut kind. My Seafood Platter was enormous and beautiful. Winnie's has genuinely raised the bar for fine Nigerian dining."</p>
+        </blockquote>
+        <footer class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm text-white" style="background:#6B1A2A;" aria-hidden="true">CO</div>
+          <div>
+            <p class="font-semibold text-sm" style="color:#2C2C2C;">Chukwuemeka Okafor</p>
+            <p class="text-xs" style="color:#6B6B6B;">Food critic · Enugu</p>
+          </div>
+        </footer>
+      </article>
+
+      <!-- Testimonial 2: Service -->
+      <article class="testi-card reveal">
+        <div class="flex gap-1 mb-4" aria-label="5 out of 5 stars">
+          <span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span>
+        </div>
+        <blockquote>
+          <p class="font-serif text-lg leading-relaxed mb-5" style="color:#2C2C2C;font-style:italic;">"I brought a business associate from Lagos and she couldn't believe this level of service existed in Enugu. From the welcome to the wine suggestions to the farewell — every staff member was attentive, warm, and professional. We will absolutely return."</p>
+        </blockquote>
+        <footer class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm text-white" style="background:#6B1A2A;" aria-hidden="true">NE</div>
+          <div>
+            <p class="font-semibold text-sm" style="color:#2C2C2C;">Ngozi Eze</p>
+            <p class="text-xs" style="color:#6B6B6B;">Business consultant · Enugu</p>
+          </div>
+        </footer>
+      </article>
+
+      <!-- Testimonial 3: Events -->
+      <article class="testi-card reveal">
+        <div class="flex gap-1 mb-4" aria-label="5 out of 5 stars">
+          <span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span>
+        </div>
+        <blockquote>
+          <p class="font-serif text-lg leading-relaxed mb-5" style="color:#2C2C2C;font-style:italic;">"We hosted our daughter's 30th birthday here with 70 guests. Winnie's handled every single detail — décor, menu, coordination — flawlessly. Our guests were stunned. Three of them have already booked for their own events. Money extremely well spent."</p>
+        </blockquote>
+        <footer class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm text-white" style="background:#6B1A2A;" aria-hidden="true">AU</div>
+          <div>
+            <p class="font-semibold text-sm" style="color:#2C2C2C;">Adaeze &amp; Uchenna Nweze</p>
+            <p class="text-xs" style="color:#6B6B6B;">Private event hosts · Enugu</p>
+          </div>
+        </footer>
+      </article>
+
+      <!-- Testimonial 4: Ambiance -->
+      <article class="testi-card reveal">
+        <div class="flex gap-1 mb-4" aria-label="5 out of 5 stars">
+          <span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span>
+        </div>
+        <blockquote>
+          <p class="font-serif text-lg leading-relaxed mb-5" style="color:#2C2C2C;font-style:italic;">"I walked in expecting a regular restaurant and left feeling like I'd visited a luxury hotel. The lighting, the music, the way the space feels — sophisticated but not cold. Perfect for a proposal dinner. She said yes, by the way."</p>
+        </blockquote>
+        <footer class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm text-white" style="background:#6B1A2A;" aria-hidden="true">KO</div>
+          <div>
+            <p class="font-semibold text-sm" style="color:#2C2C2C;">Kingsley Obiora</p>
+            <p class="text-xs" style="color:#6B6B6B;">Soon-to-be groom · Enugu</p>
+          </div>
+        </footer>
+      </article>
+
+      <!-- Testimonial 5: Catering -->
+      <article class="testi-card reveal md:col-span-2 lg:col-span-1">
+        <div class="flex gap-1 mb-4" aria-label="5 out of 5 stars">
+          <span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span><span class="star" aria-hidden="true">★</span>
+        </div>
+        <blockquote>
+          <p class="font-serif text-lg leading-relaxed mb-5" style="color:#2C2C2C;font-style:italic;">"Winnie's catered our company's end-of-year dinner for 120 employees. Every dish arrived hot, beautifully presented, and perfectly portioned. Our MD personally commended the beef tenderloin. The team was punctual, professional, and left the venue spotless."</p>
+        </blockquote>
+        <footer class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm text-white" style="background:#6B1A2A;" aria-hidden="true">IA</div>
+          <div>
+            <p class="font-semibold text-sm" style="color:#2C2C2C;">Ijeoma Ani</p>
+            <p class="text-xs" style="color:#6B6B6B;">HR Manager · Enugu</p>
+          </div>
+        </footer>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     VISIT US / LOCATION
+══════════════════════════════════ -->
+<section id="visit" aria-labelledby="visit-heading" style="background:#F5EDE0;padding:5rem 0 6rem;">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-14 reveal">
+      <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:#C9A84C;">Find Us</p>
+      <h2 id="visit-heading" class="font-serif font-light" style="font-size:clamp(2rem,4vw,3rem);color:#2C2C2C;">Visit Winnie's</h2>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+      <!-- Map -->
+      <div class="reveal rounded-xl overflow-hidden shadow-xl" style="min-height:380px;">
+        <!--
+          OWNER: To embed a real Google Map:
+          1. Go to maps.google.com and search "Nwabude Mall, Centenary City Estate, Enugu"
+          2. Click Share → Embed a map → Copy HTML
+          3. Replace the iframe below with the copied code
+          4. Keep width="100%" and the style="border:0" attribute
+        -->
+        <iframe
+          title="Winnie's Cuisine & Events location on Google Maps"
+          width="100%"
+          height="380"
+          style="border:0;"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed/v1/place?key=YOUR_GOOGLE_MAPS_API_KEY&q=Centenary+City+Estate,Enugu,Nigeria"
+          allowfullscreen>
+        </iframe>
+        <!-- OWNER: Alternatively use the free embed (no API key needed):
+        <iframe src="https://www.google.com/maps?q=Centenary+City+Estate+Enugu&output=embed" ...></iframe>
+        -->
+      </div>
+
+      <!-- Info -->
+      <div class="reveal space-y-8">
+        <!-- Address -->
+        <div>
+          <h3 class="font-serif text-xl mb-3" style="color:#6B1A2A;">Address</h3>
+          <address class="not-italic leading-relaxed" style="color:#444444;">
+            <!-- OWNER: Update full address if it changes -->
+            Winnie's Cuisine &amp; Events<br/>
+            Nwabude Mall, Centenary City Estate<br/>
+            Enugu, Enugu State<br/>
+            Nigeria
+          </address>
+          <a href="https://maps.google.com?q=Centenary+City+Estate,Enugu" target="_blank" rel="noopener" class="inline-flex items-center gap-2 mt-3 text-sm font-semibold" style="color:#C9A84C;text-decoration:none;">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Get Directions
+          </a>
+        </div>
+
+        <!-- Opening hours -->
+        <div>
+          <h3 class="font-serif text-xl mb-3" style="color:#6B1A2A;">Opening Hours</h3>
+          <!-- OWNER: Update hours if they change -->
+          <div class="rounded-lg overflow-hidden" style="border:1px solid rgba(107,26,42,0.15);">
+            <div class="hours-row px-4" style="background:rgba(107,26,42,0.04);">
+              <span class="text-sm font-semibold" style="color:#2C2C2C;">Monday – Friday</span>
+              <span class="text-sm" style="color:#444444;">11:00 AM – 10:00 PM</span>
+            </div>
+            <div class="hours-row px-4">
+              <span class="text-sm font-semibold" style="color:#2C2C2C;">Saturday</span>
+              <span class="text-sm" style="color:#444444;">10:00 AM – 11:00 PM</span>
+            </div>
+            <div class="hours-row px-4" style="background:rgba(107,26,42,0.04);">
+              <span class="text-sm font-semibold" style="color:#2C2C2C;">Sunday</span>
+              <span class="text-sm" style="color:#444444;">12:00 PM – 9:00 PM</span>
+            </div>
+            <div class="hours-row px-4" style="background:rgba(201,168,76,0.08);">
+              <span class="text-sm font-semibold" style="color:#6B1A2A;">Public Holidays</span>
+              <span class="text-sm" style="color:#6B1A2A;">By appointment</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact details -->
+        <div>
+          <h3 class="font-serif text-xl mb-4" style="color:#6B1A2A;">Contact Us</h3>
+          <ul class="space-y-3">
+            <!-- OWNER: Replace all placeholder numbers and email -->
+            <li>
+              <a href="tel:+2348000000000" class="flex items-center gap-3 text-sm group" style="color:#444444;text-decoration:none;" aria-label="Call us">
+                <span class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-burgundy transition-colors" style="background:rgba(107,26,42,0.1);">
+                  <svg width="15" height="15" fill="none" stroke="#6B1A2A" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                </span>
+                <span>+234 800 000 0000</span>
+              </a>
+            </li>
+            <li>
+              <!-- OWNER: Replace WhatsApp number in the href: https://wa.me/234XXXXXXXXXX -->
+              <a href="https://wa.me/2348000000000" target="_blank" rel="noopener" class="flex items-center gap-3 text-sm group" style="color:#444444;text-decoration:none;" aria-label="Chat on WhatsApp">
+                <span class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-green-500 transition-colors" style="background:rgba(37,211,102,0.1);">
+                  <svg width="15" height="15" fill="#25D366" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                </span>
+                <span>WhatsApp: +234 800 000 0000</span>
+              </a>
+            </li>
+            <li>
+              <!-- OWNER: Replace email address -->
+              <a href="mailto:hello@winniescuisine.com" class="flex items-center gap-3 text-sm group" style="color:#444444;text-decoration:none;" aria-label="Email us">
+                <span class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(107,26,42,0.1);">
+                  <svg width="15" height="15" fill="none" stroke="#6B1A2A" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </span>
+                <span>hello@winniescuisine.com</span>
+              </a>
+            </li>
+            <li>
+              <!-- OWNER: Replace Instagram handle @winniescuisine with your real handle -->
+              <a href="https://instagram.com/winniescuisine" target="_blank" rel="noopener" class="flex items-center gap-3 text-sm group" style="color:#444444;text-decoration:none;" aria-label="Follow us on Instagram">
+                <span class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(225,48,108,0.1);">
+                  <svg width="15" height="15" fill="none" stroke="#E1306C" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path stroke-linecap="round" d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-linecap="round"/></svg>
+                </span>
+                <span>@winniescuisine</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     FOOTER
+══════════════════════════════════ -->
+<footer style="background:#1A0D0D;padding:4rem 0 0;" role="contentinfo">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12" style="border-bottom:1px solid rgba(201,168,76,0.15);">
+
+      <!-- Brand -->
+      <div class="lg:col-span-1">
+        <a href="index.html" class="font-serif text-2xl font-semibold text-white tracking-wide" aria-label="Winnie's Cuisine & Events — Home">
+          Winnie's <span style="color:#C9A84C;">Cuisine</span>
+        </a>
+        <p class="mt-4 text-sm leading-relaxed" style="color:rgba(255,255,255,0.5);">Fine dining and exceptional events at the heart of Centenary City Estate, Enugu. Opened December 2025.</p>
+        <div class="flex gap-3 mt-5">
+          <!-- OWNER: Update social media links with your real handles -->
+          <a href="https://instagram.com/winniescuisine" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-linecap="round"/></svg>
+          </a>
+          <a href="https://facebook.com/winniescuisine" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </a>
+          <a href="https://wa.me/2348000000000" target="_blank" rel="noopener" class="social-icon" aria-label="WhatsApp">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick links -->
+      <nav aria-label="Quick links">
+        <h4 class="text-xs font-semibold uppercase tracking-widest mb-5" style="color:rgba(201,168,76,0.8);">Explore</h4>
+        <ul class="space-y-3" role="list">
+          <li><a href="index.html" class="footer-link">Home</a></li>
+          <li><a href="index.html#about" class="footer-link">About Us</a></li>
+          <li><a href="menu.html" class="footer-link">Our Menu</a></li>
+          <li><a href="events.html" class="footer-link">Events &amp; Catering</a></li>
+          <li><a href="gallery.html" class="footer-link">Gallery</a></li>
+          <li><a href="contact.html" class="footer-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Services -->
+      <nav aria-label="Our services">
+        <h4 class="text-xs font-semibold uppercase tracking-widest mb-5" style="color:rgba(201,168,76,0.8);">Services</h4>
+        <ul class="space-y-3" role="list">
+          <li><a href="contact.html#book" class="footer-link">Table Reservations</a></li>
+          <li><a href="events.html" class="footer-link">Wedding Catering</a></li>
+          <li><a href="events.html" class="footer-link">Corporate Events</a></li>
+          <li><a href="events.html" class="footer-link">Private Dining</a></li>
+          <li><a href="events.html" class="footer-link">Event Space Hire</a></li>
+          <li><a href="events.html" class="footer-link">Outside Catering</a></li>
+        </ul>
+      </nav>
+
+      <!-- Contact snippet -->
+      <div>
+        <h4 class="text-xs font-semibold uppercase tracking-widest mb-5" style="color:rgba(201,168,76,0.8);">Get In Touch</h4>
+        <address class="not-italic space-y-3 text-sm" style="color:rgba(255,255,255,0.5);">
+          <!-- OWNER: Update address, phone, and email -->
+          <p>Nwabude Mall, Centenary City Estate, Enugu</p>
+          <p>
+            <a href="tel:+2348000000000" class="footer-link">+234 800 000 0000</a>
+          </p>
+          <p>
+            <a href="mailto:hello@winniescuisine.com" class="footer-link">hello@winniescuisine.com</a>
+          </p>
+          <p class="text-xs" style="color:rgba(255,255,255,0.35);">Open daily 11 AM – 10 PM</p>
+        </address>
+        <!-- OWNER: Update WhatsApp link -->
+        <a href="https://wa.me/2348000000000" target="_blank" rel="noopener" class="inline-flex items-center gap-2 mt-5 text-xs font-semibold uppercase tracking-widest px-4 py-2.5 rounded" style="background:#25D366;color:#fff;text-decoration:none;" aria-label="Chat on WhatsApp">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat with us
+        </a>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 py-6 text-xs" style="color:rgba(255,255,255,0.35);">
+      <p>&copy; <span id="footer-year"></span> Winnie's Cuisine &amp; Events. All rights reserved.</p>
+      <p>Nwabude Mall, Centenary City Estate, Enugu, Nigeria</p>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp FAB -->
+<!-- OWNER: Update WhatsApp link -->
+<a href="https://wa.me/2348000000000?text=Hello%2C%20I'd%20like%20to%20make%20an%20enquiry." id="wa-fab" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <svg width="26" height="26" fill="white" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  /* ── Navbar ── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
+
+  /* ── Drawer ── */
+  const drawer = document.getElementById('drawer');
+  const drawerToggle = document.getElementById('drawer-toggle');
+  const drawerClose = document.getElementById('drawer-close');
+  const drawerOverlay = document.getElementById('drawer-overlay');
+  function openDrawer() { drawer.classList.add('open'); drawerToggle.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+  function closeDrawer() { drawer.classList.remove('open'); drawerToggle.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+  drawerToggle.addEventListener('click', openDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+  drawerOverlay.addEventListener('click', closeDrawer);
+
+  /* ── Reveal on scroll ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ── Footer year ── */
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+  /* ══ Multi-step form logic ══ */
+  let currentPath = null;
+  let currentStep = 1;
+
+  function selectPath(btn, path) {
+    currentPath = path;
+    document.querySelectorAll('.step-btn').forEach(b => {
+      b.classList.remove('selected');
+      b.setAttribute('aria-pressed', 'false');
+    });
+    btn.classList.add('selected');
+    btn.setAttribute('aria-pressed', 'true');
+    const nextBtn = document.getElementById('next1');
+    nextBtn.disabled = false;
+    nextBtn.removeAttribute('aria-disabled');
+  }
+
+  function showPathFields() {
+    document.querySelectorAll('.path-fields').forEach(f => f.classList.add('hidden'));
+    if (currentPath) {
+      const map = { table: 'fields-table', catering: 'fields-catering', event: 'fields-event' };
+      const el = document.getElementById(map[currentPath]);
+      if (el) el.classList.remove('hidden');
+    }
+  }
+
+  function goStep(n) {
+    if (n === 2 && !currentPath) return;
+    // hide all panels
+    document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+    if (n === 2) {
+      showPathFields();
+      document.getElementById('step2').classList.add('active');
+    } else if (n === 3) {
+      buildReview();
+      document.getElementById('step3').classList.add('active');
+    } else {
+      document.getElementById('step1').classList.add('active');
+    }
+    currentStep = n;
+    // Scroll to form top
+    document.getElementById('book').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function buildReview() {
+    const form = document.getElementById('enquiry-form');
+    const data = new FormData(form);
+    const pathLabels = { table: 'Table Reservation', catering: 'Catering Enquiry', event: 'Event Space Booking' };
+    const items = [
+      { label: 'Enquiry Type', value: pathLabels[currentPath] || currentPath },
+      { label: 'Name', value: data.get('name') || '—' },
+      { label: 'Phone / WhatsApp', value: data.get('phone') || '—' },
+      { label: 'Email', value: data.get('email') || '—' },
+    ];
+    if (currentPath === 'table') {
+      if (data.get('res_date')) items.push({ label: 'Date', value: data.get('res_date') });
+      if (data.get('res_time')) items.push({ label: 'Time', value: data.get('res_time') });
+      if (data.get('guests')) items.push({ label: 'Guests', value: data.get('guests') });
+      if (data.get('occasion')) items.push({ label: 'Occasion', value: data.get('occasion') });
+    } else if (currentPath === 'catering') {
+      if (data.get('event_date')) items.push({ label: 'Event Date', value: data.get('event_date') });
+      if (data.get('catering_guests')) items.push({ label: 'Guest Count', value: data.get('catering_guests') });
+      if (data.get('event_type')) items.push({ label: 'Event Type', value: data.get('event_type') });
+      if (data.get('budget')) items.push({ label: 'Budget', value: data.get('budget') });
+      if (data.get('catering_location')) items.push({ label: 'Location', value: data.get('catering_location') });
+    } else if (currentPath === 'event') {
+      if (data.get('ev_date')) items.push({ label: 'Event Date', value: data.get('ev_date') });
+      if (data.get('ev_guests')) items.push({ label: 'Guest Count', value: data.get('ev_guests') });
+      if (data.get('ev_type')) items.push({ label: 'Event Type', value: data.get('ev_type') });
+      if (data.get('ev_package')) items.push({ label: 'Package', value: data.get('ev_package') });
+    }
+    if (data.get('notes')) items.push({ label: 'Notes', value: data.get('notes') });
+
+    const list = document.getElementById('review-list');
+    list.innerHTML = items.map(i =>
+      `<div class="flex gap-2"><dt class="font-semibold min-w-max" style="color:rgba(255,255,255,0.5);min-width:9rem;">${i.label}</dt><dd style="color:rgba(255,255,255,0.85);">${i.value}</dd></div>`
+    ).join('');
+  }
+
+  function submitForm() {
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    /*
+      OWNER: Connect to a real form backend here. Options:
+      1. Formspree — add action="https://formspree.io/f/YOUR_ID" to <form>, method="POST"
+      2. EmailJS — call emailjs.send('service_id','template_id', formData)
+      3. WhatsApp redirect — build a wa.me link from form data and open it
+    */
+    setTimeout(() => {
+      document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('step-success').classList.add('active');
+      document.getElementById('book').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 1200);
+  }
+</script>
+</body>
+</html>
