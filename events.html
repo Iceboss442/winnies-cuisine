@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Events & Catering at Winnie's Cuisine — Four premium packages for weddings, corporate dinners, birthdays, and grand celebrations in Enugu." />
+  <title>Events &amp; Catering | Winnie's Cuisine &amp; Events · Enugu</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            burgundy: { DEFAULT: '#6B1A2A', light: '#8B2438', dark: '#4A1020' },
+            gold:     { DEFAULT: '#C9A84C', light: '#E2C36E', dark: '#A8873A' },
+            cream:    { DEFAULT: '#FAF6F0', warm: '#F5EDE0', deep: '#EAE0D0' },
+            charcoal: { DEFAULT: '#2C2C2C', light: '#444444', soft: '#6B6B6B' },
+          },
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+            sans:  ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #FAF6F0; color: #2C2C2C; -webkit-font-smoothing: antialiased; }
+
+    .section-eyebrow { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #C9A84C; }
+    .section-title   { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.12; }
+    .gold-rule       { display: block; width: 3rem; height: 2px; background: linear-gradient(90deg, #C9A84C, #E2C36E); border-radius: 2px; }
+
+    #navbar { transition: background 0.35s, box-shadow 0.35s, padding 0.35s; }
+    #navbar.scrolled { background: rgba(44,28,18,0.97) !important; backdrop-filter: blur(12px); box-shadow: 0 2px 24px rgba(0,0,0,0.25); padding-top: 0.75rem; padding-bottom: 0.75rem; }
+    .nav-link { text-decoration: none; font-size: 0.8rem; letter-spacing: 0.06em; color: rgba(250,246,240,0.8); transition: color 0.2s; }
+    .nav-link:hover, .nav-link.active { color: #C9A84C !important; }
+
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem; background: #6B1A2A; color: #FAF6F0; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #6B1A2A; text-decoration: none; transition: background 0.25s, border-color 0.25s, transform 0.2s; cursor: pointer; }
+    .btn-primary:hover { background: #4A1020; border-color: #C9A84C; transform: translateY(-1px); }
+    .btn-gold    { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.8rem; background: transparent; color: #C9A84C; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #C9A84C; text-decoration: none; transition: background 0.25s, color 0.25s, transform 0.2s; }
+    .btn-gold:hover { background: #C9A84C; color: #FAF6F0; transform: translateY(-1px); }
+    .btn-white   { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem; background: #FAF6F0; color: #6B1A2A; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #FAF6F0; text-decoration: none; transition: background 0.25s, color 0.25s, transform 0.2s; }
+    .btn-white:hover { background: transparent; color: #FAF6F0; transform: translateY(-1px); }
+
+    #mobile-menu { transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+    #mobile-menu.open { transform: translateX(0); }
+    .mobile-nav-link { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 500; color: rgba(250,246,240,0.8); text-decoration: none; transition: color 0.2s; }
+    .mobile-nav-link:hover { color: #C9A84C; }
+
+    /* ── Hero ── */
+    #events-hero { position: relative; min-height: 60vh; display: flex; align-items: flex-end; overflow: hidden; }
+    #events-hero-bg { position: absolute; inset: -5%; background-image: url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1800&q=80'); background-size: cover; background-position: center; filter: brightness(0.35) saturate(0.9); }
+    #events-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(30,10,16,0.95) 0%, rgba(30,10,16,0.5) 55%, rgba(107,26,42,0.3) 100%); }
+
+    /* ── Package Cards ── */
+    .pkg-card { position: relative; display: flex; flex-direction: column; transition: transform 0.3s, box-shadow 0.3s; }
+    .pkg-card:hover { transform: translateY(-6px); box-shadow: 0 24px 56px rgba(107,26,42,0.18); }
+    .pkg-card.featured { transform: scale(1.02); }
+    .pkg-card.featured:hover { transform: scale(1.02) translateY(-6px); }
+
+    .pkg-tier { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .pkg-name { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 600; line-height: 1.2; margin-bottom: 0.6rem; }
+    .pkg-tagline { font-size: 0.85rem; font-weight: 300; line-height: 1.6; margin-bottom: 1.5rem; }
+    .pkg-price { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600; line-height: 1; }
+    .pkg-price-note { font-size: 0.72rem; font-weight: 400; opacity: 0.65; margin-left: 0.25rem; }
+    .pkg-capacity { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.4rem; }
+
+    .pkg-divider { height: 1px; margin: 1.5rem 0; }
+    .pkg-feature { display: flex; align-items: flex-start; gap: 0.7rem; margin-bottom: 0.85rem; font-size: 0.85rem; line-height: 1.5; }
+    .pkg-feature-icon { flex-shrink: 0; width: 1rem; height: 1rem; margin-top: 0.15rem; }
+
+    /* ── Process Steps ── */
+    .process-step { display: flex; gap: 1.5rem; align-items: flex-start; }
+    .step-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; color: rgba(201,168,76,0.2); line-height: 1; flex-shrink: 0; width: 3.5rem; }
+    .step-connector { width: 1px; flex-shrink: 0; background: rgba(201,168,76,0.2); margin: 0 1.75rem; }
+
+    /* ── Venue Specs ── */
+    .spec-row { display: flex; justify-content: space-between; align-items: center; padding: 0.9rem 0; border-bottom: 1px solid rgba(201,168,76,0.12); }
+    .spec-row:last-child { border-bottom: none; }
+
+    /* ── FAQ ── */
+    .faq-item { border-bottom: 1px solid rgba(201,168,76,0.15); }
+    .faq-trigger { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 1.25rem 0; background: none; border: none; cursor: pointer; text-align: left; }
+    .faq-trigger:focus-visible { outline: 2px solid #C9A84C; }
+    .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; }
+    .faq-body.open { max-height: 20rem; padding-bottom: 1.25rem; }
+    .faq-icon { transition: transform 0.3s; flex-shrink: 0; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .stagger > *:nth-child(1) { transition-delay: 0.05s; }
+    .stagger > *:nth-child(2) { transition-delay: 0.13s; }
+    .stagger > *:nth-child(3) { transition-delay: 0.21s; }
+    .stagger > *:nth-child(4) { transition-delay: 0.29s; }
+
+    :focus-visible { outline: 2px solid #C9A84C; outline-offset: 3px; }
+    ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: #FAF6F0; } ::-webkit-scrollbar-thumb { background: #C9A84C; border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══════════════════════════════════════════════════════════════ -->
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 px-6 md:px-12" style="background:rgba(30,10,16,0.85); backdrop-filter:blur(10px);">
+  <nav class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="flex flex-col leading-none">
+      <span style="font-family:'Cormorant Garamond',serif; font-size:1.55rem; font-weight:700; color:#FAF6F0;">Winnie's</span>
+      <span style="font-size:0.58rem; font-weight:500; letter-spacing:0.28em; color:#C9A84C; text-transform:uppercase; margin-top:1px;">Cuisine &amp; Events</span>
+    </a>
+    <ul class="hidden lg:flex items-center gap-8" role="list">
+      <li><a href="index.html#about"       class="nav-link">About</a></li>
+      <li><a href="index.html#experiences" class="nav-link">Experiences</a></li>
+      <li><a href="menu.html"              class="nav-link">Menu</a></li>
+      <li><a href="gallery.html"           class="nav-link">Gallery</a></li>
+      <li><a href="events.html"            class="nav-link active">Events</a></li>
+      <li><a href="index.html#contact"     class="nav-link">Contact</a></li>
+    </ul>
+    <div class="hidden lg:flex items-center gap-4">
+      <a href="https://wa.me/2348000000000" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" style="display:flex; align-items:center; justify-content:center; width:2.25rem; height:2.25rem; border-radius:50%; border:1px solid rgba(250,246,240,0.2);">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="#E2C36E"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.134.561 4.133 1.534 5.867L0 24l6.31-1.507A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.003-1.373l-.36-.213-3.727.89.934-3.618-.234-.372A9.817 9.817 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z" fill="#E2C36E"/></svg>
+      </a>
+      <a href="index.html#contact" class="btn-primary">Get a Quote</a>
+    </div>
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Open menu">
+      <span style="display:block; width:1.5rem; height:1px; background:#FAF6F0;"></span>
+      <span style="display:block; width:1rem; height:1px; background:#FAF6F0;"></span>
+      <span style="display:block; width:1.5rem; height:1px; background:#FAF6F0;"></span>
+    </button>
+  </nav>
+</header>
+<div id="mobile-menu" class="fixed inset-y-0 right-0 z-50 w-80 max-w-full flex flex-col" style="background:#2C1810;" role="dialog">
+  <div class="flex items-center justify-between p-6 border-b border-white/10">
+    <span style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:700; color:#FAF6F0;">Winnie's</span>
+    <button id="close-menu" aria-label="Close" class="p-2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FAF6F0" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+  </div>
+  <nav class="flex-1 flex flex-col justify-center px-8 gap-6">
+    <a href="index.html#about"       class="mobile-nav-link" onclick="closeMobileMenu()">About</a>
+    <a href="index.html#experiences" class="mobile-nav-link" onclick="closeMobileMenu()">Experiences</a>
+    <a href="menu.html"              class="mobile-nav-link" onclick="closeMobileMenu()">Menu</a>
+    <a href="gallery.html"           class="mobile-nav-link" onclick="closeMobileMenu()">Gallery</a>
+    <a href="events.html"            class="mobile-nav-link" style="color:#C9A84C;" onclick="closeMobileMenu()">Events</a>
+    <a href="index.html#contact"     class="mobile-nav-link" onclick="closeMobileMenu()">Contact</a>
+  </nav>
+  <div class="p-8 border-t border-white/10"><a href="index.html#contact" class="btn-primary w-full justify-center" onclick="closeMobileMenu()">Get a Quote</a></div>
+</div>
+<div id="menu-overlay" class="fixed inset-0 z-40 bg-black/60 hidden" onclick="closeMobileMenu()"></div>
+
+
+<!-- ═══ HERO ══════════════════════════════════════════════════════════════════ -->
+<section id="events-hero" aria-label="Events and catering hero">
+  <div id="events-hero-bg" role="img" aria-label="Beautifully decorated event hall at Winnie's Cuisine"></div>
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pb-16 pt-32">
+    <div style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.4rem 1rem; background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.35); color:#E2C36E; font-size:0.68rem; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; backdrop-filter:blur(4px); margin-bottom:1.25rem;">
+      <span>✦</span> Events &amp; Catering · Enugu
+    </div>
+    <h1 style="font-family:'Cormorant Garamond',serif; font-size:clamp(2.5rem,6.5vw,5rem); font-weight:600; color:#FAF6F0; line-height:1.08; margin-bottom:1.25rem;">
+      Your Celebration,<br/><em style="color:#C9A84C; font-style:italic;">Perfectly Crafted</em>
+    </h1>
+    <p style="color:rgba(250,246,240,0.72); font-size:1rem; font-weight:300; max-width:540px; line-height:1.8; margin-bottom:2rem;">
+      From an intimate private dinner to a grand wedding reception for two hundred and fifty — Winnie's provides the venue, the cuisine, and the team to make your occasion truly unforgettable.
+    </p>
+    <div style="display:flex; flex-wrap:wrap; gap:1rem;">
+      <a href="#packages" class="btn-white">View Packages</a>
+      <a href="#inquiry" class="btn-gold" style="border-color:rgba(201,168,76,0.5);">Request a Quote</a>
+    </div>
+
+    <!-- Stats row -->
+    <div class="grid grid-cols-3 gap-6 mt-14 max-w-lg">
+      <div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:2.2rem; font-weight:600; color:#C9A84C; line-height:1;">250</p>
+        <p style="font-size:0.68rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:rgba(250,246,240,0.55); margin-top:0.25rem;">Max Capacity</p>
+      </div>
+      <div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:2.2rem; font-weight:600; color:#C9A84C; line-height:1;">4</p>
+        <p style="font-size:0.68rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:rgba(250,246,240,0.55); margin-top:0.25rem;">Event Packages</p>
+      </div>
+      <div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:2.2rem; font-weight:600; color:#C9A84C; line-height:1;">100%</p>
+        <p style="font-size:0.68rem; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:rgba(250,246,240,0.55); margin-top:0.25rem;">Bespoke Service</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ INTRO SECTION ═════════════════════════════════════════════════════════ -->
+<section class="py-20 px-6 md:px-12" style="background:#FAF6F0;">
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+    <div class="reveal-left">
+      <p class="section-eyebrow mb-4">Why Winnie's for Your Event</p>
+      <span class="gold-rule mb-6"></span>
+      <h2 class="section-title text-4xl md:text-5xl mt-6 mb-6">An Experience,<br/><em style="color:#6B1A2A; font-style:italic;">Not Just a Venue</em></h2>
+      <p style="font-weight:300; line-height:1.8; color:#6B6B6B; margin-bottom:1.25rem;">
+        At Winnie's, every event is treated as a personal commission. Our dedicated events team works alongside you from the very first call to the final toast — designing the menu, arranging the décor, managing the timeline, and ensuring your guests leave with full hearts.
+      </p>
+      <p style="font-weight:300; line-height:1.8; color:#6B6B6B; margin-bottom:2rem;">
+        Whether the occasion is sacred, celebratory, or corporate, we bring the same fine-dining excellence that defines our restaurant to every table we set.
+      </p>
+      <div class="grid grid-cols-2 gap-4">
+        <div style="display:flex; align-items:flex-start; gap:0.75rem;">
+          <span style="color:#C9A84C; font-size:1.1rem; margin-top:0.1rem;">✦</span>
+          <div><p style="font-size:0.85rem; font-weight:500; color:#2C2C2C;">Bespoke Menus</p><p style="font-size:0.78rem; color:#6B6B6B; line-height:1.5;">Tailored to your taste</p></div>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:0.75rem;">
+          <span style="color:#C9A84C; font-size:1.1rem; margin-top:0.1rem;">✦</span>
+          <div><p style="font-size:0.85rem; font-weight:500; color:#2C2C2C;">Professional Staff</p><p style="font-size:0.78rem; color:#6B6B6B; line-height:1.5;">Trained, uniformed, attentive</p></div>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:0.75rem;">
+          <span style="color:#C9A84C; font-size:1.1rem; margin-top:0.1rem;">✦</span>
+          <div><p style="font-size:0.85rem; font-weight:500; color:#2C2C2C;">Full AV &amp; Lighting</p><p style="font-size:0.78rem; color:#6B6B6B; line-height:1.5;">State-of-the-art technology</p></div>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:0.75rem;">
+          <span style="color:#C9A84C; font-size:1.1rem; margin-top:0.1rem;">✦</span>
+          <div><p style="font-size:0.85rem; font-weight:500; color:#2C2C2C;">Décor Support</p><p style="font-size:0.78rem; color:#6B6B6B; line-height:1.5;">Styled to your vision</p></div>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:0.75rem;">
+          <span style="color:#C9A84C; font-size:1.1rem; margin-top:0.1rem;">✦</span>
+          <div><p style="font-size:0.85rem; font-weight:500; color:#2C2C2C;">Off-Site Catering</p><p style="font-size:0.78rem; color:#6B6B6B; line-height:1.5;">We come to you too</p></div>
+        </div>
+        <div style="display:flex; align-items:flex-start; gap:0.75rem;">
+          <span style="color:#C9A84C; font-size:1.1rem; margin-top:0.1rem;">✦</span>
+          <div><p style="font-size:0.85rem; font-weight:500; color:#2C2C2C;">Dedicated Coordinator</p><p style="font-size:0.78rem; color:#6B6B6B; line-height:1.5;">One point of contact</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal" style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem;">
+      <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600&q=80" alt="Elegant event hall setup with round tables and floral arrangements" style="width:100%; height:18rem; object-fit:cover;" loading="lazy" />
+      <img src="https://images.unsplash.com/photo-1555244162-803834f70033?w=600&q=80" alt="Beautifully arranged buffet catering spread" style="width:100%; height:18rem; object-fit:cover;" loading="lazy" />
+      <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=600&q=80" alt="Wedding reception decoration with gold and white theme" style="width:100%; height:18rem; object-fit:cover; grid-column:1/3;" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ PACKAGES ══════════════════════════════════════════════════════════════ -->
+<section id="packages" class="py-24 md:py-32 px-6 md:px-12" style="background:#F5EDE0;">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 reveal">
+      <p class="section-eyebrow mb-4">Choose Your Experience</p>
+      <span class="gold-rule mx-auto mb-6"></span>
+      <h2 class="section-title text-4xl md:text-5xl mt-6 mb-4">Event Packages</h2>
+      <p style="font-weight:300; color:#6B6B6B; max-width:520px; margin:0 auto; line-height:1.8;">
+        Four carefully designed tiers — each delivering the Winnie's standard of excellence. All packages can be fully customised to your vision.
+      </p>
+    </div>
+
+    <!-- Packages grid -->
+    <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-5 stagger" style="align-items:start;">
+
+      <!-- Package 1: Intimate Dining -->
+      <article class="pkg-card reveal" style="background:#fff; box-shadow:0 4px 24px rgba(107,26,42,0.08);">
+        <!-- Header -->
+        <div style="background:#FAF6F0; padding:2rem; border-top:3px solid rgba(201,168,76,0.4);">
+          <p class="pkg-tier" style="color:#6B6B6B;">Tier 01</p>
+          <p class="pkg-name" style="color:#2C2C2C;">Intimate<br/>Dining</p>
+          <p class="pkg-tagline" style="color:#6B6B6B;">Perfect for personal celebrations, proposal dinners, anniversary suppers, and business lunches.</p>
+          <div style="border-top:1px solid rgba(201,168,76,0.2); padding-top:1rem; margin-top:1rem;">
+            <span class="pkg-price" style="color:#6B1A2A;">₦95,000<span class="pkg-price-note">/ event</span></span>
+            <p class="pkg-capacity" style="color:#6B6B6B; margin-top:0.5rem;">👥 2 – 15 Guests</p>
+          </div>
+        </div>
+        <!-- Features -->
+        <div style="padding:1.75rem; flex:1; display:flex; flex-direction:column; gap:0;">
+          <div class="pkg-feature" style="color:#444;">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Private dining room setup
+          </div>
+          <div class="pkg-feature" style="color:#444;">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            3-course set menu (chef's selection)
+          </div>
+          <div class="pkg-feature" style="color:#444;">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Dedicated server
+          </div>
+          <div class="pkg-feature" style="color:#444;">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Welcome drink &amp; amuse-bouche
+          </div>
+          <div class="pkg-feature" style="color:#444;">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Floral centrepiece
+          </div>
+          <div class="pkg-feature" style="color:#444;">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Personalised menu cards
+          </div>
+          <div class="pkg-feature" style="color:#AAA; margin-top:0.25rem;">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#DDD" stroke-width="1.5"/><path d="M7 7l6 6M13 7l-6 6" stroke="#DDD" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span style="color:#CCC;">Event hall hire</span>
+          </div>
+          <div style="margin-top:auto; padding-top:1.75rem;">
+            <a href="#inquiry" class="btn-gold" style="width:100%; justify-content:center;">Inquire Now</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Package 2: Celebration Package -->
+      <article class="pkg-card reveal" style="background:#fff; box-shadow:0 4px 24px rgba(107,26,42,0.08);">
+        <div style="background:#FAF6F0; padding:2rem; border-top:3px solid #C9A84C;">
+          <p class="pkg-tier" style="color:#6B6B6B;">Tier 02</p>
+          <p class="pkg-name" style="color:#2C2C2C;">Celebration<br/>Package</p>
+          <p class="pkg-tagline" style="color:#6B6B6B;">Birthdays, baby showers, bridal brunches, naming ceremonies, and family reunions.</p>
+          <div style="border-top:1px solid rgba(201,168,76,0.2); padding-top:1rem; margin-top:1rem;">
+            <span class="pkg-price" style="color:#6B1A2A;">₦185,000<span class="pkg-price-note">starting</span></span>
+            <p class="pkg-capacity" style="color:#6B6B6B; margin-top:0.5rem;">👥 16 – 60 Guests</p>
+          </div>
+        </div>
+        <div style="padding:1.75rem; flex:1; display:flex; flex-direction:column;">
+          <div class="pkg-feature" style="color:#444;">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Event hall hire (up to 6 hours)
+          </div>
+          <div class="pkg-feature" style="color:#444;">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Buffet or plated 3-course meal
+          </div>
+          <div class="pkg-feature" style="color:#444;">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Welcome cocktail or mocktail
+          </div>
+          <div class="pkg-feature" style="color:#444;">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Basic table décor &amp; centrepieces
+          </div>
+          <div class="pkg-feature" style="color:#444;">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            2 professional service staff
+          </div>
+          <div class="pkg-feature" style="color:#444;">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Sound system access
+          </div>
+          <div class="pkg-feature" style="color:#444;">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Customisable cake display table
+          </div>
+          <div style="margin-top:auto; padding-top:1.75rem;">
+            <a href="#inquiry" class="btn-gold" style="width:100%; justify-content:center;">Inquire Now</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Package 3: Corporate (FEATURED) -->
+      <article class="pkg-card featured reveal" style="background:#6B1A2A; box-shadow:0 16px 48px rgba(107,26,42,0.3);">
+        <!-- Featured badge -->
+        <div style="position:absolute; top:-0.85rem; left:50%; transform:translateX(-50%); background:#C9A84C; color:#2C2C2C; font-size:0.6rem; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; padding:0.3rem 1rem; white-space:nowrap; z-index:10;">Most Popular</div>
+        <div style="background:rgba(250,246,240,0.05); padding:2rem; border-top:3px solid #C9A84C; margin-top:0.85rem;">
+          <p class="pkg-tier" style="color:rgba(201,168,76,0.7);">Tier 03</p>
+          <p class="pkg-name" style="color:#FAF6F0;">Corporate<br/>Package</p>
+          <p class="pkg-tagline" style="color:rgba(250,246,240,0.65);">Annual dinners, product launches, award evenings, business conferences, and client entertainment.</p>
+          <div style="border-top:1px solid rgba(201,168,76,0.2); padding-top:1rem; margin-top:1rem;">
+            <span class="pkg-price" style="color:#C9A84C;">₦350,000<span class="pkg-price-note" style="color:rgba(250,246,240,0.5);">starting</span></span>
+            <p class="pkg-capacity" style="color:rgba(201,168,76,0.7); margin-top:0.5rem;">👥 20 – 120 Guests</p>
+          </div>
+        </div>
+        <div style="padding:1.75rem; flex:1; display:flex; flex-direction:column;">
+          <div class="pkg-feature" style="color:rgba(250,246,240,0.8);">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Exclusive event hall hire (up to 8 hrs)
+          </div>
+          <div class="pkg-feature" style="color:rgba(250,246,240,0.8);">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            3-course plated dinner with wine pairing
+          </div>
+          <div class="pkg-feature" style="color:rgba(250,246,240,0.8);">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Full AV — projector, microphone, PA system
+          </div>
+          <div class="pkg-feature" style="color:rgba(250,246,240,0.8);">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Corporate-branded table décor
+          </div>
+          <div class="pkg-feature" style="color:rgba(250,246,240,0.8);">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Dedicated event coordinator
+          </div>
+          <div class="pkg-feature" style="color:rgba(250,246,240,0.8);">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Pre-event planning consultation
+          </div>
+          <div class="pkg-feature" style="color:rgba(250,246,240,0.8);">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Canape reception on arrival
+          </div>
+          <div style="margin-top:auto; padding-top:1.75rem;">
+            <a href="#inquiry" class="btn-primary" style="width:100%; justify-content:center; background:#C9A84C; border-color:#C9A84C; color:#2C2C2C;">Get a Quote</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Package 4: Grand Event -->
+      <article class="pkg-card reveal" style="background:#2C2C2C; box-shadow:0 4px 24px rgba(0,0,0,0.2);">
+        <div style="background:rgba(250,246,240,0.04); padding:2rem; border-top:3px solid #C9A84C;">
+          <p class="pkg-tier" style="color:rgba(201,168,76,0.6);">Tier 04</p>
+          <p class="pkg-name" style="color:#FAF6F0;">Grand Event<br/>Package</p>
+          <p class="pkg-tagline" style="color:rgba(250,246,240,0.55);">Weddings, grand receptions, galas, coronations, and milestone celebrations at full-scale.</p>
+          <div style="border-top:1px solid rgba(201,168,76,0.15); padding-top:1rem; margin-top:1rem;">
+            <span class="pkg-price" style="color:#C9A84C;">₦750,000<span class="pkg-price-note" style="color:rgba(250,246,240,0.4);">starting</span></span>
+            <p class="pkg-capacity" style="color:rgba(201,168,76,0.6); margin-top:0.5rem;">👥 80 – 250 Guests</p>
+          </div>
+        </div>
+        <div style="padding:1.75rem; flex:1; display:flex; flex-direction:column;">
+          <div class="pkg-feature" style="color:rgba(250,246,240,0.75);">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Full-day venue hire (12 hours)
+          </div>
+          <div class="pkg-feature" style="color:rgba(250,246,240,0.75);">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Full catering — starter, main &amp; dessert
+          </div>
+          <div class="pkg-feature" style="color:rgba(250,246,240,0.75);">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Premium décor design &amp; florals
+          </div>
+          <div class="pkg-feature" style="color:rgba(250,246,240,0.75);">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Full AV, lighting rig &amp; stage setup
+          </div>
+          <div class="pkg-feature" style="color:rgba(250,246,240,0.75);">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Full event management team
+          </div>
+          <div class="pkg-feature" style="color:rgba(250,246,240,0.75);">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Open bar option available
+          </div>
+          <div class="pkg-feature" style="color:rgba(250,246,240,0.75);">
+            <svg class="pkg-feature-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C9A84C" stroke-width="1.5"/><path d="M6 10l3 3 5-5" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Tasting session before event day
+          </div>
+          <div style="margin-top:auto; padding-top:1.75rem;">
+            <a href="#inquiry" class="btn-primary" style="width:100%; justify-content:center; background:transparent; border-color:rgba(201,168,76,0.5); color:#C9A84C;">Get a Quote</a>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /grid -->
+
+    <p class="text-center mt-8 reveal" style="font-size:0.8rem; color:#6B6B6B;">
+      All prices are starting rates. Final pricing depends on guest count, menu choices, duration, and customisation. <a href="#inquiry" style="color:#C9A84C; text-decoration:none;">Contact us</a> for a detailed proposal.
+    </p>
+  </div>
+</section>
+
+
+<!-- ═══ VENUE SPECS ════════════════════════════════════════════════════════════ -->
+<section class="py-20 px-6 md:px-12" style="background:#FAF6F0;">
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+    <div class="reveal">
+      <p class="section-eyebrow mb-4">The Space</p>
+      <span class="gold-rule mb-6"></span>
+      <h2 class="section-title text-4xl mt-6 mb-6">Our Event Hall,<br/><em style="color:#6B1A2A; font-style:italic;">Your Canvas</em></h2>
+      <p style="font-weight:300; line-height:1.8; color:#6B6B6B; margin-bottom:2rem;">
+        Located within Nwabude Mall, Centenary City Estate — Enugu's most prestigious new address — our event hall is a beautifully appointed space that can be configured for any layout or theme.
+      </p>
+      <div style="background:#fff; padding:1.5rem; box-shadow:0 2px 16px rgba(107,26,42,0.06);">
+        <div class="spec-row"><span style="font-size:0.85rem; font-weight:500; color:#2C2C2C;">Maximum Capacity</span><span style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; color:#C9A84C;">250 guests</span></div>
+        <div class="spec-row"><span style="font-size:0.85rem; font-weight:500; color:#2C2C2C;">Banquet (Round Tables)</span><span style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; color:#C9A84C;">180 guests</span></div>
+        <div class="spec-row"><span style="font-size:0.85rem; font-weight:500; color:#2C2C2C;">Theatre / Lecture Style</span><span style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; color:#C9A84C;">250 guests</span></div>
+        <div class="spec-row"><span style="font-size:0.85rem; font-weight:500; color:#2C2C2C;">Boardroom / U-Shape</span><span style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; color:#C9A84C;">30 guests</span></div>
+        <div class="spec-row"><span style="font-size:0.85rem; font-weight:500; color:#2C2C2C;">Cocktail / Standing</span><span style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; color:#C9A84C;">250+ guests</span></div>
+        <div class="spec-row"><span style="font-size:0.85rem; font-weight:500; color:#2C2C2C;">AV Equipment</span><span style="font-size:0.85rem; color:#6B6B6B;">Projector · PA · Microphones</span></div>
+        <div class="spec-row"><span style="font-size:0.85rem; font-weight:500; color:#2C2C2C;">Air Conditioning</span><span style="font-size:0.85rem; color:#6B6B6B;">Full central AC</span></div>
+        <div class="spec-row" style="border-bottom:none;"><span style="font-size:0.85rem; font-weight:500; color:#2C2C2C;">Parking</span><span style="font-size:0.85rem; color:#6B6B6B;">Nwabude Mall carpark</span></div>
+      </div>
+    </div>
+    <div class="reveal" style="position:relative;">
+      <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80" alt="Winnie's event hall — wide angle showing elegant banquet setup" style="width:100%; height:26rem; object-fit:cover; box-shadow:0 16px 48px rgba(107,26,42,0.15);" loading="lazy" />
+      <div style="position:absolute; bottom:1.5rem; right:-1rem; background:#6B1A2A; padding:1.5rem; box-shadow:0 8px 24px rgba(107,26,42,0.3); max-width:220px;">
+        <p style="font-family:'Cormorant Garamond',serif; font-size:0.95rem; font-style:italic; color:#C9A84C; line-height:1.5;">"A setting as beautiful as your occasion deserves."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ PROCESS SECTION ═══════════════════════════════════════════════════════ -->
+<section class="py-20 px-6 md:px-12" style="background:#EAE0D0;">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <p class="section-eyebrow mb-4">How It Works</p>
+      <span class="gold-rule mx-auto mb-6"></span>
+      <h2 class="section-title text-4xl mt-6">From Vision<br/><em style="color:#6B1A2A; font-style:italic;">to Reality</em></h2>
+    </div>
+    <div class="space-y-0 reveal">
+      <!-- Step 1 -->
+      <div style="display:flex; gap:1.5rem; align-items:stretch;">
+        <div style="display:flex; flex-direction:column; align-items:center; flex-shrink:0; width:3.5rem;">
+          <div style="width:2.5rem; height:2.5rem; background:#6B1A2A; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <span style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:700; color:#C9A84C;">1</span>
+          </div>
+          <div style="flex:1; width:1px; background:rgba(107,26,42,0.2); margin:0.5rem 0;"></div>
+        </div>
+        <div style="padding-bottom:2.5rem;">
+          <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.35rem; font-weight:600; color:#2C2C2C; margin-bottom:0.5rem;">Reach Out &amp; Consult</h3>
+          <p style="font-size:0.88rem; font-weight:300; line-height:1.8; color:#6B6B6B;">Send us an inquiry via the form below, WhatsApp, or email. We'll respond within the hour to schedule a complimentary consultation — in person or by phone.</p>
+        </div>
+      </div>
+      <!-- Step 2 -->
+      <div style="display:flex; gap:1.5rem; align-items:stretch;">
+        <div style="display:flex; flex-direction:column; align-items:center; flex-shrink:0; width:3.5rem;">
+          <div style="width:2.5rem; height:2.5rem; background:#6B1A2A; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <span style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:700; color:#C9A84C;">2</span>
+          </div>
+          <div style="flex:1; width:1px; background:rgba(107,26,42,0.2); margin:0.5rem 0;"></div>
+        </div>
+        <div style="padding-bottom:2.5rem;">
+          <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.35rem; font-weight:600; color:#2C2C2C; margin-bottom:0.5rem;">Plan &amp; Customise</h3>
+          <p style="font-size:0.88rem; font-weight:300; line-height:1.8; color:#6B6B6B;">Our events coordinator will guide you through menu selection, room layout, décor themes, and any special requirements. We send a detailed proposal and quote within 48 hours.</p>
+        </div>
+      </div>
+      <!-- Step 3 -->
+      <div style="display:flex; gap:1.5rem; align-items:stretch;">
+        <div style="display:flex; flex-direction:column; align-items:center; flex-shrink:0; width:3.5rem;">
+          <div style="width:2.5rem; height:2.5rem; background:#6B1A2A; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <span style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:700; color:#C9A84C;">3</span>
+          </div>
+          <div style="flex:1; width:1px; background:rgba(107,26,42,0.2); margin:0.5rem 0;"></div>
+        </div>
+        <div style="padding-bottom:2.5rem;">
+          <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.35rem; font-weight:600; color:#2C2C2C; margin-bottom:0.5rem;">Confirm &amp; Secure</h3>
+          <p style="font-size:0.88rem; font-weight:300; line-height:1.8; color:#6B6B6B;">Agree on the package and sign the event contract. A 40% deposit secures your date. For packages above ₦500,000, a tasting session is included to finalise the menu.</p>
+        </div>
+      </div>
+      <!-- Step 4 -->
+      <div style="display:flex; gap:1.5rem; align-items:flex-start;">
+        <div style="display:flex; flex-direction:column; align-items:center; flex-shrink:0; width:3.5rem;">
+          <div style="width:2.5rem; height:2.5rem; background:#C9A84C; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <span style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:700; color:#2C2C2C;">4</span>
+          </div>
+        </div>
+        <div>
+          <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.35rem; font-weight:600; color:#2C2C2C; margin-bottom:0.5rem;">Celebrate</h3>
+          <p style="font-size:0.88rem; font-weight:300; line-height:1.8; color:#6B6B6B;">On the day, our team handles everything — setup, service, and breakdown. You arrive as a guest at your own event. We take care of the rest.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ EVENT TYPES ════════════════════════════════════════════════════════════ -->
+<section class="py-20 px-6 md:px-12" style="background:#6B1A2A;">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <p class="section-eyebrow mb-4" style="color:rgba(201,168,76,0.8);">No Occasion Too Small or Grand</p>
+      <span class="gold-rule mx-auto mb-6"></span>
+      <h2 class="section-title text-4xl mt-6" style="color:#FAF6F0;">Events We Specialise In</h2>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 stagger">
+      <div class="reveal" style="text-align:center; padding:1.75rem 1rem; background:rgba(250,246,240,0.05); border:1px solid rgba(201,168,76,0.15); transition:background 0.2s;" onmouseenter="this.style.background='rgba(201,168,76,0.1)'" onmouseleave="this.style.background='rgba(250,246,240,0.05)'">
+        <div style="font-size:2rem; margin-bottom:0.75rem;">💍</div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:600; color:#FAF6F0; margin-bottom:0.3rem;">Weddings</p>
+        <p style="font-size:0.72rem; color:rgba(250,246,240,0.5); line-height:1.5;">Receptions &amp; white-wedding dinners</p>
+      </div>
+      <div class="reveal" style="text-align:center; padding:1.75rem 1rem; background:rgba(250,246,240,0.05); border:1px solid rgba(201,168,76,0.15); transition:background 0.2s;" onmouseenter="this.style.background='rgba(201,168,76,0.1)'" onmouseleave="this.style.background='rgba(250,246,240,0.05)'">
+        <div style="font-size:2rem; margin-bottom:0.75rem;">🎂</div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:600; color:#FAF6F0; margin-bottom:0.3rem;">Birthdays</p>
+        <p style="font-size:0.72rem; color:rgba(250,246,240,0.5); line-height:1.5;">Milestone &amp; themed celebrations</p>
+      </div>
+      <div class="reveal" style="text-align:center; padding:1.75rem 1rem; background:rgba(250,246,240,0.05); border:1px solid rgba(201,168,76,0.15); transition:background 0.2s;" onmouseenter="this.style.background='rgba(201,168,76,0.1)'" onmouseleave="this.style.background='rgba(250,246,240,0.05)'">
+        <div style="font-size:2rem; margin-bottom:0.75rem;">💼</div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:600; color:#FAF6F0; margin-bottom:0.3rem;">Corporate</p>
+        <p style="font-size:0.72rem; color:rgba(250,246,240,0.5); line-height:1.5;">Dinners, conferences &amp; launches</p>
+      </div>
+      <div class="reveal" style="text-align:center; padding:1.75rem 1rem; background:rgba(250,246,240,0.05); border:1px solid rgba(201,168,76,0.15); transition:background 0.2s;" onmouseenter="this.style.background='rgba(201,168,76,0.1)'" onmouseleave="this.style.background='rgba(250,246,240,0.05)'">
+        <div style="font-size:2rem; margin-bottom:0.75rem;">👶</div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:600; color:#FAF6F0; margin-bottom:0.3rem;">Naming &amp; Christening</p>
+        <p style="font-size:0.72rem; color:rgba(250,246,240,0.5); line-height:1.5;">Elegant family celebrations</p>
+      </div>
+      <div class="reveal" style="text-align:center; padding:1.75rem 1rem; background:rgba(250,246,240,0.05); border:1px solid rgba(201,168,76,0.15); transition:background 0.2s;" onmouseenter="this.style.background='rgba(201,168,76,0.1)'" onmouseleave="this.style.background='rgba(250,246,240,0.05)'">
+        <div style="font-size:2rem; margin-bottom:0.75rem;">🕊️</div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:600; color:#FAF6F0; margin-bottom:0.3rem;">Burials &amp; Tributes</p>
+        <p style="font-size:0.72rem; color:rgba(250,246,240,0.5); line-height:1.5;">Dignified memorial receptions</p>
+      </div>
+      <div class="reveal" style="text-align:center; padding:1.75rem 1rem; background:rgba(250,246,240,0.05); border:1px solid rgba(201,168,76,0.15); transition:background 0.2s;" onmouseenter="this.style.background='rgba(201,168,76,0.1)'" onmouseleave="this.style.background='rgba(250,246,240,0.05)'">
+        <div style="font-size:2rem; margin-bottom:0.75rem;">✨</div>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:600; color:#FAF6F0; margin-bottom:0.3rem;">Private Dinners</p>
+        <p style="font-size:0.72rem; color:rgba(250,246,240,0.5); line-height:1.5;">Proposals, anniversaries &amp; VIP</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ FAQ ═══════════════════════════════════════════════════════════════════ -->
+<section class="py-20 px-6 md:px-12" style="background:#FAF6F0;">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-12 reveal">
+      <p class="section-eyebrow mb-4">Common Questions</p>
+      <span class="gold-rule mx-auto mb-6"></span>
+      <h2 class="section-title text-4xl mt-6">FAQs</h2>
+    </div>
+    <div class="reveal">
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <span style="font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:600; color:#2C2C2C; text-align:left;">How far in advance should I book?</span>
+          <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-body"><p style="font-size:0.88rem; font-weight:300; line-height:1.8; color:#6B6B6B;">We recommend booking at least 4–6 weeks in advance for smaller events and 3–6 months for weddings and large receptions. Weekend dates fill quickly, especially during festive periods (Christmas, New Year, Easter).</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <span style="font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:600; color:#2C2C2C; text-align:left;">Can we bring our own caterer or alcohol?</span>
+          <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-body"><p style="font-size:0.88rem; font-weight:300; line-height:1.8; color:#6B6B6B;">All food and beverages must be supplied by Winnie's Cuisine — this ensures our food safety standards and the overall quality of your event. We are happy to design a fully custom menu to match your preferences. Our beverage selection includes wines, spirits, cocktails, and a full range of non-alcoholic options.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <span style="font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:600; color:#2C2C2C; text-align:left;">What is the deposit and cancellation policy?</span>
+          <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-body"><p style="font-size:0.88rem; font-weight:300; line-height:1.8; color:#6B6B6B;">A 40% deposit is required to confirm your booking. Cancellations made more than 30 days before the event receive a 50% refund of the deposit. Cancellations within 14 days of the event are non-refundable. We strongly recommend event insurance for large bookings.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <span style="font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:600; color:#2C2C2C; text-align:left;">Can Winnie's cater for events outside the venue?</span>
+          <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-body"><p style="font-size:0.88rem; font-weight:300; line-height:1.8; color:#6B6B6B;">Yes. Our catering team can travel to external venues across Enugu State and neighbouring areas. Off-site catering is available for the Celebration, Corporate, and Grand Event packages. Travel and logistics charges apply depending on location and distance.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <span style="font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:600; color:#2C2C2C; text-align:left;">Do you accommodate dietary restrictions and allergies?</span>
+          <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="faq-body"><p style="font-size:0.88rem; font-weight:300; line-height:1.8; color:#6B6B6B;">Absolutely. We cater for vegetarians, vegans, gluten-free guests, halal dietary requirements, nut allergies, and more. Please inform us of any dietary needs during the planning stage and we will design appropriate alternatives for affected guests.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ INQUIRY FORM ════════════════════════════════════════════════════════════ -->
+<section id="inquiry" class="py-24 px-6 md:px-12" style="background:linear-gradient(135deg,#4A1020 0%,#6B1A2A 100%);">
+  <div class="max-w-3xl mx-auto reveal">
+    <div class="text-center mb-10">
+      <p class="section-eyebrow mb-4" style="color:rgba(201,168,76,0.8);">Start Planning Today</p>
+      <span class="gold-rule mx-auto mb-6"></span>
+      <h2 class="section-title text-4xl mt-6" style="color:#FAF6F0;">Request an Event Quote</h2>
+      <p style="color:rgba(250,246,240,0.65); font-size:0.9rem; margin-top:1rem; line-height:1.7;">Tell us about your event and we'll get back to you within the hour with a personalised proposal.</p>
+    </div>
+    <form id="event-form" style="background:rgba(250,246,240,0.05); border:1px solid rgba(201,168,76,0.2); padding:2.5rem; backdrop-filter:blur(8px);" novalidate>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:1.25rem;">
+        <div><label class="form-label-light" for="ef-name">Full Name *</label><input type="text" id="ef-name" placeholder="Your name" required class="form-input-dark" /></div>
+        <div><label class="form-label-light" for="ef-phone">Phone / WhatsApp *</label><input type="tel" id="ef-phone" placeholder="+234 800 000 0000" required class="form-input-dark" /></div>
+      </div>
+      <div style="margin-bottom:1.25rem;"><label class="form-label-light" for="ef-email">Email Address</label><input type="email" id="ef-email" placeholder="you@example.com" class="form-input-dark" /></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:1.25rem;">
+        <div>
+          <label class="form-label-light" for="ef-type">Event Type *</label>
+          <select id="ef-type" class="form-input-dark" style="appearance:none;">
+            <option value="">Select event type…</option>
+            <option>Wedding / Reception</option>
+            <option>Birthday Celebration</option>
+            <option>Corporate Event</option>
+            <option>Naming / Christening</option>
+            <option>Burial / Memorial</option>
+            <option>Private Dinner</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label-light" for="ef-pkg">Preferred Package</label>
+          <select id="ef-pkg" class="form-input-dark" style="appearance:none;">
+            <option value="">Select package…</option>
+            <option>Intimate Dining (₦95k)</option>
+            <option>Celebration Package (₦185k+)</option>
+            <option>Corporate Package (₦350k+)</option>
+            <option>Grand Event (₦750k+)</option>
+            <option>Not sure — need advice</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:1.25rem;">
+        <div><label class="form-label-light" for="ef-date">Event Date</label><input type="date" id="ef-date" class="form-input-dark" /></div>
+        <div><label class="form-label-light" for="ef-guests">Expected Guests</label><input type="number" id="ef-guests" placeholder="e.g. 80" min="2" class="form-input-dark" /></div>
+      </div>
+      <div style="margin-bottom:1.5rem;"><label class="form-label-light" for="ef-msg">Additional Details</label><textarea id="ef-msg" rows="4" placeholder="Tell us about your vision — theme, dietary needs, special requests…" class="form-input-dark" style="resize:none;"></textarea></div>
+      <button type="submit" class="btn-primary" style="width:100%; justify-content:center; background:#C9A84C; border-color:#C9A84C; color:#2C2C2C; font-size:0.85rem; padding:1rem 2rem;">
+        Send Event Inquiry
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+      </button>
+      <p style="text-align:center; font-size:0.72rem; color:rgba(250,246,240,0.4); margin-top:1rem;">Or reach us directly on <a href="https://wa.me/2348000000000" style="color:#C9A84C; text-decoration:none;">WhatsApp</a> · Response within 1 hour</p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .form-label-light { display:block; font-size:0.7rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:rgba(250,246,240,0.5); margin-bottom:0.4rem; }
+  .form-input-dark { width:100%; padding:0.75rem 1rem; background:rgba(250,246,240,0.07); border:1px solid rgba(201,168,76,0.2); color:#FAF6F0; font-family:'Inter',sans-serif; font-size:0.9rem; outline:none; transition:border-color 0.2s; }
+  .form-input-dark:focus { border-color:#C9A84C; }
+  .form-input-dark::placeholder { color:rgba(250,246,240,0.3); }
+  .form-input-dark option { background:#2C1810; color:#FAF6F0; }
+</style>
+
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════════════════ -->
+<footer style="background:#1A0C10; color:rgba(250,246,240,0.65); padding:3rem 1.5rem;">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+    <div>
+      <a href="index.html" style="font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:700; color:#FAF6F0; text-decoration:none;">Winnie's Cuisine &amp; Events</a>
+      <p style="font-size:0.75rem; color:#C9A84C; letter-spacing:0.15em; text-transform:uppercase; margin-top:3px;">Where every meal is a masterpiece</p>
+    </div>
+    <nav style="display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center;">
+      <a href="index.html" style="font-size:0.8rem; color:rgba(250,246,240,0.5); text-decoration:none;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(250,246,240,0.5)'">Home</a>
+      <a href="menu.html" style="font-size:0.8rem; color:rgba(250,246,240,0.5); text-decoration:none;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(250,246,240,0.5)'">Menu</a>
+      <a href="events.html" style="font-size:0.8rem; color:#C9A84C; text-decoration:none;">Events</a>
+      <a href="gallery.html" style="font-size:0.8rem; color:rgba(250,246,240,0.5); text-decoration:none;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(250,246,240,0.5)'">Gallery</a>
+      <a href="index.html#contact" style="font-size:0.8rem; color:rgba(250,246,240,0.5); text-decoration:none;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(250,246,240,0.5)'">Contact</a>
+    </nav>
+    <p style="font-size:0.72rem;">© 2025 Winnie's Cuisine &amp; Events</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/2348000000000" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" style="position:fixed; bottom:2rem; right:2rem; z-index:100; width:3.5rem; height:3.5rem; border-radius:50%; background:linear-gradient(135deg,#25D366,#128C7E); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(37,211,102,0.4); transition:transform 0.2s;" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform='scale(1)'">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="white"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.134.561 4.133 1.534 5.867L0 24l6.31-1.507A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.003-1.373l-.36-.213-3.727.89.934-3.618-.234-.372A9.817 9.817 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z" fill="white"/></svg>
+</a>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const overlay = document.getElementById('menu-overlay');
+  hamburger.addEventListener('click', () => { mobileMenu.classList.add('open'); overlay.classList.remove('hidden'); document.body.style.overflow = 'hidden'; });
+  document.getElementById('close-menu').addEventListener('click', closeMobileMenu);
+  function closeMobileMenu() { mobileMenu.classList.remove('open'); overlay.classList.add('hidden'); document.body.style.overflow = ''; }
+
+  // FAQ accordion
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const body = item.querySelector('.faq-body');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-body').classList.remove('open'); });
+    if (!isOpen) { item.classList.add('open'); body.classList.add('open'); }
+  }
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left');
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => ro.observe(el));
+
+  // Form
+  document.getElementById('event-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('button[type=submit]');
+    btn.textContent = 'Sending…'; btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = '✓ Inquiry Received! We\'ll be in touch shortly.';
+      btn.style.background = '#2A6B3A'; btn.style.borderColor = '#2A6B3A'; btn.style.color = '#FAF6F0';
+      setTimeout(() => { btn.textContent = 'Send Event Inquiry'; btn.style.background = ''; btn.style.borderColor = ''; btn.style.color = ''; btn.disabled = false; this.reset(); }, 4000);
+    }, 1000);
+  });
+</script>
+</body>
+</html>

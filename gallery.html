@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Gallery — Winnie's Cuisine & Events, Enugu. Browse photos of our fine dining dishes, elegant interiors, and beautifully hosted events." />
+  <title>Gallery | Winnie's Cuisine &amp; Events · Enugu</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            burgundy: { DEFAULT: '#6B1A2A', light: '#8B2438', dark: '#4A1020' },
+            gold:     { DEFAULT: '#C9A84C', light: '#E2C36E', dark: '#A8873A' },
+            cream:    { DEFAULT: '#FAF6F0', warm: '#F5EDE0', deep: '#EAE0D0' },
+            charcoal: { DEFAULT: '#2C2C2C', light: '#444444', soft: '#6B6B6B' },
+          },
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+            sans:  ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #FAF6F0; color: #2C2C2C; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+    .section-eyebrow { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #C9A84C; }
+    .section-title   { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.12; }
+    .gold-rule       { display: block; width: 3rem; height: 2px; background: linear-gradient(90deg, #C9A84C, #E2C36E); border-radius: 2px; }
+
+    /* ── Navbar ── */
+    #navbar { transition: background 0.35s, box-shadow 0.35s, padding 0.35s; }
+    #navbar.scrolled { background: rgba(44,28,18,0.97) !important; backdrop-filter: blur(12px); box-shadow: 0 2px 24px rgba(0,0,0,0.25); padding-top: 0.75rem; padding-bottom: 0.75rem; }
+    .nav-link { text-decoration: none; font-size: 0.8rem; letter-spacing: 0.06em; color: rgba(250,246,240,0.8); transition: color 0.2s; }
+    .nav-link:hover, .nav-link.active { color: #C9A84C !important; }
+    #mobile-menu { transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+    #mobile-menu.open { transform: translateX(0); }
+    .mobile-nav-link { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 500; color: rgba(250,246,240,0.8); text-decoration: none; transition: color 0.2s; }
+    .mobile-nav-link:hover { color: #C9A84C; }
+
+    /* ── Buttons ── */
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem; background: #6B1A2A; color: #FAF6F0; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #6B1A2A; text-decoration: none; transition: background 0.25s, border-color 0.25s, transform 0.2s; }
+    .btn-primary:hover { background: #4A1020; border-color: #C9A84C; transform: translateY(-1px); }
+
+    /* ── Hero ── */
+    #gallery-hero { position: relative; height: 52vh; min-height: 380px; display: flex; align-items: flex-end; overflow: hidden; }
+    #gallery-hero-bg { position: absolute; inset: -5%; background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=80'); background-size: cover; background-position: center; filter: brightness(0.4) saturate(0.8); }
+    #gallery-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(30,10,16,0.92) 0%, rgba(30,10,16,0.35) 60%, transparent 100%); }
+
+    /* ── Filter tabs ── */
+    #filter-bar { position: sticky; top: 72px; z-index: 30; background: #fff; border-bottom: 1px solid rgba(201,168,76,0.2); }
+    .filter-btn { padding: 1rem 1.5rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6B6B; cursor: pointer; border: none; background: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.2s, border-color 0.2s; }
+    .filter-btn.active, .filter-btn:hover { color: #6B1A2A; border-bottom-color: #C9A84C; }
+
+    /* ── Masonry Grid ── */
+    #gallery-grid { columns: 3; column-gap: 0.5rem; padding: 0; }
+    @media (max-width: 1024px) { #gallery-grid { columns: 2; } }
+    @media (max-width: 600px)  { #gallery-grid { columns: 1; } }
+
+    .gallery-item {
+      position: relative;
+      break-inside: avoid;
+      margin-bottom: 0.5rem;
+      overflow: hidden;
+      cursor: pointer;
+      display: block;
+      background: #EAE0D0;
+    }
+    .gallery-item img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      transition: transform 0.45s ease, filter 0.35s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.04); filter: brightness(0.75); }
+
+    /* Hover overlay */
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.25rem;
+      background: linear-gradient(to top, rgba(44,14,20,0.85) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-caption { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 500; color: #FAF6F0; line-height: 1.3; }
+    .gallery-category-tag { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #C9A84C; margin-bottom: 0.4rem; }
+
+    /* Zoom icon on hover */
+    .zoom-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%) scale(0.7);
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      width: 3rem; height: 3rem;
+      background: rgba(201,168,76,0.9);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .gallery-item:hover .zoom-icon { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+
+    /* Hide/show for filter */
+    .gallery-item.hidden { display: none; }
+    .gallery-item { animation: fadeIn 0.4s ease both; }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+
+    /* ── Lightbox ── */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(10,4,8,0.97);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    #lightbox.open { opacity: 1; pointer-events: all; }
+    #lightbox-img {
+      max-width: 90vw;
+      max-height: 82vh;
+      object-fit: contain;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+    }
+    #lightbox-img.switching { opacity: 0; transform: scale(0.96); }
+    #lightbox-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      width: 2.75rem; height: 2.75rem;
+      background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background 0.2s;
+    }
+    #lightbox-close:hover { background: rgba(201,168,76,0.3); }
+    #lightbox-prev, #lightbox-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 3rem; height: 3rem;
+      background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.25);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background 0.2s, transform 0.2s;
+    }
+    #lightbox-prev:hover, #lightbox-next:hover { background: rgba(201,168,76,0.25); }
+    #lightbox-prev { left: 1.5rem; }
+    #lightbox-next { right: 1.5rem; }
+    #lightbox-info { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); text-align: center; }
+    #lightbox-caption { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: rgba(250,246,240,0.9); margin-bottom: 0.3rem; }
+    #lightbox-counter { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; color: rgba(201,168,76,0.7); text-transform: uppercase; }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    :focus-visible { outline: 2px solid #C9A84C; outline-offset: 3px; }
+    ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: #FAF6F0; } ::-webkit-scrollbar-thumb { background: #C9A84C; border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══════════════════════════════════════════════════════════════ -->
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 px-6 md:px-12" style="background:rgba(30,10,16,0.85); backdrop-filter:blur(10px);">
+  <nav class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="flex flex-col leading-none">
+      <span style="font-family:'Cormorant Garamond',serif; font-size:1.55rem; font-weight:700; color:#FAF6F0;">Winnie's</span>
+      <span style="font-size:0.58rem; font-weight:500; letter-spacing:0.28em; color:#C9A84C; text-transform:uppercase; margin-top:1px;">Cuisine &amp; Events</span>
+    </a>
+    <ul class="hidden lg:flex items-center gap-8" role="list">
+      <li><a href="index.html#about"       class="nav-link">About</a></li>
+      <li><a href="index.html#experiences" class="nav-link">Experiences</a></li>
+      <li><a href="menu.html"              class="nav-link">Menu</a></li>
+      <li><a href="gallery.html"           class="nav-link active">Gallery</a></li>
+      <li><a href="events.html"            class="nav-link">Events</a></li>
+      <li><a href="index.html#contact"     class="nav-link">Contact</a></li>
+    </ul>
+    <div class="hidden lg:flex items-center gap-4">
+      <a href="https://wa.me/2348000000000" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" style="display:flex; align-items:center; justify-content:center; width:2.25rem; height:2.25rem; border-radius:50%; border:1px solid rgba(250,246,240,0.2);">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="#E2C36E"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.134.561 4.133 1.534 5.867L0 24l6.31-1.507A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.003-1.373l-.36-.213-3.727.89.934-3.618-.234-.372A9.817 9.817 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z" fill="#E2C36E"/></svg>
+      </a>
+      <a href="index.html#contact" class="btn-primary">Book a Table</a>
+    </div>
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Open menu">
+      <span style="display:block; width:1.5rem; height:1px; background:#FAF6F0;"></span>
+      <span style="display:block; width:1rem; height:1px; background:#FAF6F0;"></span>
+      <span style="display:block; width:1.5rem; height:1px; background:#FAF6F0;"></span>
+    </button>
+  </nav>
+</header>
+<div id="mobile-menu" class="fixed inset-y-0 right-0 z-50 w-80 max-w-full flex flex-col" style="background:#2C1810;" role="dialog">
+  <div class="flex items-center justify-between p-6 border-b border-white/10">
+    <span style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:700; color:#FAF6F0;">Winnie's</span>
+    <button id="close-menu" aria-label="Close" class="p-2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FAF6F0" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+  </div>
+  <nav class="flex-1 flex flex-col justify-center px-8 gap-6">
+    <a href="index.html#about"       class="mobile-nav-link" onclick="closeMobileMenu()">About</a>
+    <a href="index.html#experiences" class="mobile-nav-link" onclick="closeMobileMenu()">Experiences</a>
+    <a href="menu.html"              class="mobile-nav-link" onclick="closeMobileMenu()">Menu</a>
+    <a href="gallery.html"           class="mobile-nav-link" style="color:#C9A84C;" onclick="closeMobileMenu()">Gallery</a>
+    <a href="events.html"            class="mobile-nav-link" onclick="closeMobileMenu()">Events</a>
+    <a href="index.html#contact"     class="mobile-nav-link" onclick="closeMobileMenu()">Contact</a>
+  </nav>
+  <div class="p-8 border-t border-white/10"><a href="index.html#contact" class="btn-primary w-full justify-center" onclick="closeMobileMenu()">Book a Table</a></div>
+</div>
+<div id="menu-overlay" class="fixed inset-0 z-40 bg-black/60 hidden" onclick="closeMobileMenu()"></div>
+
+
+<!-- ═══ HERO ══════════════════════════════════════════════════════════════════ -->
+<section id="gallery-hero" aria-label="Gallery hero">
+  <div id="gallery-hero-bg" role="img" aria-label="Elegantly plated fine-dining dish at Winnie's Cuisine"></div>
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pb-14">
+    <div style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.4rem 1rem; background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.35); color:#E2C36E; font-size:0.68rem; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; backdrop-filter:blur(4px); margin-bottom:1.25rem;">
+      <span>✦</span> A Visual Journey
+    </div>
+    <h1 style="font-family:'Cormorant Garamond',serif; font-size:clamp(2.5rem,6vw,4.5rem); font-weight:600; color:#FAF6F0; line-height:1.1; margin-bottom:1rem;">
+      Our <em style="color:#C9A84C; font-style:italic;">Gallery</em>
+    </h1>
+    <p style="color:rgba(250,246,240,0.72); font-size:1rem; font-weight:300; max-width:480px; line-height:1.75;">
+      Every image tells a story — of flavour, warmth, elegance, and the unforgettable moments we help create.
+    </p>
+  </div>
+</section>
+
+
+<!-- ═══ FILTER BAR ════════════════════════════════════════════════════════════ -->
+<div id="filter-bar">
+  <div class="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+    <div style="overflow-x:auto; scrollbar-width:none; display:flex;" id="filter-scroll">
+      <button class="filter-btn active" data-filter="all"       onclick="filterGallery('all',this)">All Photos</button>
+      <button class="filter-btn"        data-filter="food"      onclick="filterGallery('food',this)">Food &amp; Dishes</button>
+      <button class="filter-btn"        data-filter="interior"  onclick="filterGallery('interior',this)">Interior &amp; Ambience</button>
+      <button class="filter-btn"        data-filter="events"    onclick="filterGallery('events',this)">Events &amp; Celebrations</button>
+    </div>
+    <span id="item-count" style="font-size:0.72rem; color:#6B6B6B; white-space:nowrap; padding-left:1rem; flex-shrink:0;"></span>
+  </div>
+</div>
+
+
+<!-- ═══ MASONRY GALLERY ═══════════════════════════════════════════════════════ -->
+<main class="max-w-7xl mx-auto px-6 md:px-12 py-10 pb-24">
+  <div id="gallery-grid" role="list" aria-label="Photo gallery">
+
+    <!-- ─── FOOD & DISHES ─────────────────────────────────────────────────── -->
+
+    <figure class="gallery-item" data-category="food" data-caption="Signature Jollof Rice — Winnie's party-style with smoky firewood base" onclick="openLightbox(0)" role="listitem" tabindex="0" aria-label="Open photo: Signature Jollof Rice" onkeydown="if(event.key==='Enter')openLightbox(0)">
+      <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800&q=80"
+           alt="Beautifully plated signature jollof rice with fried plantain and grilled chicken at Winnie's Cuisine" loading="lazy" />
+      <div class="gallery-overlay">
+        <p class="gallery-category-tag">Food &amp; Dishes</p>
+        <p class="gallery-caption">Signature Jollof Rice</p>
+      </div>
+      <div class="zoom-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2C2C" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+    </figure>
+
+    <figure class="gallery-item" data-category="interior" data-caption="The dining room at Winnie's — warm lighting, elegant table settings" onclick="openLightbox(1)" role="listitem" tabindex="0" aria-label="Open photo: Dining Room Interior" onkeydown="if(event.key==='Enter')openLightbox(1)">
+      <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80"
+           alt="Winnie's Cuisine elegant dining room interior with warm lighting and beautifully set tables" loading="lazy" />
+      <div class="gallery-overlay">
+        <p class="gallery-category-tag">Interior &amp; Ambience</p>
+        <p class="gallery-caption">The Dining Room</p>
+      </div>
+      <div class="zoom-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2C2C" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+    </figure>
+
+    <figure class="gallery-item" data-category="food" data-caption="Pan-Seared Salmon — crispy skin, lemon beurre blanc, charred broccolini" onclick="openLightbox(2)" role="listitem" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(2)">
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80"
+           alt="Pan-seared salmon with crispy skin, lemon beurre blanc and charred broccolini" loading="lazy" />
+      <div class="gallery-overlay">
+        <p class="gallery-category-tag">Food &amp; Dishes</p>
+        <p class="gallery-caption">Pan-Seared Salmon</p>
+      </div>
+      <div class="zoom-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2C2C" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+    </figure>
+
+    <figure class="gallery-item" data-category="events" data-caption="A grand wedding reception hosted at Winnie's event hall" onclick="openLightbox(3)" role="listitem" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(3)">
+      <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=900&q=80"
+           alt="Grand wedding reception in Winnie's beautifully decorated event hall with white and gold theme" loading="lazy" />
+      <div class="gallery-overlay">
+        <p class="gallery-category-tag">Events &amp; Celebrations</p>
+        <p class="gallery-caption">Wedding Reception</p>
+      </div>
+      <div class="zoom-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2C2C" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+    </figure>
+
+    <figure class="gallery-item" data-category="food" data-caption="Dark Chocolate Fondant — Valrhona, vanilla ice cream, edible gold" onclick="openLightbox(4)" role="listitem" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(4)">
+      <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=700&q=80"
+           alt="Dark Valrhona chocolate fondant with molten centre served with vanilla ice cream and edible gold" loading="lazy" />
+      <div class="gallery-overlay">
+        <p class="gallery-category-tag">Food &amp; Dishes</p>
+        <p class="gallery-caption">Dark Chocolate Fondant</p>
+      </div>
+      <div class="zoom-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2C2C" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+    </figure>
+
+    <figure class="gallery-item" data-category="interior" data-caption="Candlelit private dining nook — perfect for intimate celebrations" onclick="openLightbox(5)" role="listitem" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(5)">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80"
+           alt="Candlelit private dining nook at Winnie's Cuisine with warm amber lighting and white linen" loading="lazy" />
+      <div class="gallery-overlay">
+        <p class="gallery-category-tag">Interior &amp; Ambience</p>
+        <p class="gallery-caption">Private Dining Nook</p>
+      </div>
+      <div class="zoom-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2C2C" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+    </figure>
+
+    <figure class="gallery-item" data-category="food" data-caption="Suya Skewer Trio — premium beef, groundnut sauce, pickled slaw" onclick="openLightbox(6)" role="listitem" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(6)">
+      <img src="https://images.unsplash.com/photo-1572441713132-51c75654db73?w=700&q=80"
+           alt="Suya skewer trio with premium beef, groundnut dipping sauce and pickled vegetable slaw" loading="lazy" />
+      <div class="gallery-overlay">
+        <p class="gallery-category-tag">Food &amp; Dishes</p>
+        <p class="gallery-caption">Suya Skewer Trio</p>
+      </div>
+      <div class="zoom-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2C2C" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+    </figure>
+
+    <figure class="gallery-item" data-category="events" data-caption="Corporate gala dinner — beautifully set banquet tables" onclick="openLightbox(7)" role="listitem" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(7)">
+      <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=900&q=80"
+           alt="Corporate gala dinner with elegantly set banquet tables, floral centrepieces and warm lighting" loading="lazy" />
+      <div class="gallery-overlay">
+        <p class="gallery-category-tag">Events &amp; Celebrations</p>
+        <p class="gallery-caption">Corporate Gala Dinner</p>
+      </div>
+      <div class="zoom-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2C2C" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+    </figure>
+
+    <figure class="gallery-item" data-category="food" data-caption="Mango & Coconut Panna Cotta — tropical elegance on a plate" onclick="openLightbox(8)" role="listitem" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(8)">
+      <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=700&q=80"
+           alt="Mango and coconut panna cotta with fresh mango coulis, toasted coconut and passionfruit gel" loading="lazy" />
+      <div class="gallery-overlay">
+        <p class="gallery-category-tag">Food &amp; Dishes</p>
+        <p class="gallery-caption">Mango &amp; Coconut Panna Cotta</p>
+      </div>
+      <div class="zoom-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2C2C" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+    </figure>
+
+    <figure class="gallery-item" data-category="interior" data-caption="The bar — a curated selection of wines, cocktails, and spirits" onclick="openLightbox(9)" role="listitem" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(9)">
+      <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=800&q=80"
+           alt="Winnie's restaurant bar with curated wine selection and elegant back-lit shelving" loading="lazy" />
+      <div class="gallery-overlay">
+        <p class="gallery-category-tag">Interior &amp; Ambience</p>
+        <p class="gallery-caption">The Bar</p>
+      </div>
+      <div class="zoom-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2C2C" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+    </figure>
+
+    <figure class="gallery-item" data-category="events" data-caption="Birthday celebration — elegant table styling with balloons and florals" onclick="openLightbox(10)" role="listitem" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(10)">
+      <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=800&q=80"
+           alt="Elegant birthday celebration setup with gold and white balloons, floral arrangements and personalised cake table" loading="lazy" />
+      <div class="gallery-overlay">
+        <p class="gallery-category-tag">Events &amp; Celebrations</p>
+        <p class="gallery-caption">Birthday Celebration</p>
+      </div>
+      <div class="zoom-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2C2C" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+    </figure>
+
+    <figure class="gallery-item" data-category="food" data-caption="Fresh premium ingredients — the foundation of every Winnie's dish" onclick="openLightbox(11)" role="listitem" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(11)">
+      <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=800&q=80"
+           alt="Fresh premium Nigerian ingredients including peppers, herbs, spices and vegetables" loading="lazy" />
+      <div class="gallery-overlay">
+        <p class="gallery-category-tag">Food &amp; Dishes</p>
+        <p class="gallery-caption">Our Ingredients</p>
+      </div>
+      <div class="zoom-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2C2C" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+    </figure>
+
+    <figure class="gallery-item" data-category="events" data-caption="Catering for a naming ceremony — warmly presented buffet spread" onclick="openLightbox(12)" role="listitem" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(12)">
+      <img src="https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=80"
+           alt="Winnie's catering team presenting an elegant buffet spread for a naming ceremony" loading="lazy" />
+      <div class="gallery-overlay">
+        <p class="gallery-category-tag">Events &amp; Celebrations</p>
+        <p class="gallery-caption">Naming Ceremony Catering</p>
+      </div>
+      <div class="zoom-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2C2C" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+    </figure>
+
+    <figure class="gallery-item" data-category="food" data-caption="Winnie's Masterpiece Plate — the dish that started it all" onclick="openLightbox(13)" role="listitem" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(13)">
+      <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=800&q=80"
+           alt="Winnie's Masterpiece Plate — slow-braised oxtail with minted jollof couscous and plantain chips" loading="lazy" />
+      <div class="gallery-overlay">
+        <p class="gallery-category-tag">Food &amp; Dishes</p>
+        <p class="gallery-caption">The Masterpiece Plate</p>
+      </div>
+      <div class="zoom-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2C2C" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+    </figure>
+
+    <figure class="gallery-item" data-category="interior" data-caption="Outdoor terrace — alfresco dining under the Enugu sky" onclick="openLightbox(14)" role="listitem" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(14)">
+      <img src="https://images.unsplash.com/photo-1530062845289-9109b2c9c868?w=800&q=80"
+           alt="Winnie's outdoor terrace seating area for alfresco dining with ambient string lights" loading="lazy" />
+      <div class="gallery-overlay">
+        <p class="gallery-category-tag">Interior &amp; Ambience</p>
+        <p class="gallery-caption">Outdoor Terrace</p>
+      </div>
+      <div class="zoom-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2C2C" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+    </figure>
+
+    <figure class="gallery-item" data-category="food" data-caption="Grilled Chicken Supreme — herb butter, roasted vegetables, mushroom cream" onclick="openLightbox(15)" role="listitem" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(15)">
+      <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800&q=80"
+           alt="Grilled chicken supreme with herb butter, roasted root vegetables and mushroom cream sauce" loading="lazy" />
+      <div class="gallery-overlay">
+        <p class="gallery-category-tag">Food &amp; Dishes</p>
+        <p class="gallery-caption">Grilled Chicken Supreme</p>
+      </div>
+      <div class="zoom-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2C2C" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+    </figure>
+
+    <figure class="gallery-item" data-category="events" data-caption="Product launch reception — styled corporate event at Winnie's" onclick="openLightbox(16)" role="listitem" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(16)">
+      <img src="https://images.unsplash.com/photo-1551248429-40975aa4de74?w=800&q=80"
+           alt="Corporate product launch reception at Winnie's with cocktail tables, ambient lighting and branded styling" loading="lazy" />
+      <div class="gallery-overlay">
+        <p class="gallery-category-tag">Events &amp; Celebrations</p>
+        <p class="gallery-caption">Corporate Product Launch</p>
+      </div>
+      <div class="zoom-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2C2C" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+    </figure>
+
+    <figure class="gallery-item" data-category="food" data-caption="Tiger Prawn Cocktail — chilled prawns, avocado, citrus Marie Rose" onclick="openLightbox(17)" role="listitem" tabindex="0" onkeydown="if(event.key==='Enter')openLightbox(17)">
+      <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800&q=80"
+           alt="Tiger prawn cocktail with chilled prawns, fresh avocado and citrus-ginger Marie Rose sauce" loading="lazy" />
+      <div class="gallery-overlay">
+        <p class="gallery-category-tag">Food &amp; Dishes</p>
+        <p class="gallery-caption">Tiger Prawn Cocktail</p>
+      </div>
+      <div class="zoom-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2C2C" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+    </figure>
+
+  </div><!-- /gallery-grid -->
+
+  <!-- CTA after gallery -->
+  <div class="text-center mt-16 reveal">
+    <p style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:#2C2C2C; margin-bottom:0.5rem;">Love what you see?</p>
+    <p style="font-size:0.9rem; font-weight:300; color:#6B6B6B; margin-bottom:1.5rem;">Come experience it in person — book a table or plan your next event with us.</p>
+    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;">
+      <a href="index.html#contact" class="btn-primary">Reserve a Table</a>
+      <a href="events.html" style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.8rem 1.8rem; background:transparent; color:#C9A84C; font-size:0.75rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; border:1.5px solid #C9A84C; text-decoration:none; transition:background 0.25s, color 0.25s;" onmouseover="this.style.background='#C9A84C'; this.style.color='#FAF6F0'" onmouseout="this.style.background='transparent'; this.style.color='#C9A84C'">Plan an Event</a>
+    </div>
+  </div>
+</main>
+
+
+<!-- ═══ LIGHTBOX ══════════════════════════════════════════════════════════════ -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Image lightbox" aria-describedby="lightbox-caption">
+  <!-- Close -->
+  <button id="lightbox-close" onclick="closeLightbox()" aria-label="Close lightbox">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FAF6F0" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <!-- Prev -->
+  <button id="lightbox-prev" onclick="changeImage(-1)" aria-label="Previous image">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <!-- Image -->
+  <img id="lightbox-img" src="" alt="" />
+  <!-- Next -->
+  <button id="lightbox-next" onclick="changeImage(1)" aria-label="Next image">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
+  <!-- Info -->
+  <div id="lightbox-info">
+    <p id="lightbox-caption"></p>
+    <p id="lightbox-counter"></p>
+  </div>
+</div>
+
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════════════════ -->
+<footer style="background:#1A0C10; color:rgba(250,246,240,0.65); padding:3rem 1.5rem;">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+    <div>
+      <a href="index.html" style="font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:700; color:#FAF6F0; text-decoration:none;">Winnie's Cuisine &amp; Events</a>
+      <p style="font-size:0.75rem; color:#C9A84C; letter-spacing:0.15em; text-transform:uppercase; margin-top:3px;">Where every meal is a masterpiece</p>
+    </div>
+    <nav style="display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center;">
+      <a href="index.html" style="font-size:0.8rem; color:rgba(250,246,240,0.5); text-decoration:none;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(250,246,240,0.5)'">Home</a>
+      <a href="menu.html" style="font-size:0.8rem; color:rgba(250,246,240,0.5); text-decoration:none;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(250,246,240,0.5)'">Menu</a>
+      <a href="events.html" style="font-size:0.8rem; color:rgba(250,246,240,0.5); text-decoration:none;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(250,246,240,0.5)'">Events</a>
+      <a href="gallery.html" style="font-size:0.8rem; color:#C9A84C; text-decoration:none;">Gallery</a>
+      <a href="index.html#contact" style="font-size:0.8rem; color:rgba(250,246,240,0.5); text-decoration:none;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(250,246,240,0.5)'">Contact</a>
+    </nav>
+    <p style="font-size:0.72rem;">© 2025 Winnie's Cuisine &amp; Events</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/2348000000000" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" style="position:fixed; bottom:2rem; right:2rem; z-index:100; width:3.5rem; height:3.5rem; border-radius:50%; background:linear-gradient(135deg,#25D366,#128C7E); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(37,211,102,0.4); transition:transform 0.2s;" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform='scale(1)'">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="white"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.134.561 4.133 1.534 5.867L0 24l6.31-1.507A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.003-1.373l-.36-.213-3.727.89.934-3.618-.234-.372A9.817 9.817 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z" fill="white"/></svg>
+</a>
+
+
+<!-- ═══ JAVASCRIPT ════════════════════════════════════════════════════════════ -->
+<script>
+  /* ── Navbar ── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
+
+  /* ── Mobile menu ── */
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.add('open');
+    document.getElementById('menu-overlay').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  });
+  document.getElementById('close-menu').addEventListener('click', closeMobileMenu);
+  function closeMobileMenu() {
+    document.getElementById('mobile-menu').classList.remove('open');
+    document.getElementById('menu-overlay').classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  /* ── Gallery filter ── */
+  function filterGallery(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const items = document.querySelectorAll('.gallery-item');
+    let count = 0;
+    items.forEach(item => {
+      const matches = cat === 'all' || item.dataset.category === cat;
+      item.classList.toggle('hidden', !matches);
+      if (matches) count++;
+    });
+    document.getElementById('item-count').textContent = count + ' photo' + (count !== 1 ? 's' : '');
+  }
+
+  /* ── Lightbox ── */
+  let currentIndex = 0;
+  let visibleItems = [];
+
+  function getVisibleItems() {
+    return Array.from(document.querySelectorAll('.gallery-item:not(.hidden)'));
+  }
+
+  function openLightbox(globalIndex) {
+    visibleItems = getVisibleItems();
+    // Find position in visible items
+    const allItems = Array.from(document.querySelectorAll('.gallery-item'));
+    const target = allItems[globalIndex];
+    currentIndex = visibleItems.indexOf(target);
+    if (currentIndex === -1) currentIndex = 0;
+    renderLightbox();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('lightbox').focus();
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function changeImage(dir) {
+    const img = document.getElementById('lightbox-img');
+    img.classList.add('switching');
+    setTimeout(() => {
+      currentIndex = (currentIndex + dir + visibleItems.length) % visibleItems.length;
+      renderLightbox();
+      img.classList.remove('switching');
+    }, 220);
+  }
+
+  function renderLightbox() {
+    const item = visibleItems[currentIndex];
+    if (!item) return;
+    const img = item.querySelector('img');
+    const caption = item.dataset.caption || img.alt;
+    document.getElementById('lightbox-img').src = img.src.replace(/w=\d+/, 'w=1400');
+    document.getElementById('lightbox-img').alt = img.alt;
+    document.getElementById('lightbox-caption').textContent = caption;
+    document.getElementById('lightbox-counter').textContent = (currentIndex + 1) + ' of ' + visibleItems.length;
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    const lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowLeft')  changeImage(-1);
+    if (e.key === 'ArrowRight') changeImage(1);
+  });
+
+  // Close on backdrop click
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+
+  // Touch swipe support
+  let touchStartX = 0;
+  document.getElementById('lightbox').addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  document.getElementById('lightbox').addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) changeImage(diff > 0 ? 1 : -1);
+  });
+
+  /* ── Reveal animation ── */
+  const revealEls = document.querySelectorAll('.reveal');
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => ro.observe(el));
+
+  /* ── Init count ── */
+  window.addEventListener('DOMContentLoaded', () => {
+    const total = document.querySelectorAll('.gallery-item').length;
+    document.getElementById('item-count').textContent = total + ' photos';
+  });
+</script>
+</body>
+</html>

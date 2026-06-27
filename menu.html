@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Winnie's Cuisine & Events Menu — Fine dining Nigerian and international cuisine in Enugu. Starters, mains, desserts, wines and beverages." />
+  <title>Menu | Winnie's Cuisine &amp; Events · Enugu</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            burgundy: { DEFAULT: '#6B1A2A', light: '#8B2438', dark: '#4A1020' },
+            gold:     { DEFAULT: '#C9A84C', light: '#E2C36E', dark: '#A8873A' },
+            cream:    { DEFAULT: '#FAF6F0', warm: '#F5EDE0', deep: '#EAE0D0' },
+            charcoal: { DEFAULT: '#2C2C2C', light: '#444444', soft: '#6B6B6B' },
+          },
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+            sans:  ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #FAF6F0; color: #2C2C2C; -webkit-font-smoothing: antialiased; }
+
+    /* ── Shared design tokens ── */
+    .section-eyebrow { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #C9A84C; }
+    .section-title   { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.12; }
+    .gold-rule       { display: block; width: 3rem; height: 2px; background: linear-gradient(90deg, #C9A84C, #E2C36E); border-radius: 2px; }
+
+    /* ── Navbar (shared component) ── */
+    #navbar { transition: background 0.35s, box-shadow 0.35s, padding 0.35s; }
+    #navbar.scrolled { background: rgba(44,28,18,0.97) !important; backdrop-filter: blur(12px); box-shadow: 0 2px 24px rgba(0,0,0,0.25); padding-top: 0.75rem; padding-bottom: 0.75rem; }
+    .nav-link { text-decoration: none; font-size: 0.8rem; letter-spacing: 0.06em; color: rgba(250,246,240,0.8); transition: color 0.2s; }
+    .nav-link:hover, .nav-link.active { color: #C9A84C !important; }
+
+    /* ── Buttons ── */
+    .btn-primary   { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem; background: #6B1A2A; color: #FAF6F0; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #6B1A2A; text-decoration: none; transition: background 0.25s, border-color 0.25s, transform 0.2s; }
+    .btn-primary:hover { background: #4A1020; border-color: #C9A84C; transform: translateY(-1px); }
+    .btn-gold      { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.8rem; background: transparent; color: #C9A84C; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #C9A84C; text-decoration: none; transition: background 0.25s, color 0.25s, transform 0.2s; }
+    .btn-gold:hover { background: #C9A84C; color: #FAF6F0; transform: translateY(-1px); }
+
+    /* ── Mobile menu ── */
+    #mobile-menu { transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+    #mobile-menu.open { transform: translateX(0); }
+    .mobile-nav-link { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 500; color: rgba(250,246,240,0.8); text-decoration: none; transition: color 0.2s; }
+    .mobile-nav-link:hover { color: #C9A84C; }
+
+    /* ── Hero ── */
+    #menu-hero { position: relative; height: 52vh; min-height: 380px; display: flex; align-items: flex-end; overflow: hidden; }
+    #menu-hero-bg { position: absolute; inset: -5%; background-image: url('https://images.unsplash.com/photo-1547592180-85f173990554?w=1800&q=80'); background-size: cover; background-position: center 40%; filter: brightness(0.45) saturate(0.85); }
+    #menu-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(30,10,16,0.9) 0%, rgba(30,10,16,0.4) 60%, transparent 100%); }
+
+    /* ── Category Tab Bar ── */
+    #category-bar { position: sticky; top: 72px; z-index: 30; background: #fff; border-bottom: 1px solid rgba(201,168,76,0.2); }
+    .cat-tab { display: inline-flex; align-items: center; gap: 0.4rem; padding: 1rem 1.2rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #6B6B6B; white-space: nowrap; cursor: pointer; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; background: none; border-top: none; border-left: none; border-right: none; }
+    .cat-tab.active, .cat-tab:hover { color: #6B1A2A; border-bottom-color: #C9A84C; }
+    #tab-scroll { overflow-x: auto; scrollbar-width: none; display: flex; }
+    #tab-scroll::-webkit-scrollbar { display: none; }
+
+    /* ── Menu Section ── */
+    .menu-section { padding-top: 5rem; margin-top: -1px; }
+    .menu-section-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2.5rem; }
+    .menu-section-number { font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 700; color: rgba(201,168,76,0.15); line-height: 1; flex-shrink: 0; }
+
+    /* ── Menu Item Row ── */
+    .menu-item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; padding: 1.4rem 0; border-bottom: 1px solid rgba(201,168,76,0.12); position: relative; transition: background 0.2s; }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item:hover { background: rgba(201,168,76,0.03); margin: 0 -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem; }
+    .item-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: #2C2C2C; line-height: 1.3; }
+    .item-desc { font-size: 0.82rem; font-weight: 300; color: #6B6B6B; line-height: 1.65; margin-top: 0.3rem; max-width: 46rem; }
+    .item-price { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: #C9A84C; white-space: nowrap; padding-top: 0.1rem; }
+
+    /* ── Dietary Tags ── */
+    .tag { display: inline-flex; align-items: center; gap: 3px; padding: 0.2rem 0.55rem; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 2px; margin-right: 0.35rem; margin-top: 0.5rem; }
+    .tag-v  { background: rgba(52,168,83,0.1);  color: #2A7A3B; border: 1px solid rgba(52,168,83,0.25); }
+    .tag-gf { background: rgba(201,168,76,0.1); color: #8B6820; border: 1px solid rgba(201,168,76,0.3); }
+    .tag-s  { background: rgba(234,67,53,0.08); color: #B83228; border: 1px solid rgba(234,67,53,0.2); }
+    .tag-h  { background: rgba(52,168,83,0.08); color: #1B6B30; border: 1px solid rgba(52,168,83,0.2); }
+    .tag-c  { background: rgba(107,26,42,0.08); color: #6B1A2A; border: 1px solid rgba(107,26,42,0.2); }
+
+    /* ── Featured Item Card ── */
+    .featured-item { background: #fff; box-shadow: 0 4px 24px rgba(107,26,42,0.08); overflow: hidden; }
+    .featured-item img { width: 100%; height: 14rem; object-fit: cover; transition: transform 0.45s ease; }
+    .featured-item:hover img { transform: scale(1.04); }
+
+    /* ── Beverage card ── */
+    .bev-card { background: #fff; padding: 1.8rem; border-top: 3px solid #C9A84C; box-shadow: 0 2px 16px rgba(107,26,42,0.06); }
+
+    /* ── Scroll reveal ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .stagger > *:nth-child(1) { transition-delay: 0.05s; }
+    .stagger > *:nth-child(2) { transition-delay: 0.13s; }
+    .stagger > *:nth-child(3) { transition-delay: 0.21s; }
+
+    /* ── Focus ── */
+    :focus-visible { outline: 2px solid #C9A84C; outline-offset: 3px; }
+    ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: #FAF6F0; } ::-webkit-scrollbar-thumb { background: #C9A84C; border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══════════════════════════════════════════════════════════════ -->
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 px-6 md:px-12" style="background:rgba(30,10,16,0.85); backdrop-filter:blur(10px);">
+  <nav class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="flex flex-col leading-none" aria-label="Winnie's Cuisine Home">
+      <span style="font-family:'Cormorant Garamond',serif; font-size:1.55rem; font-weight:700; color:#FAF6F0; letter-spacing:0.02em;">Winnie's</span>
+      <span style="font-size:0.58rem; font-weight:500; letter-spacing:0.28em; color:#C9A84C; text-transform:uppercase; margin-top:1px;">Cuisine &amp; Events</span>
+    </a>
+    <ul class="hidden lg:flex items-center gap-8" role="list">
+      <li><a href="index.html#about"       class="nav-link">About</a></li>
+      <li><a href="index.html#experiences" class="nav-link">Experiences</a></li>
+      <li><a href="menu.html"              class="nav-link active">Menu</a></li>
+      <li><a href="gallery.html"           class="nav-link">Gallery</a></li>
+      <li><a href="events.html"            class="nav-link">Events</a></li>
+      <li><a href="index.html#contact"     class="nav-link">Contact</a></li>
+    </ul>
+    <div class="hidden lg:flex items-center gap-4">
+      <a href="https://wa.me/2348000000000" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="flex items-center justify-center w-9 h-9 rounded-full border border-white/20 hover:border-gold transition-colors" style="border-color:rgba(250,246,240,0.2);">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="#E2C36E"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.134.561 4.133 1.534 5.867L0 24l6.31-1.507A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.003-1.373l-.36-.213-3.727.89.934-3.618-.234-.372A9.817 9.817 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z" fill="#E2C36E"/></svg>
+      </a>
+      <a href="index.html#contact" class="btn-primary">Book a Table</a>
+    </div>
+    <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Open menu" aria-expanded="false">
+      <span style="display:block; width:1.5rem; height:1px; background:#FAF6F0;"></span>
+      <span style="display:block; width:1rem; height:1px; background:#FAF6F0;"></span>
+      <span style="display:block; width:1.5rem; height:1px; background:#FAF6F0;"></span>
+    </button>
+  </nav>
+</header>
+
+<!-- Mobile menu -->
+<div id="mobile-menu" class="fixed inset-y-0 right-0 z-50 w-80 max-w-full flex flex-col" style="background:#2C1810;" role="dialog">
+  <div class="flex items-center justify-between p-6 border-b border-white/10">
+    <span style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:700; color:#FAF6F0;">Winnie's</span>
+    <button id="close-menu" aria-label="Close menu" class="p-2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FAF6F0" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+  </div>
+  <nav class="flex-1 flex flex-col justify-center px-8 gap-6">
+    <a href="index.html#about"       class="mobile-nav-link" onclick="closeMobileMenu()">About</a>
+    <a href="index.html#experiences" class="mobile-nav-link" onclick="closeMobileMenu()">Experiences</a>
+    <a href="menu.html"              class="mobile-nav-link" style="color:#C9A84C;" onclick="closeMobileMenu()">Menu</a>
+    <a href="gallery.html"           class="mobile-nav-link" onclick="closeMobileMenu()">Gallery</a>
+    <a href="events.html"            class="mobile-nav-link" onclick="closeMobileMenu()">Events</a>
+    <a href="index.html#contact"     class="mobile-nav-link" onclick="closeMobileMenu()">Contact</a>
+  </nav>
+  <div class="p-8 border-t border-white/10">
+    <a href="index.html#contact" class="btn-primary w-full justify-center" onclick="closeMobileMenu()">Book a Table</a>
+  </div>
+</div>
+<div id="menu-overlay" class="fixed inset-0 z-40 bg-black/60 hidden backdrop-blur-sm" onclick="closeMobileMenu()"></div>
+
+
+<!-- ═══ HERO ══════════════════════════════════════════════════════════════════ -->
+<section id="menu-hero" aria-label="Menu hero">
+  <div id="menu-hero-bg" role="img" aria-label="Fresh premium ingredients and plated dishes"></div>
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pb-14">
+    <div class="hero-badge mb-5" style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.4rem 1rem; background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.35); color:#E2C36E; font-size:0.68rem; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; backdrop-filter:blur(4px);">
+      <span>✦</span> Seasonal Menu · Updated Daily
+    </div>
+    <h1 style="font-family:'Cormorant Garamond',serif; font-size:clamp(2.5rem,6vw,4.5rem); font-weight:600; color:#FAF6F0; line-height:1.1; margin-bottom:1rem;">
+      Our <em style="color:#C9A84C; font-style:italic;">Menu</em>
+    </h1>
+    <p style="color:rgba(250,246,240,0.72); font-size:1rem; font-weight:300; max-width:520px; line-height:1.75;">
+      A curated selection of Nigerian heritage and international artistry — crafted fresh each day by our culinary team.
+    </p>
+  </div>
+</section>
+
+
+<!-- ═══ STICKY CATEGORY TAB BAR ═════════════════════════════════════════════ -->
+<div id="category-bar">
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+    <div id="tab-scroll" role="tablist" aria-label="Menu categories">
+      <button class="cat-tab active" role="tab" data-target="starters"      onclick="scrollToSection('starters',this)">
+        <span>01</span> Starters
+      </button>
+      <button class="cat-tab" role="tab" data-target="nigerian"       onclick="scrollToSection('nigerian',this)">
+        <span>02</span> Nigerian Classics
+      </button>
+      <button class="cat-tab" role="tab" data-target="international"  onclick="scrollToSection('international',this)">
+        <span>03</span> International &amp; Grills
+      </button>
+      <button class="cat-tab" role="tab" data-target="mains"          onclick="scrollToSection('mains',this)">
+        <span>04</span> Signature Mains
+      </button>
+      <button class="cat-tab" role="tab" data-target="desserts"       onclick="scrollToSection('desserts',this)">
+        <span>05</span> Desserts
+      </button>
+      <button class="cat-tab" role="tab" data-target="beverages"      onclick="scrollToSection('beverages',this)">
+        <span>06</span> Wines &amp; Beverages
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ MENU CONTENT ══════════════════════════════════════════════════════════ -->
+<main class="max-w-7xl mx-auto px-6 md:px-12 pb-24">
+
+  <!-- Dietary legend -->
+  <div class="py-6 flex flex-wrap gap-3 items-center" style="border-bottom:1px solid rgba(201,168,76,0.15);">
+    <span style="font-size:0.7rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#6B6B6B; margin-right:0.5rem;">Dietary:</span>
+    <span class="tag tag-v">&#x25CF; Vegetarian</span>
+    <span class="tag tag-gf">&#x25CF; Gluten-Free</span>
+    <span class="tag tag-s">&#x25CF; Spicy</span>
+    <span class="tag tag-h">&#x25CF; Halal</span>
+    <span class="tag tag-c">&#x25CF; Chef's Pick</span>
+  </div>
+
+
+  <!-- ─── 01 STARTERS & SMALL PLATES ───────────────────────────────────────── -->
+  <section id="starters" class="menu-section">
+    <div class="menu-section-header reveal">
+      <span class="menu-section-number">01</span>
+      <div>
+        <p class="section-eyebrow mb-2">Begin Your Journey</p>
+        <h2 class="section-title" style="font-size:clamp(1.8rem,3.5vw,2.6rem);">Starters &amp; Small Plates</h2>
+      </div>
+    </div>
+
+    <!-- Featured starters (photo cards) -->
+    <div class="grid md:grid-cols-3 gap-5 mb-8 stagger">
+      <div class="featured-item reveal">
+        <div class="overflow-hidden"><img src="https://images.unsplash.com/photo-1572441713132-51c75654db73?w=600&q=80" alt="Crispy suya skewers with groundnut sauce and shredded cabbage slaw" loading="lazy" /></div>
+        <div style="padding:1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.4rem;">
+            <p class="item-name">Suya Skewer Trio</p>
+            <p class="item-price">₦4,500</p>
+          </div>
+          <p class="item-desc">Premium beef tenderloin skewers with our house suya spice blend, groundnut sauce, and pickled vegetable slaw.</p>
+          <div><span class="tag tag-h">Halal</span><span class="tag tag-s">Spicy</span><span class="tag tag-c">Chef's Pick</span></div>
+        </div>
+      </div>
+      <div class="featured-item reveal">
+        <div class="overflow-hidden"><img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=600&q=80" alt="Prawn cocktail with avocado and citrus dressing" loading="lazy" /></div>
+        <div style="padding:1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.4rem;">
+            <p class="item-name">Tiger Prawn Cocktail</p>
+            <p class="item-price">₦6,800</p>
+          </div>
+          <p class="item-desc">Chilled tiger prawns, garden lettuce, ripe avocado, and a zesty citrus-ginger Marie Rose sauce.</p>
+          <div><span class="tag tag-gf">Gluten-Free</span><span class="tag tag-c">Chef's Pick</span></div>
+        </div>
+      </div>
+      <div class="featured-item reveal">
+        <div class="overflow-hidden"><img src="https://images.unsplash.com/photo-1607532941433-304659e8198a?w=600&q=80" alt="Mushroom and pepper bruschetta on toasted sourdough" loading="lazy" /></div>
+        <div style="padding:1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.4rem;">
+            <p class="item-name">Wild Mushroom Bruschetta</p>
+            <p class="item-price">₦3,800</p>
+          </div>
+          <p class="item-desc">Sautéed wild mushrooms, roasted red peppers, fresh thyme, and aged parmesan on house-baked sourdough.</p>
+          <div><span class="tag tag-v">Vegetarian</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Remaining starters (list format) -->
+    <div style="background:#fff; padding:0 1.5rem; box-shadow:0 2px 16px rgba(107,26,42,0.06);" class="reveal">
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Pepper Soup Amuse-Bouche</p>
+          <p class="item-desc">A warm shot of our signature catfish peppersoup — fragrant with utazi leaf, uziza, and scotch bonnet.</p>
+          <div><span class="tag tag-gf">Gluten-Free</span><span class="tag tag-h">Halal</span><span class="tag tag-s">Spicy</span></div>
+        </div>
+        <p class="item-price">₦2,500</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Smoked Salmon Blini</p>
+          <p class="item-desc">House-smoked Atlantic salmon on buckwheat blini with crème fraîche, capers, and micro dill.</p>
+          <div><span class="tag tag-gf">Gluten-Free</span></div>
+        </div>
+        <p class="item-price">₦5,500</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Fried Plantain &amp; Avocado Stack</p>
+          <p class="item-desc">Ripe dodo medallions layered with chunky avocado, cherry tomato salsa, and a drizzle of aged balsamic.</p>
+          <div><span class="tag tag-v">Vegetarian</span><span class="tag tag-gf">Gluten-Free</span></div>
+        </div>
+        <p class="item-price">₦3,200</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Beef Asun Lettuce Cups</p>
+          <p class="item-desc">Smoky-spiced roasted goat meat with sliced red onion and fresh chilli, served in crisp iceberg cups.</p>
+          <div><span class="tag tag-gf">Gluten-Free</span><span class="tag tag-s">Spicy</span></div>
+        </div>
+        <p class="item-price">₦4,200</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Burrata &amp; Heirloom Tomato Salad</p>
+          <p class="item-desc">Creamy imported burrata, heirloom tomatoes, basil oil, fleur de sel, and balsamic glaze.</p>
+          <div><span class="tag tag-v">Vegetarian</span><span class="tag tag-gf">Gluten-Free</span><span class="tag tag-c">Chef's Pick</span></div>
+        </div>
+        <p class="item-price">₦5,200</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Garden Salad (Classic or Caesar)</p>
+          <p class="item-desc">Crisp seasonal greens, cherry tomatoes, cucumber, and red onion. Caesar option adds parmesan and anchovy dressing.</p>
+          <div><span class="tag tag-v">Vegetarian</span></div>
+        </div>
+        <p class="item-price">₦2,800 – ₦3,500</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── 02 NIGERIAN CLASSICS ──────────────────────────────────────────────── -->
+  <section id="nigerian" class="menu-section">
+    <div class="menu-section-header reveal">
+      <span class="menu-section-number">02</span>
+      <div>
+        <p class="section-eyebrow mb-2">Heritage &amp; Soul</p>
+        <h2 class="section-title" style="font-size:clamp(1.8rem,3.5vw,2.6rem);">Nigerian Classics</h2>
+      </div>
+    </div>
+    <p class="section-body reveal" style="font-weight:300; color:#6B6B6B; line-height:1.8; max-width:580px; margin-bottom:2.5rem; font-size:0.95rem;">
+      The very best of Igbo and pan-Nigerian culinary tradition — prepared with premium cuts, freshly ground spices, and the patience that great Nigerian cooking demands.
+    </p>
+
+    <div style="background:#fff; padding:0 1.5rem; box-shadow:0 2px 16px rgba(107,26,42,0.06);" class="reveal">
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Ofe Akwu (Palm Nut Soup)</p>
+          <p class="item-desc">Rich, deep-red palm nut cream soup with assorted proteins — stockfish, ponmo, and goat meat — slow-cooked with uziza leaves and traditional seasoning. Served with pounded yam or fufu.</p>
+          <div><span class="tag tag-gf">Gluten-Free</span><span class="tag tag-h">Halal</span><span class="tag tag-c">Chef's Pick</span></div>
+        </div>
+        <p class="item-price">₦8,500</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Ofe Onugbu (Bitter Leaf Soup)</p>
+          <p class="item-desc">Authentic Anambra-style bitter leaf soup with cocoyam thickener, orishirishi (assorted meats), and dried fish. Served with pounded yam, eba, or semolina.</p>
+          <div><span class="tag tag-gf">Gluten-Free</span><span class="tag tag-h">Halal</span></div>
+        </div>
+        <p class="item-price">₦8,000</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Egusi Soup (Melon Seed)</p>
+          <p class="item-desc">Stone-ground melon seed soup fried in palm oil with assorted proteins — beef, goat, dried fish, and stockfish. A deep, nutty flavour perfect with any swallow of choice.</p>
+          <div><span class="tag tag-gf">Gluten-Free</span><span class="tag tag-h">Halal</span><span class="tag tag-c">Chef's Pick</span></div>
+        </div>
+        <p class="item-price">₦9,000</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Oha Soup</p>
+          <p class="item-desc">A celebrated Igbo delicacy — fresh oha leaves in a rich cocoyam-thickened base with crayfish, stockfish, and orishirishi. Served with your choice of swallow.</p>
+          <div><span class="tag tag-gf">Gluten-Free</span></div>
+        </div>
+        <p class="item-price">₦9,500</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Winnie's Signature Jollof Rice</p>
+          <p class="item-desc">Slow-cooked party-style jollof in firewood-smoke tomato base with aromatic bay leaf and scotch bonnet. Served with coleslaw, fried plantain, and your choice of grilled chicken, beef, or fish.</p>
+          <div><span class="tag tag-gf">Gluten-Free</span><span class="tag tag-h">Halal</span><span class="tag tag-c">Chef's Pick</span></div>
+        </div>
+        <p class="item-price">₦7,500 – ₦10,500</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Ofada Rice &amp; Ayamase Stew</p>
+          <p class="item-desc">Unpolished Ofada rice paired with the beloved green pepper and bleached palm oil stew — laced with assorted offal, ponmo, and a generous portion of goat meat.</p>
+          <div><span class="tag tag-gf">Gluten-Free</span><span class="tag tag-s">Spicy</span></div>
+        </div>
+        <p class="item-price">₦8,500</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Catfish Peppersoup (Isi Ewu)</p>
+          <p class="item-desc">Your choice of whole catfish in a spiced broth, or the classic Isi Ewu — goat head prepared with ugba, potash, utazi, and crayfish. A true Enugu delicacy.</p>
+          <div><span class="tag tag-gf">Gluten-Free</span><span class="tag tag-s">Spicy</span></div>
+        </div>
+        <p class="item-price">₦6,500 – ₦12,000</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Nkwobi</p>
+          <p class="item-desc">Spiced cow foot in seasoned palm oil sauce with utazi leaves — a cherished Igbo delicacy, served with chilled palm wine or a cold beverage of choice.</p>
+          <div><span class="tag tag-gf">Gluten-Free</span><span class="tag tag-s">Spicy</span></div>
+        </div>
+        <p class="item-price">₦7,000</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Abacha &amp; Ugba (African Salad)</p>
+          <p class="item-desc">Cassava strips tossed with ugba (oil bean), garden egg, crayfish, and a fragrant palm oil dressing. Light, textured, and utterly satisfying.</p>
+          <div><span class="tag tag-v">Vegetarian</span><span class="tag tag-gf">Gluten-Free</span></div>
+        </div>
+        <p class="item-price">₦4,500</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Swallow Choices</p>
+          <p class="item-desc">All soups served with your choice of: Pounded Yam · Fufu · Eba (Garri) · Amala · Semolina · Wheat Meal</p>
+        </div>
+        <p class="item-price" style="font-size:0.85rem; color:#6B6B6B;">Included</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── 03 INTERNATIONAL & GRILLS ────────────────────────────────────────── -->
+  <section id="international" class="menu-section">
+    <div class="menu-section-header reveal">
+      <span class="menu-section-number">03</span>
+      <div>
+        <p class="section-eyebrow mb-2">World Flavours</p>
+        <h2 class="section-title" style="font-size:clamp(1.8rem,3.5vw,2.6rem);">International Favourites &amp; Grills</h2>
+      </div>
+    </div>
+
+    <!-- Two column layout: list + featured photo -->
+    <div class="grid lg:grid-cols-5 gap-8 items-start">
+      <div style="background:#fff; padding:0 1.5rem; box-shadow:0 2px 16px rgba(107,26,42,0.06);" class="lg:col-span-3 reveal">
+        <div class="menu-item">
+          <div>
+            <p class="item-name">Pan-Seared Atlantic Salmon</p>
+            <p class="item-desc">Crispy-skin salmon fillet, lemon-caper beurre blanc, charred broccolini, and duchesse potato rosette.</p>
+            <div><span class="tag tag-gf">Gluten-Free</span><span class="tag tag-c">Chef's Pick</span></div>
+          </div>
+          <p class="item-price">₦16,500</p>
+        </div>
+        <div class="menu-item">
+          <div>
+            <p class="item-name">Beef Tenderloin (250g)</p>
+            <p class="item-desc">Premium Nigerian pasture-raised beef, cooked to your preference, with red wine jus, truffle mashed potato, and asparagus.</p>
+            <div><span class="tag tag-gf">Gluten-Free</span><span class="tag tag-c">Chef's Pick</span></div>
+          </div>
+          <p class="item-price">₦22,000</p>
+        </div>
+        <div class="menu-item">
+          <div>
+            <p class="item-name">Grilled Chicken Supreme</p>
+            <p class="item-desc">Free-range chicken breast marinated in herb butter, flame-grilled, served with roasted root vegetables and mushroom cream sauce.</p>
+            <div><span class="tag tag-gf">Gluten-Free</span><span class="tag tag-h">Halal</span></div>
+          </div>
+          <p class="item-price">₦13,500</p>
+        </div>
+        <div class="menu-item">
+          <div>
+            <p class="item-name">Lamb Rack (3 Cutlets)</p>
+            <p class="item-desc">French-trimmed lamb cutlets, rosemary and garlic crust, mint jus, ratatouille compote, and fondant potato.</p>
+            <div><span class="tag tag-gf">Gluten-Free</span><span class="tag tag-c">Chef's Pick</span></div>
+          </div>
+          <p class="item-price">₦26,000</p>
+        </div>
+        <div class="menu-item">
+          <div>
+            <p class="item-name">Prawn &amp; Garlic Linguine</p>
+            <p class="item-desc">Tiger prawns tossed in white wine, garlic, cherry tomatoes, fresh basil, and extra-virgin olive oil on al dente linguine.</p>
+          </div>
+          <p class="item-price">₦14,500</p>
+        </div>
+        <div class="menu-item">
+          <div>
+            <p class="item-name">Mixed Grill Platter (For 2)</p>
+            <p class="item-desc">A generous sharing board of suya-spiced beef, BBQ chicken wings, spatchcock quail, pork spare ribs, and grilled prawns with assorted dipping sauces.</p>
+            <div><span class="tag tag-s">Spicy</span></div>
+          </div>
+          <p class="item-price">₦32,000</p>
+        </div>
+        <div class="menu-item">
+          <div>
+            <p class="item-name">Pasta Primavera</p>
+            <p class="item-desc">Penne with seasonal roasted vegetables, sun-dried tomato, basil pesto, and shaved parmesan. Light, vibrant, and deeply satisfying.</p>
+            <div><span class="tag tag-v">Vegetarian</span></div>
+          </div>
+          <p class="item-price">₦9,500</p>
+        </div>
+      </div>
+      <!-- Featured photo -->
+      <div class="lg:col-span-2 reveal" style="position:sticky; top:130px;">
+        <div class="featured-item">
+          <div class="overflow-hidden"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=700&q=80" alt="Premium mixed grill platter with suya beef, grilled chicken, and prawn skewers" loading="lazy" style="height:20rem;" /></div>
+        </div>
+        <div style="background:#6B1A2A; padding:1.5rem; margin-top:0;">
+          <p style="font-family:'Cormorant Garamond',serif; font-size:1rem; font-style:italic; color:#C9A84C; margin-bottom:0.4rem;">"Our grill celebrates both Nigerian spice and international technique."</p>
+          <p style="font-size:0.72rem; color:rgba(250,246,240,0.6); text-transform:uppercase; letter-spacing:0.1em;">— Executive Chef</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── 04 SIGNATURE MAINS ────────────────────────────────────────────────── -->
+  <section id="mains" class="menu-section">
+    <div class="menu-section-header reveal">
+      <span class="menu-section-number">04</span>
+      <div>
+        <p class="section-eyebrow mb-2">The Centrepiece</p>
+        <h2 class="section-title" style="font-size:clamp(1.8rem,3.5vw,2.6rem);">Signature Mains</h2>
+      </div>
+    </div>
+    <p style="font-weight:300; color:#6B6B6B; line-height:1.8; max-width:580px; margin-bottom:2.5rem; font-size:0.95rem;" class="reveal">
+      These are the dishes that define us — built from bold Nigerian spirit and refined international craft, designed to be remembered.
+    </p>
+
+    <div style="background:#fff; padding:0 1.5rem; box-shadow:0 2px 16px rgba(107,26,42,0.06);" class="reveal">
+      <div class="menu-item" style="background:linear-gradient(90deg,rgba(201,168,76,0.04),transparent); padding:1.6rem 0;">
+        <div>
+          <p class="item-name" style="font-size:1.25rem;">
+            Winnie's Masterpiece Plate
+            <span class="tag tag-c" style="display:inline-flex; margin-left:0.5rem;">Chef's Pick</span>
+          </p>
+          <p class="item-desc">Slow-braised oxtail in a 36-hour bone broth reduction, served alongside minted jollof couscous, sautéed garden egg, and crispy plantain chips. The dish that started it all.</p>
+        </div>
+        <p class="item-price" style="font-size:1.2rem;">₦24,500</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Braised Short Rib &amp; Ugba Gremolata</p>
+          <p class="item-desc">48-hour braised beef short rib with a surprising ugba (oil bean) and citrus gremolata, yam fondant, and jus.</p>
+          <div><span class="tag tag-gf">Gluten-Free</span><span class="tag tag-c">Chef's Pick</span></div>
+        </div>
+        <p class="item-price">₦20,000</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Whole Roasted Tilapia</p>
+          <p class="item-desc">Oven-roasted whole tilapia stuffed with scotch bonnet, garden tomato, and fresh herbs — a show-stopping centrepiece. Served with jollof rice and fried plantain.</p>
+          <div><span class="tag tag-gf">Gluten-Free</span><span class="tag tag-h">Halal</span><span class="tag tag-c">Chef's Pick</span></div>
+        </div>
+        <p class="item-price">₦15,000</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Duck Confit &amp; Hibiscus Jus</p>
+          <p class="item-desc">Slow-cooked duck leg confit with a bold hibiscus and zobo reduction, sweet potato mash, and wilted spinach.</p>
+          <div><span class="tag tag-gf">Gluten-Free</span></div>
+        </div>
+        <p class="item-price">₦19,500</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Vegetarian Tasting Board</p>
+          <p class="item-desc">A curated plant-forward main: roasted cauliflower steak, spiced lentil cake, grilled halloumi, roasted beet purée, and chickpea fritter. Colourful, nourishing, and full of flavour.</p>
+          <div><span class="tag tag-v">Vegetarian</span><span class="tag tag-gf">Gluten-Free</span></div>
+        </div>
+        <p class="item-price">₦12,000</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Seafood Platter (For 2)</p>
+          <p class="item-desc">Grilled lobster tail, tiger prawns, calamari, and seasonal fish fillet with two sauces — lemon aioli and a fiery Nigerian tomato-pepper dip.</p>
+          <div><span class="tag tag-gf">Gluten-Free</span><span class="tag tag-c">Chef's Pick</span></div>
+        </div>
+        <p class="item-price">₦38,000</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── 05 DESSERTS ───────────────────────────────────────────────────────── -->
+  <section id="desserts" class="menu-section">
+    <div class="menu-section-header reveal">
+      <span class="menu-section-number">05</span>
+      <div>
+        <p class="section-eyebrow mb-2">A Sweet Finale</p>
+        <h2 class="section-title" style="font-size:clamp(1.8rem,3.5vw,2.6rem);">Desserts</h2>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 stagger">
+      <div class="featured-item reveal">
+        <div class="overflow-hidden"><img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=700&q=80" alt="Dark chocolate fondant with vanilla ice cream and gold leaf" loading="lazy" /></div>
+        <div style="padding:1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.4rem;">
+            <p class="item-name">Dark Chocolate Fondant</p>
+            <p class="item-price">₦5,500</p>
+          </div>
+          <p class="item-desc">Warm Valrhona chocolate lava cake with a molten centre, Madagascan vanilla bean ice cream, and edible gold.</p>
+          <div><span class="tag tag-v">Vegetarian</span><span class="tag tag-c">Chef's Pick</span></div>
+        </div>
+      </div>
+      <div class="featured-item reveal">
+        <div class="overflow-hidden"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=700&q=80" alt="Mango and coconut panna cotta with passion fruit coulis" loading="lazy" /></div>
+        <div style="padding:1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.4rem;">
+            <p class="item-name">Mango &amp; Coconut Panna Cotta</p>
+            <p class="item-price">₦4,800</p>
+          </div>
+          <p class="item-desc">Silky coconut cream panna cotta with fresh Nigerian mango coulis, toasted coconut, and a passion fruit gel.</p>
+          <div><span class="tag tag-v">Vegetarian</span><span class="tag tag-gf">Gluten-Free</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#fff; padding:0 1.5rem; box-shadow:0 2px 16px rgba(107,26,42,0.06); margin-top:1.5rem;" class="reveal">
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Chin-Chin Ice Cream Sundae</p>
+          <p class="item-desc">A playful tribute to Nigerian street food — vanilla and toffee ice cream layered with crunchy chin-chin, groundnut brittle, and rich caramel sauce.</p>
+          <div><span class="tag tag-v">Vegetarian</span></div>
+        </div>
+        <p class="item-price">₦4,200</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Crème Brûlée au Zobo</p>
+          <p class="item-desc">Classic French crème brûlée infused with hibiscus (zobo) flower — a subtly tart, floral twist on the timeless favourite.</p>
+          <div><span class="tag tag-v">Vegetarian</span><span class="tag tag-gf">Gluten-Free</span><span class="tag tag-c">Chef's Pick</span></div>
+        </div>
+        <p class="item-price">₦5,000</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Cheese Board &amp; Honeycomb</p>
+          <p class="item-desc">Selection of three premium cheeses, local honeycomb, seasonal preserves, water crackers, and candied walnuts.</p>
+          <div><span class="tag tag-v">Vegetarian</span></div>
+        </div>
+        <p class="item-price">₦7,500</p>
+      </div>
+      <div class="menu-item">
+        <div>
+          <p class="item-name">Seasonal Fruit Pavlova</p>
+          <p class="item-desc">Crisp meringue nest with whipped cream, fresh tropical fruit, passionfruit curd, and edible flowers.</p>
+          <div><span class="tag tag-v">Vegetarian</span><span class="tag tag-gf">Gluten-Free</span></div>
+        </div>
+        <p class="item-price">₦4,500</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── 06 WINES & BEVERAGES ──────────────────────────────────────────────── -->
+  <section id="beverages" class="menu-section">
+    <div class="menu-section-header reveal">
+      <span class="menu-section-number">06</span>
+      <div>
+        <p class="section-eyebrow mb-2">Raise a Glass</p>
+        <h2 class="section-title" style="font-size:clamp(1.8rem,3.5vw,2.6rem);">Wines &amp; Beverages</h2>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 stagger">
+
+      <!-- Wines -->
+      <div class="bev-card reveal">
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1.35rem; font-weight:600; color:#2C2C2C; margin-bottom:1rem;">Wines</p>
+        <div class="menu-item" style="padding:0.8rem 0;">
+          <div><p class="item-name" style="font-size:1rem;">House Red (Shiraz)</p><p class="item-desc" style="font-size:0.78rem;">Smooth, fruit-forward · South Africa</p></div>
+          <p class="item-price" style="font-size:0.95rem;">₦6,500/btl</p>
+        </div>
+        <div class="menu-item" style="padding:0.8rem 0;">
+          <div><p class="item-name" style="font-size:1rem;">House White (Chenin Blanc)</p><p class="item-desc" style="font-size:0.78rem;">Crisp, citrus notes · South Africa</p></div>
+          <p class="item-price" style="font-size:0.95rem;">₦6,500/btl</p>
+        </div>
+        <div class="menu-item" style="padding:0.8rem 0;">
+          <div><p class="item-name" style="font-size:1rem;">Rosé (Côtes de Provence)</p><p class="item-desc" style="font-size:0.78rem;">Elegant, dry · France</p></div>
+          <p class="item-price" style="font-size:0.95rem;">₦14,000/btl</p>
+        </div>
+        <div class="menu-item" style="padding:0.8rem 0; border-bottom:none;">
+          <div><p class="item-name" style="font-size:1rem;">Prosecco (NV)</p><p class="item-desc" style="font-size:0.78rem;">Celebratory bubbles · Italy</p></div>
+          <p class="item-price" style="font-size:0.95rem;">₦16,000/btl</p>
+        </div>
+      </div>
+
+      <!-- Cocktails & Spirits -->
+      <div class="bev-card reveal">
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1.35rem; font-weight:600; color:#2C2C2C; margin-bottom:1rem;">Cocktails &amp; Spirits</p>
+        <div class="menu-item" style="padding:0.8rem 0;">
+          <div><p class="item-name" style="font-size:1rem;">Zobo Mojito</p><p class="item-desc" style="font-size:0.78rem;">Hibiscus, mint, lime, white rum, soda</p></div>
+          <p class="item-price" style="font-size:0.95rem;">₦5,500</p>
+        </div>
+        <div class="menu-item" style="padding:0.8rem 0;">
+          <div><p class="item-name" style="font-size:1rem;">Winnie's Sunset</p><p class="item-desc" style="font-size:0.78rem;">Mango vodka, passion fruit, ginger beer</p></div>
+          <p class="item-price" style="font-size:0.95rem;">₦6,000</p>
+        </div>
+        <div class="menu-item" style="padding:0.8rem 0;">
+          <div><p class="item-name" style="font-size:1rem;">Classic Old Fashioned</p><p class="item-desc" style="font-size:0.78rem;">Bourbon, bitters, demerara, orange zest</p></div>
+          <p class="item-price" style="font-size:0.95rem;">₦7,500</p>
+        </div>
+        <div class="menu-item" style="padding:0.8rem 0; border-bottom:none;">
+          <div><p class="item-name" style="font-size:1rem;">Mocktail of the Day</p><p class="item-desc" style="font-size:0.78rem;">Ask your server for today's creation</p></div>
+          <p class="item-price" style="font-size:0.95rem;">₦3,500</p>
+        </div>
+      </div>
+
+      <!-- Non-Alcoholic -->
+      <div class="bev-card reveal">
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1.35rem; font-weight:600; color:#2C2C2C; margin-bottom:1rem;">Non-Alcoholic</p>
+        <div class="menu-item" style="padding:0.8rem 0;">
+          <div><p class="item-name" style="font-size:1rem;">Fresh Zobo (Hibiscus)</p><p class="item-desc" style="font-size:0.78rem;">House-brewed, lightly sweetened</p></div>
+          <p class="item-price" style="font-size:0.95rem;">₦2,000</p>
+        </div>
+        <div class="menu-item" style="padding:0.8rem 0;">
+          <div><p class="item-name" style="font-size:1rem;">Kunu Aya (Tiger Nut Milk)</p><p class="item-desc" style="font-size:0.78rem;">Cold-pressed, lightly spiced</p></div>
+          <p class="item-price" style="font-size:0.95rem;">₦2,500</p>
+        </div>
+        <div class="menu-item" style="padding:0.8rem 0;">
+          <div><p class="item-name" style="font-size:1rem;">Fresh Fruit Juices</p><p class="item-desc" style="font-size:0.78rem;">Orange · Watermelon · Pineapple · Mango</p></div>
+          <p class="item-price" style="font-size:0.95rem;">₦2,200</p>
+        </div>
+        <div class="menu-item" style="padding:0.8rem 0;">
+          <div><p class="item-name" style="font-size:1rem;">Specialty Coffee &amp; Tea</p><p class="item-desc" style="font-size:0.78rem;">Espresso · Cappuccino · Lemon grass tea</p></div>
+          <p class="item-price" style="font-size:0.95rem;">₦1,800 – ₦2,500</p>
+        </div>
+        <div class="menu-item" style="padding:0.8rem 0; border-bottom:none;">
+          <div><p class="item-name" style="font-size:1rem;">Still &amp; Sparkling Water</p></div>
+          <p class="item-price" style="font-size:0.95rem;">₦800 – ₦1,500</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ─── DISCLAIMER + CTA ──────────────────────────────────────────────────── -->
+  <div class="mt-20 reveal" style="background:#F5EDE0; padding:2.5rem; border-left:3px solid #C9A84C;">
+    <p class="section-eyebrow mb-3">Please Note</p>
+    <p style="font-size:0.85rem; font-weight:300; line-height:1.8; color:#6B6B6B; margin-bottom:0.75rem;">
+      Prices are subject to change without prior notice. All dishes can be adapted for dietary requirements — please inform your server of any allergies or preferences before ordering. Custom menus and private dining menus are available on request. A 10% service charge will be added to tables of 6 or more. VAT inclusive.
+    </p>
+    <p style="font-size:0.85rem; font-weight:300; line-height:1.8; color:#6B6B6B;">
+      <strong style="color:#2C2C2C;">Custom &amp; Catering Orders:</strong> Planning an event? Our team can craft a bespoke menu tailored to your occasion, cultural preferences, and dietary needs. Contact us to discuss.
+    </p>
+  </div>
+
+  <div class="mt-10 text-center reveal">
+    <p style="font-family:'Cormorant Garamond',serif; font-size:1.8rem; color:#2C2C2C; margin-bottom:1.25rem;">Ready to dine with us?</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="index.html#contact" class="btn-primary">Reserve a Table</a>
+      <a href="events.html" class="btn-gold">Event Catering</a>
+    </div>
+  </div>
+
+</main>
+
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════════════════════ -->
+<footer style="background:#1A0C10; color:rgba(250,246,240,0.65); padding:3rem 1.5rem;">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+    <div>
+      <a href="index.html" style="font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:700; color:#FAF6F0; text-decoration:none;">Winnie's Cuisine &amp; Events</a>
+      <p style="font-size:0.75rem; color:#C9A84C; letter-spacing:0.15em; text-transform:uppercase; margin-top:3px;">Where every meal is a masterpiece</p>
+    </div>
+    <nav style="display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center;">
+      <a href="index.html" style="font-size:0.8rem; color:rgba(250,246,240,0.5); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(250,246,240,0.5)'">Home</a>
+      <a href="menu.html"  style="font-size:0.8rem; color:#C9A84C; text-decoration:none;">Menu</a>
+      <a href="events.html" style="font-size:0.8rem; color:rgba(250,246,240,0.5); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(250,246,240,0.5)'">Events</a>
+      <a href="gallery.html" style="font-size:0.8rem; color:rgba(250,246,240,0.5); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(250,246,240,0.5)'">Gallery</a>
+      <a href="index.html#contact" style="font-size:0.8rem; color:rgba(250,246,240,0.5); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(250,246,240,0.5)'">Contact</a>
+    </nav>
+    <p style="font-size:0.72rem;">© 2025 Winnie's Cuisine &amp; Events</p>
+  </div>
+</footer>
+
+<!-- WhatsApp FAB -->
+<a href="https://wa.me/2348000000000" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp" style="position:fixed; bottom:2rem; right:2rem; z-index:100; width:3.5rem; height:3.5rem; border-radius:50%; background:linear-gradient(135deg,#25D366,#128C7E); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(37,211,102,0.4); transition:transform 0.2s;" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform='scale(1)'">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="white"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.134.561 4.133 1.534 5.867L0 24l6.31-1.507A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.003-1.373l-.36-.213-3.727.89.934-3.618-.234-.372A9.817 9.817 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182c5.43 0 9.818 4.388 9.818 9.818 0 5.43-4.388 9.818-9.818 9.818z" fill="white"/></svg>
+</a>
+
+<script>
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const overlay = document.getElementById('menu-overlay');
+  hamburger.addEventListener('click', () => { mobileMenu.classList.add('open'); overlay.classList.remove('hidden'); document.body.style.overflow = 'hidden'; });
+  document.getElementById('close-menu').addEventListener('click', closeMobileMenu);
+  function closeMobileMenu() { mobileMenu.classList.remove('open'); overlay.classList.add('hidden'); document.body.style.overflow = ''; }
+
+  // Scroll to section + activate tab
+  function scrollToSection(id, btn) {
+    const target = document.getElementById(id);
+    if (!target) return;
+    const offset = document.getElementById('category-bar').offsetHeight + navbar.offsetHeight;
+    window.scrollTo({ top: target.offsetTop - offset + 1, behavior: 'smooth' });
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  // Auto-highlight tab on scroll
+  const sections = ['starters','nigerian','international','mains','desserts','beverages'];
+  const tabs = document.querySelectorAll('.cat-tab');
+  const barEl = document.getElementById('category-bar');
+
+  window.addEventListener('scroll', () => {
+    const offset = barEl.offsetHeight + navbar.offsetHeight + 20;
+    let current = sections[0];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - offset) current = id;
+    });
+    tabs.forEach(t => {
+      t.classList.toggle('active', t.dataset.target === current);
+    });
+  }, { passive: true });
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => ro.observe(el));
+</script>
+</body>
+</html>
