@@ -104,6 +104,8 @@
       background-color: #FAF6F0;
       color: #2C2C2C;
       -webkit-font-smoothing: antialiased;
+      /* Mobile: body padding so content clears the sticky bottom bar */
+      padding-bottom: 5rem;
     }
 
     /* Utility: section headings */
@@ -138,78 +140,81 @@
     }
 
     /* ─── Buttons ──────────────────────────────────────────────────────────── */
-    /* Primary: filled burgundy with gold border on hover */
     .btn-primary {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0.5rem;
-      padding: 0.85rem 2rem;
+      width: 100%;
+      padding: 1rem 1.5rem;
       background-color: #6B1A2A;
       color: #FAF6F0;
       font-family: 'Inter', sans-serif;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 500;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       border: 1.5px solid #6B1A2A;
+      text-decoration: none;
       transition: background 0.25s, border-color 0.25s, color 0.25s, transform 0.2s;
     }
-    .btn-primary:hover {
-      background-color: #4A1020;
-      border-color: #C9A84C;
-      transform: translateY(-1px);
-    }
+    .btn-primary:hover { background-color: #4A1020; border-color: #C9A84C; transform: translateY(-1px); }
 
-    /* Secondary: ghost / outlined */
     .btn-secondary {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 0.5rem;
-      padding: 0.85rem 2rem;
+      width: 100%;
+      padding: 1rem 1.5rem;
       background-color: transparent;
       color: #FAF6F0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: 1.5px solid rgba(250,246,240,0.5);
+      text-decoration: none;
+      transition: background 0.25s, border-color 0.25s, transform 0.2s;
+    }
+    .btn-secondary:hover { background-color: rgba(250,246,240,0.08); border-color: #C9A84C; transform: translateY(-1px); }
+
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.9rem 1.5rem;
+      background-color: transparent;
+      color: #C9A84C;
       font-family: 'Inter', sans-serif;
       font-size: 0.8rem;
       font-weight: 500;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      border: 1.5px solid rgba(250,246,240,0.5);
-      transition: background 0.25s, border-color 0.25s, transform 0.2s;
-    }
-    .btn-secondary:hover {
-      background-color: rgba(250,246,240,0.08);
-      border-color: #C9A84C;
-      transform: translateY(-1px);
-    }
-
-    /* Gold outline (on light backgrounds) */
-    .btn-gold {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.8rem 1.8rem;
-      background-color: transparent;
-      color: #C9A84C;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
       border: 1.5px solid #C9A84C;
+      text-decoration: none;
       transition: background 0.25s, color 0.25s, transform 0.2s;
     }
-    .btn-gold:hover {
-      background-color: #C9A84C;
-      color: #FAF6F0;
-      transform: translateY(-1px);
+    .btn-gold:hover { background-color: #C9A84C; color: #FAF6F0; transform: translateY(-1px); }
+
+    /* On desktop, most buttons revert to auto-width inline */
+    @media (min-width: 768px) {
+      .btn-primary, .btn-secondary, .btn-gold {
+        width: auto;
+        padding: 0.85rem 2rem;
+        font-size: 0.8rem;
+        justify-content: flex-start;
+      }
+      .btn-gold { padding: 0.8rem 1.8rem; font-size: 0.75rem; }
     }
 
     /* ─── Navbar ───────────────────────────────────────────────────────────── */
-    #navbar {
-      transition: background 0.35s, box-shadow 0.35s, padding 0.35s;
-    }
+    #navbar { transition: background 0.35s, box-shadow 0.35s, padding 0.35s; }
     #navbar.scrolled {
-      background-color: rgba(44,28,18,0.97) !important;
+      background-color: rgba(44,28,18,0.97);
       backdrop-filter: blur(12px);
       box-shadow: 0 2px 24px rgba(0,0,0,0.25);
       padding-top: 0.75rem;
@@ -225,7 +230,6 @@
       overflow: hidden;
     }
 
-    /* Animated parallax background via CSS */
     #hero-bg {
       position: absolute;
       inset: -5%;
@@ -237,34 +241,56 @@
       filter: brightness(0.72) saturate(0.9);
     }
 
-    /* Overlay gradient */
     #hero::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(44,14,20,0.45) 0%,
-        rgba(44,14,20,0.6)  50%,
-        rgba(30,10,16,0.92) 100%
-      );
+      background: linear-gradient(to bottom, rgba(44,14,20,0.45) 0%, rgba(44,14,20,0.6) 50%, rgba(30,10,16,0.92) 100%);
       pointer-events: none;
     }
 
-    /* Floating badge */
+    /* Mobile: hero content near top */
+    #hero .hero-inner {
+      justify-content: flex-start;
+      padding-top: 3.5rem;
+      padding-bottom: 4rem;
+      min-height: unset;
+    }
+
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.45rem 1rem;
+      padding: 0.35rem 0.75rem;
       background: rgba(201,168,76,0.18);
       border: 1px solid rgba(201,168,76,0.4);
       color: #E2C36E;
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 500;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       backdrop-filter: blur(4px);
+    }
+
+    /* Mobile: hero heading smaller */
+    #hero h1 { font-size: clamp(2.4rem, 10vw, 3.2rem); }
+
+    /* Mobile: hero CTAs full-width stacked */
+    #hero .hero-ctas {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    /* Desktop: hero content at bottom-left, larger type */
+    @media (min-width: 1024px) {
+      #hero .hero-inner {
+        justify-content: flex-end;
+        padding-bottom: 5rem;
+        padding-top: 8rem;
+        min-height: 100vh;
+      }
+      #hero h1 { font-size: clamp(2.8rem, 7vw, 5.5rem); }
+      #hero .hero-ctas { flex-direction: row; gap: 1rem; }
     }
 
     /* ─── Experience Cards ─────────────────────────────────────────────────── */
@@ -274,86 +300,215 @@
       background: #fff;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .experience-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 48px rgba(107,26,42,0.14);
-    }
+    .experience-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(107,26,42,0.14); }
     .experience-card .card-img {
-      height: 22rem;
+      height: 16rem;  /* mobile default */
       overflow: hidden;
     }
     .experience-card .card-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      width: 100%; height: 100%; object-fit: cover;
       transition: transform 0.5s ease;
     }
-    .experience-card:hover .card-img img {
-      transform: scale(1.06);
+    .experience-card:hover .card-img img { transform: scale(1.06); }
+
+    @media (min-width: 1024px) {
+      .experience-card .card-img { height: 22rem; }
     }
+
     .card-number {
-      position: absolute;
-      top: 1.25rem;
-      left: 1.25rem;
+      position: absolute; top: 1.25rem; left: 1.25rem;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 4rem;
-      font-weight: 700;
-      color: rgba(201,168,76,0.2);
-      line-height: 1;
-      pointer-events: none;
-      user-select: none;
+      font-size: 4rem; font-weight: 700;
+      color: rgba(201,168,76,0.2); line-height: 1;
+      pointer-events: none; user-select: none;
+    }
+
+    /* Mobile: experience cards horizontal scroll carousel */
+    .experience-cards-wrap {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 1rem;
+      padding-bottom: 1.5rem;
+      margin-left: -1.25rem;
+      margin-right: -1.25rem;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+      scrollbar-width: none;
+    }
+    .experience-cards-wrap::-webkit-scrollbar { display: none; }
+    .experience-cards-wrap article {
+      min-width: 82vw;
+      scroll-snap-align: start;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 1024px) {
+      .experience-cards-wrap {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        overflow-x: visible;
+        margin-left: 0; margin-right: 0;
+        padding-left: 0; padding-right: 0;
+        padding-bottom: 0;
+      }
+      .experience-cards-wrap article { min-width: unset; }
     }
 
     /* ─── Gallery Grid ─────────────────────────────────────────────────────── */
+    /* Mobile: 2-col grid */
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      grid-template-rows: 14rem 14rem;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(3, 12rem);
       gap: 0.5rem;
     }
     .gallery-grid img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      width: 100%; height: 100%; object-fit: cover;
       transition: filter 0.3s, transform 0.4s;
     }
-    .gallery-grid img:hover {
-      filter: brightness(1.08);
-      transform: scale(1.02);
+    .gallery-grid img:hover { filter: brightness(1.08); transform: scale(1.02); }
+    .g1 { grid-column: 1 / 3; grid-row: 1 / 2; }
+    .g2 { grid-column: 1 / 2; grid-row: 2 / 3; }
+    .g3 { grid-column: 2 / 3; grid-row: 2 / 3; }
+    .g4 { grid-column: 1 / 2; grid-row: 3 / 4; }
+    .g5 { grid-column: 2 / 3; grid-row: 3 / 4; }
+
+    /* Desktop: full 12-col asymmetric grid */
+    @media (min-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: 14rem 14rem;
+      }
+      .g1 { grid-column: 1 / 6;  grid-row: 1 / 3; }
+      .g2 { grid-column: 6 / 9;  grid-row: 1 / 2; }
+      .g3 { grid-column: 9 / 13; grid-row: 1 / 2; }
+      .g4 { grid-column: 6 / 9;  grid-row: 2 / 3; }
+      .g5 { grid-column: 9 / 13; grid-row: 2 / 3; }
     }
-    .g1 { grid-column: 1 / 6;  grid-row: 1 / 3; }
-    .g2 { grid-column: 6 / 9;  grid-row: 1 / 2; }
-    .g3 { grid-column: 9 / 13; grid-row: 1 / 2; }
-    .g4 { grid-column: 6 / 9;  grid-row: 2 / 3; }
-    .g5 { grid-column: 9 / 13; grid-row: 2 / 3; }
 
     /* ─── Testimonials ─────────────────────────────────────────────────────── */
-    .testimonial-slider { scroll-snap-type: x mandatory; }
-    .testimonial-card   { scroll-snap-align: start; }
+    /* Mobile: horizontal scroll carousel */
+    .testimonial-carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 1rem;
+      margin-left: -1.25rem;
+      margin-right: -1.25rem;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+      padding-bottom: 1rem;
+      scrollbar-width: none;
+    }
+    .testimonial-carousel::-webkit-scrollbar { display: none; }
+    .testimonial-carousel blockquote {
+      min-width: 82vw;
+      scroll-snap-align: start;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 1024px) {
+      .testimonial-carousel {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        overflow-x: visible;
+        margin-left: 0; margin-right: 0;
+        padding-left: 0; padding-right: 0;
+        padding-bottom: 0;
+      }
+      .testimonial-carousel blockquote { min-width: unset; }
+    }
 
     /* ─── Menu Preview ─────────────────────────────────────────────────────── */
+    /* Mobile: stacked layout (price below name, no dots) */
     .menu-item-line {
       display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      padding: 0.9rem 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.125rem;
+      padding: 0.875rem 0;
       border-bottom: 1px solid rgba(201,168,76,0.15);
     }
-    .menu-dots {
-      flex: 1;
-      border-bottom: 1px dotted rgba(201,168,76,0.3);
-      margin: 0 0.75rem;
-      position: relative;
-      top: -0.25rem;
+    .menu-dots { display: none; }
+    .menu-item-line span:last-child { font-size: 0.9rem; font-weight: 600; }
+
+    /* Desktop: inline with dots */
+    @media (min-width: 768px) {
+      .menu-item-line {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 0.9rem 0;
+        gap: 0;
+      }
+      .menu-dots {
+        display: block;
+        flex: 1;
+        border-bottom: 1px dotted rgba(201,168,76,0.3);
+        margin: 0 0.75rem;
+        position: relative;
+        top: -0.25rem;
+      }
+      .menu-item-line span:last-child { font-size: 0.85rem; font-weight: 500; }
     }
 
     /* ─── Stats Band ───────────────────────────────────────────────────────── */
+    /* Mobile: 2-col grid via Tailwind grid-cols-2, border-bottom on each */
     .stat-card {
       text-align: center;
-      padding: 2.5rem 2rem;
-      border-right: 1px solid rgba(201,168,76,0.2);
+      padding: 1.5rem 1rem;
+      border-right: none;
+      border-bottom: 1px solid rgba(201,168,76,0.2);
     }
-    .stat-card:last-child { border-right: none; }
+    .stat-card:last-child { border-bottom: none; }
+    .stat-card p:first-child { font-size: 2rem; }
+
+    @media (min-width: 1024px) {
+      .stat-card {
+        padding: 2.5rem 2rem;
+        border-right: 1px solid rgba(201,168,76,0.2);
+        border-bottom: none;
+      }
+      .stat-card:last-child { border-right: none; }
+      .stat-card p:first-child { font-size: 2.6rem; }
+    }
+
+    /* ─── About Section ────────────────────────────────────────────────────── */
+    /* Mobile: hide overlapping composition, show single image */
+    #about .about-img-overlay { display: none; }
+    #about .about-img-main { margin-left: 0; margin-top: 0; }
+    #about .about-img-main img { height: 20rem; width: 100%; }
+    #about .about-quote-mobile {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: #C9A84C;
+      background: #6B1A2A;
+      padding: 0.9rem 1.25rem;
+    }
+
+    /* Desktop: restore overlapping composition */
+    @media (min-width: 1024px) {
+      #about .about-img-overlay { display: block; }
+      #about .about-img-main { margin-left: 3rem; margin-top: 3rem; }
+      #about .about-img-main img { height: 28rem; }
+      #about .about-quote-mobile { display: none; }
+    }
+
+    /* ─── Section padding (mobile base) ─────────────────────────────────────── */
+    .section-pad {
+      padding: 3.5rem 1.25rem;
+    }
+    @media (min-width: 768px) {
+      .section-pad { padding: 5rem 3rem; }
+    }
+    @media (min-width: 1024px) {
+      .section-pad { padding: 6rem 3rem; }
+    }
 
     /* ─── Mobile Menu ──────────────────────────────────────────────────────── */
     #mobile-menu {
@@ -363,35 +518,12 @@
     #mobile-menu.open { transform: translateX(0); }
 
     /* ─── Intersection Observer Animation Targets ──────────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-left {
-      opacity: 0;
-      transform: translateX(-28px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-    .reveal-left.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .reveal-right {
-      opacity: 0;
-      transform: translateX(28px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-    .reveal-right.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    /* Stagger children */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
     .stagger > *:nth-child(1) { transition-delay: 0.05s; }
     .stagger > *:nth-child(2) { transition-delay: 0.15s; }
     .stagger > *:nth-child(3) { transition-delay: 0.25s; }
@@ -401,198 +533,11 @@
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: #FAF6F0; }
     ::-webkit-scrollbar-thumb { background: #C9A84C; border-radius: 3px; }
+    :focus-visible { outline: 2px solid #C9A84C; outline-offset: 3px; }
 
-    /* ─── Focus Styles (accessibility) ────────────────────────────────────── */
-    :focus-visible {
-      outline: 2px solid #C9A84C;
-      outline-offset: 3px;
-    }
-
-    @media (max-width: 768px) {
-      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 12rem); }
-      .g1 { grid-column: 1 / 3; grid-row: 1 / 2; }
-      .g2 { grid-column: 1 / 2; grid-row: 2 / 3; }
-      .g3 { grid-column: 2 / 3; grid-row: 2 / 3; }
-      .g4 { grid-column: 1 / 2; grid-row: 3 / 4; }
-      .g5 { grid-column: 2 / 3; grid-row: 3 / 4; }
-    }
-
-    /* ═══════════════════════════════════════════════
-       MOBILE OPTIMISATIONS  (max-width: 767px)
-       Goal: better on mobile than on desktop
-    ═══════════════════════════════════════════════ */
-    @media (max-width: 767px) {
-      body { padding-bottom: 5rem; }
-
-      /* ── Global spacing reduction ── */
-      section, #about, #experiences, #menu, #gallery, #events, #contact {
-        padding-left: 1.25rem !important;
-        padding-right: 1.25rem !important;
-        padding-top: 4rem !important;
-        padding-bottom: 4rem !important;
-      }
-
-      /* ── Hero: fill the viewport, content near top-centre ── */
-      #hero { min-height: 100svh; }
-      /* Override justify-end so content sits 30% down, not at the very bottom */
-      #hero .max-w-7xl {
-        padding-left: 1.25rem !important;
-        padding-right: 1.25rem !important;
-        padding-top: 3.5rem !important;
-        padding-bottom: 4rem !important;
-        justify-content: flex-start !important;   /* was justify-end — pulls from bottom */
-        min-height: unset !important;             /* remove min-h-screen from the inner div */
-      }
-      #hero h1 { font-size: clamp(2.4rem, 10vw, 3.2rem) !important; }
-      #hero p  { font-size: 1rem !important; max-width: 100% !important; }
-      /* Full-width stacked CTAs on mobile */
-      #hero .flex.flex-wrap { flex-direction: column; gap: 0.75rem; }
-      #hero .flex.flex-wrap a { width: 100%; justify-content: center; padding: 1rem 1.5rem; font-size: 0.85rem; }
-      /* Badge – smaller */
-      .hero-badge { font-size: 0.65rem; padding: 0.35rem 0.75rem; }
-
-      /* ── Stats band: full border on each cell ── */
-      .stat-card {
-        padding: 1.5rem 1rem !important;
-        border-right: none !important;
-        border-bottom: 1px solid rgba(201,168,76,0.2);
-      }
-      .stat-card:last-child { border-bottom: none; }
-      .stat-card p:first-child { font-size: 2rem !important; }
-
-      /* ── About: flatten the overlapping image composition ── */
-      #about .reveal-left { overflow: visible; }
-      /* Hide the accent photo, gold frame, signature badge behind */
-      #about .reveal-left > div.absolute { display: none !important; }
-      /* Remove the push-over margin from the main photo wrapper */
-      #about .reveal-left > div.relative { margin-left: 0 !important; margin-top: 0 !important; }
-      #about .reveal-left > div.relative img { height: 20rem !important; width: 100%; }
-      /* Show a floating quote pill below the image */
-      #about .reveal-left::after {
-        content: '"A taste of home, elevated."';
-        display: block;
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 1rem;
-        font-style: italic;
-        color: #C9A84C;
-        background: #6B1A2A;
-        padding: 0.9rem 1.25rem;
-        margin-top: -0.1rem;
-      }
-      /* Section headings */
-      #about h2, #experiences h2, #menu h2, #gallery h2, #contact h2 {
-        font-size: clamp(1.9rem, 8vw, 2.5rem) !important;
-      }
-
-      /* ── Experience cards: horizontal scroll carousel ── */
-      #experiences .grid.md\:grid-cols-3 {
-        display: flex !important;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        gap: 1rem;
-        padding-bottom: 1.5rem;
-        margin-left: -1.25rem;
-        margin-right: -1.25rem;
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-        scrollbar-width: none;
-      }
-      #experiences .grid.md\:grid-cols-3::-webkit-scrollbar { display: none; }
-      #experiences .grid.md\:grid-cols-3 article {
-        min-width: 82vw;
-        scroll-snap-align: start;
-        flex-shrink: 0;
-      }
-      .experience-card .card-img { height: 16rem; }
-      /* Scroll hint label */
-      #experiences .grid.md\:grid-cols-3::after {
-        content: '';
-        min-width: 0.1rem;
-        flex-shrink: 0;
-      }
-
-      /* ── Menu: fix the dotted separator on mobile ── */
-      .menu-item-line {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 0.125rem;
-        padding: 0.875rem 0;
-      }
-      .menu-dots { display: none !important; }
-      .menu-item-line span:last-child {
-        font-size: 0.9rem !important;
-        font-weight: 600 !important;
-      }
-      /* Menu right image stack — single column */
-      #menu .grid.grid-cols-2 { grid-template-columns: 1fr; }
-      #menu .grid.grid-cols-2 .col-span-2 { grid-column: auto; }
-      #menu .grid.grid-cols-2 img { height: 14rem !important; }
-
-      /* ── Gallery header: left-align description text ── */
-      #gallery .section-body { text-align: left !important; }
-      #gallery .flex.flex-col { gap: 0.5rem; }
-
-      /* ── Gallery grid ── */
-      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, 12rem); }
-      .g1 { grid-column: 1 / 3; grid-row: 1 / 2; }
-      .g2 { grid-column: 1 / 2; grid-row: 2 / 3; }
-      .g3 { grid-column: 2 / 3; grid-row: 2 / 3; }
-      .g4 { grid-column: 1 / 2; grid-row: 3 / 4; }
-      .g5 { grid-column: 2 / 3; grid-row: 3 / 4; }
-
-      /* ── Events section ── */
-      #events { padding-top: 4rem !important; padding-bottom: 4rem !important; }
-      #events h2 { font-size: clamp(1.9rem, 8vw, 2.5rem) !important; }
-      #events .grid.grid-cols-2 { grid-template-columns: 1fr; gap: 0.6rem; }
-      #events .btn-primary { width: 100%; justify-content: center; }
-
-      /* ── Testimonials: horizontal scroll ── */
-      section .grid.md\:grid-cols-3 {
-        display: flex !important;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        gap: 1rem;
-        margin-left: -1.25rem;
-        margin-right: -1.25rem;
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-        padding-bottom: 1rem;
-        scrollbar-width: none;
-      }
-      section .grid.md\:grid-cols-3::-webkit-scrollbar { display: none; }
-      section .grid.md\:grid-cols-3 blockquote {
-        min-width: 82vw;
-        scroll-snap-align: start;
-        flex-shrink: 0;
-      }
-
-      /* ── CTA Band: stacked full-width buttons ── */
-      .flex.flex-wrap.justify-center { flex-direction: column; align-items: stretch; }
-      .flex.flex-wrap.justify-center a { justify-content: center; width: 100%; }
-
-      /* ── Contact form: stack name fields ── */
-      #inquiry-form .grid.grid-cols-2,
-      #inquiry-form .grid { grid-template-columns: 1fr !important; }
-      .form-input { padding: 0.875rem 1rem; font-size: 1rem; }
-      #inquiry-form { padding: 1.75rem 1.25rem !important; }
-
-      /* ── Footer: tighter spacing ── */
-      footer .max-w-7xl { padding: 3rem 1.25rem !important; }
-
-      /* ── WhatsApp FAB: larger on mobile ── */
-      #whatsapp-fab {
-        width: 3.75rem !important;
-        height: 3.75rem !important;
-        bottom: 1.25rem !important;
-        right: 1.25rem !important;
-      }
-    }
-
-    /* ── Sticky mobile bottom bar ── */
+    /* ── Sticky mobile bottom bar — visible by default, hidden on desktop ── */
     #mobile-cta-bar {
-      display: none;
+      display: flex;
       position: fixed;
       bottom: 0; left: 0; right: 0;
       z-index: 80;
@@ -602,47 +547,30 @@
       border-top: 1px solid rgba(201,168,76,0.2);
       gap: 0.75rem;
     }
-    @media (max-width: 767px) {
-      body { padding-bottom: 5rem; }
-      #mobile-cta-bar { display: flex; }
-      /* Nudge WhatsApp FAB above the bar */
-      #whatsapp-fab { bottom: 5.5rem !important; }
+    @media (min-width: 768px) {
+      #mobile-cta-bar { display: none; }
+      body { padding-bottom: 0; }
     }
+
+    /* WhatsApp FAB: above bar on mobile, normal position on desktop */
+    #whatsapp-fab { bottom: 5.5rem; }
+    @media (min-width: 768px) {
+      #whatsapp-fab { bottom: 2rem; }
+    }
+
     .mobile-cta-btn-primary {
-      flex: 1;
-      background: #6B1A2A;
-      color: #FAF6F0;
-      border: none;
-      padding: 0.8rem;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 0.25rem;
-      transition: background 0.2s;
+      flex: 1; background: #6B1A2A; color: #FAF6F0; border: none; padding: 0.8rem;
+      font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; text-align: center;
+      text-decoration: none; border-radius: 0.25rem; transition: background 0.2s;
     }
     .mobile-cta-btn-primary:hover { background: #4A1020; }
     .mobile-cta-btn-wa {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-      background: #25D366;
-      color: #fff;
-      border: none;
-      padding: 0.8rem 1rem;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 0.25rem;
-      transition: background 0.2s;
-      white-space: nowrap;
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+      background: #25D366; color: #fff; border: none; padding: 0.8rem 1rem;
+      font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+      border-radius: 0.25rem; transition: background 0.2s; white-space: nowrap;
     }
     .mobile-cta-btn-wa:hover { background: #128C7E; }
   </style>
@@ -750,7 +678,7 @@
   }
   .mobile-nav-link:hover { color: #C9A84C; }
   .nav-link { text-decoration: none; transition: color 0.2s; }
-  .nav-link:hover { color: #C9A84C !important; }
+  .nav-link:hover { color: #C9A84C; }
 </style>
 
 
@@ -763,7 +691,7 @@
   <div id="hero-bg" role="img" aria-label="Elegant fine-dining table setting at Winnie's Cuisine"></div>
 
   <!-- Content -->
-  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pb-20 pt-32 flex flex-col justify-end min-h-screen">
+  <div class="hero-inner relative z-10 w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-12 flex flex-col">
     <!-- Eyebrow badge -->
     <div class="hero-badge mb-6 w-fit animate-fade-in" style="animation-delay:0.1s;">
       <span style="color:#C9A84C; font-size:1rem;">✦</span>
@@ -771,7 +699,7 @@
     </div>
 
     <!-- Main headline -->
-    <h1 class="animate-fade-up" style="font-family:'Cormorant Garamond',serif; font-size:clamp(2.8rem,7vw,5.5rem); font-weight:600; color:#FAF6F0; line-height:1.08; max-width:800px; animation-delay:0.2s;">
+    <h1 class="animate-fade-up" style="font-family:'Cormorant Garamond',serif; font-weight:600; color:#FAF6F0; line-height:1.08; max-width:800px; animation-delay:0.2s;">
       Where Every Meal<br/>
       <em style="color:#C9A84C; font-style:italic;">is a Masterpiece</em>
     </h1>
@@ -782,7 +710,7 @@
     </p>
 
     <!-- CTA Row -->
-    <div class="mt-10 flex flex-wrap gap-4 animate-fade-up" style="animation-delay:0.5s;">
+    <div class="hero-ctas mt-10 flex gap-4 animate-fade-up" style="animation-delay:0.5s;">
       <a href="#experiences" class="btn-primary">
         Explore Experiences
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -841,23 +769,26 @@
 <!-- ═══════════════════════════════════════════════════════════════════════════
      ABOUT US SECTION
 ═══════════════════════════════════════════════════════════════════════════ -->
-<section id="about" class="py-24 md:py-32 px-6 md:px-12" style="background:#FAF6F0;">
+<section id="about" class="py-14 md:py-24 lg:py-32 px-5 md:px-8 lg:px-12" style="background:#FAF6F0;">
   <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
 
     <!-- Left: Imagery composition -->
     <div class="relative reveal-left">
-      <!-- Main photo -->
-      <div class="relative z-10" style="margin-left:3rem; margin-top:3rem;">
-        <img
-          src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=700&q=80"
-          alt="Beautifully plated fine-dining dish at Winnie's Cuisine"
-          class="w-full object-cover"
-          style="height:28rem; box-shadow: 0 20px 60px rgba(107,26,42,0.2);"
-          loading="lazy"
-        />
+      <!-- Mobile: simple full-width image with a quote below -->
+      <img
+        src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=700&q=80"
+        alt="Beautifully plated fine-dining dish at Winnie's Cuisine"
+        class="about-img-main w-full object-cover"
+        style="height:22rem; box-shadow: 0 20px 60px rgba(107,26,42,0.2);"
+        loading="lazy"
+      />
+      <!-- Mobile quote (shown on mobile, hidden on desktop) -->
+      <div class="about-quote-mobile" style="background:#6B1A2A; padding:1rem 1.5rem; margin-top:0; box-shadow:0 8px 24px rgba(107,26,42,0.3);">
+        <p style="font-family:'Cormorant Garamond',serif; font-size:0.95rem; font-style:italic; color:#C9A84C;">"A taste of home, elevated."</p>
       </div>
-      <!-- Accent photo behind -->
-      <div class="absolute top-0 left-0 z-0" style="width:60%; height:55%;">
+
+      <!-- Desktop overlay elements (hidden on mobile, shown on desktop) -->
+      <div class="about-img-overlay absolute top-0 left-0 z-0" style="width:60%; height:55%;">
         <img
           src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=500&q=75"
           alt="Elegant restaurant interior"
@@ -866,10 +797,8 @@
           loading="lazy"
         />
       </div>
-      <!-- Gold frame accent -->
-      <div class="absolute bottom-0 right-0 w-24 h-24 z-0" style="border:2px solid #C9A84C; margin-right:-1rem; margin-bottom:-1rem;"></div>
-      <!-- Signature badge -->
-      <div class="absolute z-20" style="bottom:2rem; left:0; background:#6B1A2A; padding:1.2rem 1.5rem; box-shadow:0 8px 24px rgba(107,26,42,0.3);">
+      <div class="about-img-overlay absolute bottom-0 right-0 w-24 h-24 z-0" style="border:2px solid #C9A84C; margin-right:-1rem; margin-bottom:-1rem;"></div>
+      <div class="about-img-overlay absolute z-20" style="bottom:2rem; left:0; background:#6B1A2A; padding:1.2rem 1.5rem; box-shadow:0 8px 24px rgba(107,26,42,0.3);">
         <p style="font-family:'Cormorant Garamond',serif; font-size:0.95rem; font-style:italic; color:#C9A84C;">"A taste of home,<br/>elevated."</p>
       </div>
     </div>
@@ -925,7 +854,7 @@
      OUR EXPERIENCES SECTION
      Three elegant cards: Fine Dining · Catering · Event Space
 ═══════════════════════════════════════════════════════════════════════════ -->
-<section id="experiences" class="py-24 md:py-32 px-6 md:px-12" style="background:#F5EDE0;">
+<section id="experiences" class="py-14 md:py-24 lg:py-32 px-5 md:px-8 lg:px-12" style="background:#F5EDE0;">
   <!-- Subtle texture overlay -->
   <div class="max-w-7xl mx-auto">
 
@@ -940,7 +869,7 @@
     </div>
 
     <!-- Cards Grid -->
-    <div class="grid md:grid-cols-3 gap-6 stagger">
+    <div class="experience-cards-wrap gap-6 stagger">
 
       <!-- Card 1: Fine Dining -->
       <article class="experience-card reveal" aria-label="Fine Dining experience">
@@ -1060,7 +989,7 @@
 <!-- ═══════════════════════════════════════════════════════════════════════════
      MENU PREVIEW SECTION
 ═══════════════════════════════════════════════════════════════════════════ -->
-<section id="menu" class="py-24 md:py-32 px-6 md:px-12" style="background:#FAF6F0;">
+<section id="menu" class="py-14 md:py-24 lg:py-32 px-5 md:px-8 lg:px-12" style="background:#FAF6F0;">
   <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
 
     <!-- Left: text + menu items -->
@@ -1142,7 +1071,7 @@
 <!-- ═══════════════════════════════════════════════════════════════════════════
      GALLERY SECTION
 ═══════════════════════════════════════════════════════════════════════════ -->
-<section id="gallery" class="py-24 md:py-32 px-6 md:px-12" style="background:#EAE0D0;">
+<section id="gallery" class="py-14 md:py-24 lg:py-32 px-5 md:px-8 lg:px-12" style="background:#EAE0D0;">
   <div class="max-w-7xl mx-auto">
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 reveal">
       <div>
@@ -1186,7 +1115,7 @@
      EVENTS SECTION
      Highlight the event space with a full-bleed background
 ═══════════════════════════════════════════════════════════════════════════ -->
-<section id="events" class="relative py-32 px-6 md:px-12 overflow-hidden">
+<section id="events" class="relative py-20 md:py-28 lg:py-32 px-5 md:px-8 lg:px-12 overflow-hidden">
   <!-- Background -->
   <div class="absolute inset-0 z-0">
     <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1800&q=80"
@@ -1248,7 +1177,7 @@
 <!-- ═══════════════════════════════════════════════════════════════════════════
      TESTIMONIALS
 ═══════════════════════════════════════════════════════════════════════════ -->
-<section class="py-24 md:py-32 px-6 md:px-12" style="background:#FAF6F0;">
+<section class="py-14 md:py-24 lg:py-32 px-5 md:px-8 lg:px-12" style="background:#FAF6F0;">
   <div class="max-w-7xl mx-auto">
     <div class="text-center mb-14 reveal">
       <p class="section-eyebrow mb-4">Guest Voices</p>
@@ -1257,7 +1186,7 @@
     </div>
 
     <!-- Testimonial cards -->
-    <div class="grid md:grid-cols-3 gap-6 stagger">
+    <div class="testimonial-carousel gap-6 stagger">
 
       <!-- T1 -->
       <blockquote class="reveal" style="background:#fff; padding:2.5rem; box-shadow:0 4px 24px rgba(107,26,42,0.07); border-top:3px solid #C9A84C;">
@@ -1341,7 +1270,7 @@
 <!-- ═══════════════════════════════════════════════════════════════════════════
      CONTACT SECTION
 ═══════════════════════════════════════════════════════════════════════════ -->
-<section id="contact" class="py-24 md:py-32 px-6 md:px-12" style="background:#FAF6F0;">
+<section id="contact" class="py-14 md:py-24 lg:py-32 px-5 md:px-8 lg:px-12" style="background:#FAF6F0;">
   <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16">
 
     <!-- Left: Info -->
@@ -1407,7 +1336,7 @@
         <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:600; color:#2C2C2C; margin-bottom:0.25rem;">Make a Reservation</h3>
         <p style="font-size:0.8rem; color:#6B6B6B; margin-bottom:1rem;">or send an event inquiry — we respond within the hour.</p>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label for="fname" class="form-label">First Name</label>
             <input type="text" id="fname" name="fname" placeholder="Adaeze" required class="form-input" />

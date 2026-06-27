@@ -70,7 +70,6 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', system-ui, sans-serif; background: #FAF6F0; color: #2C2C2C; }
 
     /* ── Navbar ── */
     #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 50; padding: 1.25rem 0; transition: background 0.35s, backdrop-filter 0.35s, padding 0.35s; }
@@ -136,78 +135,63 @@
     .social-icon { width: 2.25rem; height: 2.25rem; border-radius: 50%; border: 1px solid rgba(201,168,76,0.35); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.7); transition: all 0.2s; }
     .social-icon:hover { border-color: #C9A84C; color: #C9A84C; background: rgba(201,168,76,0.1); }
 
-    /* ── WhatsApp FAB ── */
-    #wa-fab { position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 90; width: 3.5rem; height: 3.5rem; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.5); transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; }
+    /* ── WhatsApp FAB: above sticky bar on mobile, normal on desktop ── */
+    #wa-fab { position: fixed; bottom: 5.5rem; right: 1.75rem; z-index: 90; width: 3.5rem; height: 3.5rem; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.5); transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; }
     #wa-fab:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
+    @media (min-width: 768px) { #wa-fab { bottom: 1.75rem; } }
 
-    /* ═══ MOBILE ═══════════════════════════════════════ */
-    @media (max-width: 767px) {
-      body { padding-bottom: 5rem; }
-      /* Narrower padding throughout */
-      .max-w-3xl, .max-w-7xl { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
-      section { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+    /* Mobile body: padded for sticky bar */
+    body { font-family: 'Inter', system-ui, sans-serif; background: #FAF6F0; color: #2C2C2C; padding-bottom: 5rem; }
+    @media (min-width: 768px) { body { padding-bottom: 0; } }
 
-      /* Form: full-width grids */
-      .grid.md\:grid-cols-2, .grid.md\:grid-cols-3 { grid-template-columns: 1fr !important; }
-
-      /* Step buttons: larger touch targets */
-      .step-btn { padding: 1rem 0.875rem; }
-      .step-btn .text-2xl { font-size: 1.5rem; }
-
-      /* Inputs: bigger tap targets */
-      .field-input { padding: 0.9rem 1rem; font-size: 1rem; min-height: 48px; }
-      select.field-input { min-height: 52px; }
-      textarea.field-input { font-size: 1rem; }
-
-      /* Action buttons: full width */
-      .btn-gold, .btn-ghost { width: 100%; justify-content: center; }
-      #next1 { width: 100%; justify-content: center; margin-top: 0.5rem; }
-
-      /* Review box */
-      #review-list > div { flex-direction: column; gap: 0.1rem; }
-      #review-list dt { min-width: unset !important; }
-
-      /* Testimonials: horizontal scroll */
-      #testimonials .grid {
-        display: flex !important;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        gap: 1rem;
-        margin-left: -1.25rem;
-        margin-right: -1.25rem;
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-        padding-bottom: 1rem;
-        scrollbar-width: none;
-      }
-      #testimonials .grid::-webkit-scrollbar { display: none; }
-      #testimonials .grid .testi-card {
-        min-width: 82vw;
-        scroll-snap-align: start;
-        flex-shrink: 0;
-      }
-
-      /* Location section */
-      #visit iframe { height: 260px; }
-
-      /* Contact info: larger tap targets */
-      #visit li a { padding: 0.5rem 0; display: flex; min-height: 48px; }
-
-      /* Hours rows */
-      .hours-row { padding: 0.75rem 1rem; }
-
-      /* WAB FAB nudge above mobile bar */
-      #wa-fab { bottom: 5.5rem !important; }
-
-      /* Section headings */
-      h2 { font-size: clamp(1.75rem, 7vw, 2.25rem) !important; }
+    /* ── Buttons: full-width on mobile ── */
+    .btn-gold { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; background: #C9A84C; color: #2C1C12; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.9rem 1.5rem; border-radius: 0.375rem; border: none; cursor: pointer; transition: background 0.2s, transform 0.15s; }
+    .btn-gold:hover { background: #E2C36E; transform: translateY(-1px); }
+    .btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; background: transparent; color: rgba(255,255,255,0.7); font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.9rem 1.5rem; border-radius: 0.375rem; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; transition: all 0.2s; }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+    @media (min-width: 768px) {
+      .btn-gold { width: auto; padding: 0.875rem 2rem; justify-content: flex-start; }
+      .btn-ghost { width: auto; padding: 0.875rem 1.5rem; justify-content: flex-start; }
     }
 
-    /* Sticky mobile bottom bar */
-    #mobile-cta-bar { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 80; background: rgba(44,24,16,0.97); backdrop-filter: blur(12px); padding: 0.875rem 1.25rem; border-top: 1px solid rgba(201,168,76,0.2); gap: 0.75rem; }
-    @media (max-width: 767px) {
-      body { padding-bottom: 5rem; } #mobile-cta-bar { display: flex; } }
+    /* ── Step buttons: larger touch targets on mobile ── */
+    .step-btn { border: 1px solid rgba(201,168,76,0.4); border-radius: 0.5rem; padding: 1rem 0.875rem; cursor: pointer; transition: all 0.25s; background: transparent; text-align: left; width: 100%; min-height: 48px; }
+    .step-btn:hover { border-color: #C9A84C; background: rgba(201,168,76,0.06); }
+    .step-btn.selected { border-color: #C9A84C; background: rgba(201,168,76,0.1); }
+    @media (min-width: 768px) { .step-btn { padding: 1.25rem 1rem; } }
+
+    /* ── Inputs: bigger tap targets on mobile ── */
+    .field-input { width: 100%; background: rgba(255,255,255,0.07); border: 1px solid rgba(201,168,76,0.25); border-radius: 0.375rem; color: #fff; font-family: 'Inter', sans-serif; font-size: 1rem; padding: 0.9rem 1rem; min-height: 48px; transition: border-color 0.2s, background 0.2s; outline: none; }
+    .field-input:focus { border-color: #C9A84C; background: rgba(255,255,255,0.1); }
+    .field-input::placeholder { color: rgba(255,255,255,0.3); }
+    select.field-input { min-height: 52px; }
+    select.field-input option { background: #2C1C12; color: #fff; }
+    @media (min-width: 768px) { .field-input { font-size: 0.9375rem; padding: 0.75rem 1rem; min-height: unset; } select.field-input { min-height: unset; } }
+
+    /* ── Testimonials: horizontal scroll on mobile, grid on desktop ── */
+    .testi-carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 1rem;
+      margin-left: -1.25rem;
+      margin-right: -1.25rem;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+      padding-bottom: 1rem;
+      scrollbar-width: none;
+    }
+    .testi-carousel::-webkit-scrollbar { display: none; }
+    .testi-carousel .testi-card { min-width: 82vw; scroll-snap-align: start; flex-shrink: 0; }
+    @media (min-width: 1024px) {
+      .testi-carousel { display: grid; grid-template-columns: repeat(3, 1fr); overflow-x: visible; margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0; padding-bottom: 0; }
+      .testi-carousel .testi-card { min-width: unset; }
+    }
+
+    /* ── Sticky mobile bottom bar ── */
+    #mobile-cta-bar { display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 80; background: rgba(44,24,16,0.97); backdrop-filter: blur(12px); padding: 0.875rem 1.25rem; border-top: 1px solid rgba(201,168,76,0.2); gap: 0.75rem; }
+    @media (min-width: 768px) { #mobile-cta-bar { display: none; } }
     .mob-btn-r { flex: 1; background: #6B1A2A; color: #FAF6F0; border: none; padding: 0.8rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; text-decoration: none; border-radius: 0.25rem; }
     .mob-btn-wa { display: flex; align-items: center; justify-content: center; gap: 0.4rem; background: #25D366; color: #fff; padding: 0.8rem 1rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 0.25rem; white-space: nowrap; }
   </style>
@@ -218,7 +202,7 @@
      NAVBAR
 ══════════════════════════════════ -->
 <nav id="navbar" role="navigation" aria-label="Main navigation">
-  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 flex items-center justify-between">
     <a href="index.html" class="font-serif text-xl font-semibold text-white tracking-wide" aria-label="Winnie's Cuisine & Events — Home">
       Winnie's <span style="color:#C9A84C;">Cuisine</span>
     </a>
@@ -271,7 +255,7 @@
 <header class="relative flex items-end" style="height:42vh;min-height:320px;background:linear-gradient(160deg,#4A1020 0%,#6B1A2A 50%,#2C1C12 100%);">
   <div class="absolute inset-0 opacity-20" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&auto=format&fit=crop');background-size:cover;background-position:center;" aria-hidden="true"></div>
   <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(44,28,18,0.85) 0%,rgba(74,16,32,0.4) 100%);" aria-hidden="true"></div>
-  <div class="relative max-w-7xl mx-auto px-6 pb-14 w-full">
+  <div class="relative max-w-7xl mx-auto px-5 md:px-8 lg:px-12 pb-10 md:pb-14 w-full">
     <p class="text-gold-light text-xs font-semibold tracking-widest uppercase mb-3" style="color:#E2C36E;">Get In Touch</p>
     <h1 class="font-serif text-white font-light" style="font-size:clamp(2.25rem,5vw,3.75rem);line-height:1.1;">Reservations &amp; Enquiries</h1>
     <p class="mt-3 text-white/70 text-lg max-w-xl">Whether you're planning a romantic dinner or a grand celebration, we're here to make it exceptional.</p>
@@ -282,7 +266,7 @@
      MULTI-STEP FORM
 ══════════════════════════════════ -->
 <section id="book" aria-labelledby="book-heading" style="background:linear-gradient(135deg,#2C1C12 0%,#3D1A22 50%,#1A1A1A 100%);padding:5rem 0 6rem;">
-  <div class="max-w-3xl mx-auto px-6">
+  <div class="max-w-3xl mx-auto px-5 md:px-8">
     <div class="text-center mb-12 reveal">
       <h2 id="book-heading" class="font-serif text-white font-light" style="font-size:clamp(1.875rem,4vw,2.75rem);">Make a Reservation</h2>
       <p class="mt-3 text-white/60 text-base">We'll confirm via WhatsApp or email within <strong class="text-white/80">24 hours</strong>.</p>
@@ -543,14 +527,14 @@
 <!-- ══════════════════════════════════
      TESTIMONIALS
 ══════════════════════════════════ -->
-<section id="testimonials" aria-labelledby="testi-heading" style="background:#FAF6F0;padding:5rem 0 6rem;">
-  <div class="max-w-7xl mx-auto px-6">
+<section id="testimonials" aria-labelledby="testi-heading" style="background:#FAF6F0;padding:3.5rem 0 5rem;">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
     <div class="text-center mb-14 reveal">
       <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:#C9A84C;">Guest Experiences</p>
       <h2 id="testi-heading" class="font-serif font-light" style="font-size:clamp(2rem,4vw,3rem);color:#2C2C2C;">What Our Guests Say</h2>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 stagger">
+    <div class="testi-carousel gap-6 stagger">
       <!-- Testimonial 1: Food -->
       <article class="testi-card reveal">
         <div class="flex gap-1 mb-4" aria-label="5 out of 5 stars">
@@ -642,8 +626,8 @@
 <!-- ══════════════════════════════════
      VISIT US / LOCATION
 ══════════════════════════════════ -->
-<section id="visit" aria-labelledby="visit-heading" style="background:#F5EDE0;padding:5rem 0 6rem;">
-  <div class="max-w-7xl mx-auto px-6">
+<section id="visit" aria-labelledby="visit-heading" style="background:#F5EDE0;padding:3.5rem 0 5rem;">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
     <div class="text-center mb-14 reveal">
       <p class="text-xs font-semibold uppercase tracking-widest mb-3" style="color:#C9A84C;">Find Us</p>
       <h2 id="visit-heading" class="font-serif font-light" style="font-size:clamp(2rem,4vw,3rem);color:#2C2C2C;">Visit Winnie's</h2>
@@ -767,7 +751,7 @@
      FOOTER
 ══════════════════════════════════ -->
 <footer style="background:#1A0D0D;padding:4rem 0 0;" role="contentinfo">
-  <div class="max-w-7xl mx-auto px-6">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12" style="border-bottom:1px solid rgba(201,168,76,0.15);">
 
       <!-- Brand -->

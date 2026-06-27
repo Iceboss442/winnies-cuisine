@@ -45,7 +45,8 @@
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; background: #FAF6F0; color: #2C2C2C; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    body { font-family: 'Inter', sans-serif; background: #FAF6F0; color: #2C2C2C; -webkit-font-smoothing: antialiased; overflow-x: hidden; padding-bottom: 5rem; }
+    @media (min-width: 768px) { body { padding-bottom: 0; } }
 
     .section-eyebrow { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #C9A84C; }
     .section-title   { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.12; }
@@ -53,32 +54,39 @@
 
     /* ── Navbar ── */
     #navbar { transition: background 0.35s, box-shadow 0.35s, padding 0.35s; }
-    #navbar.scrolled { background: rgba(44,28,18,0.97) !important; backdrop-filter: blur(12px); box-shadow: 0 2px 24px rgba(0,0,0,0.25); padding-top: 0.75rem; padding-bottom: 0.75rem; }
+    #navbar.scrolled { background: rgba(44,28,18,0.97); backdrop-filter: blur(12px); box-shadow: 0 2px 24px rgba(0,0,0,0.25); padding-top: 0.75rem; padding-bottom: 0.75rem; }
     .nav-link { text-decoration: none; font-size: 0.8rem; letter-spacing: 0.06em; color: rgba(250,246,240,0.8); transition: color 0.2s; }
-    .nav-link:hover, .nav-link.active { color: #C9A84C !important; }
+    .nav-link:hover, .nav-link.active { color: #C9A84C; }
     #mobile-menu { transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
     #mobile-menu.open { transform: translateX(0); }
     .mobile-nav-link { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 500; color: rgba(250,246,240,0.8); text-decoration: none; transition: color 0.2s; }
     .mobile-nav-link:hover { color: #C9A84C; }
 
-    /* ── Buttons ── */
-    .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem; background: #6B1A2A; color: #FAF6F0; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #6B1A2A; text-decoration: none; transition: background 0.25s, border-color 0.25s, transform 0.2s; }
+    /* ── Buttons: full-width on mobile ── */
+    .btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; padding: 1rem 1.5rem; background: #6B1A2A; color: #FAF6F0; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #6B1A2A; text-decoration: none; transition: background 0.25s, border-color 0.25s, transform 0.2s; }
     .btn-primary:hover { background: #4A1020; border-color: #C9A84C; transform: translateY(-1px); }
+    @media (min-width: 768px) { .btn-primary { width: auto; justify-content: flex-start; padding: 0.85rem 2rem; font-size: 0.8rem; } }
 
-    /* ── Hero ── */
-    #gallery-hero { position: relative; height: 52vh; min-height: 380px; display: flex; align-items: flex-end; overflow: hidden; }
+    /* ── Hero: shorter on mobile ── */
+    #gallery-hero { position: relative; height: 38vh; min-height: 240px; display: flex; align-items: flex-end; overflow: hidden; }
+    #gallery-hero h1 { font-size: clamp(2rem, 9vw, 2.8rem); }
+    @media (min-width: 768px) {
+      #gallery-hero { height: 52vh; min-height: 380px; }
+      #gallery-hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); }
+    }
     #gallery-hero-bg { position: absolute; inset: -5%; background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1800&q=80'); background-size: cover; background-position: center; filter: brightness(0.4) saturate(0.8); }
     #gallery-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(30,10,16,0.92) 0%, rgba(30,10,16,0.35) 60%, transparent 100%); }
 
-    /* ── Filter tabs ── */
+    /* ── Filter tabs: larger touch targets on mobile ── */
     #filter-bar { position: sticky; top: 72px; z-index: 30; background: #fff; border-bottom: 1px solid rgba(201,168,76,0.2); }
-    .filter-btn { padding: 1rem 1.5rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6B6B; cursor: pointer; border: none; background: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.2s, border-color 0.2s; }
+    .filter-btn { padding: 0.75rem 1rem; font-size: 0.72rem; min-height: 44px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6B6B; cursor: pointer; border: none; background: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.2s, border-color 0.2s; }
     .filter-btn.active, .filter-btn:hover { color: #6B1A2A; border-bottom-color: #C9A84C; }
+    @media (min-width: 768px) { .filter-btn { padding: 1rem 1.5rem; font-size: 0.75rem; } }
 
-    /* ── Masonry Grid ── */
-    #gallery-grid { columns: 3; column-gap: 0.5rem; padding: 0; }
-    @media (max-width: 1024px) { #gallery-grid { columns: 2; } }
-    @media (max-width: 600px)  { #gallery-grid { columns: 1; } }
+    /* ── Masonry Grid: mobile-first ── */
+    #gallery-grid { columns: 1; column-gap: 0.5rem; padding: 0; }
+    @media (min-width: 480px)  { #gallery-grid { columns: 2; } }
+    @media (min-width: 1025px) { #gallery-grid { columns: 3; } }
 
     .gallery-item {
       position: relative;
@@ -185,35 +193,14 @@
     :focus-visible { outline: 2px solid #C9A84C; outline-offset: 3px; }
     ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: #FAF6F0; } ::-webkit-scrollbar-thumb { background: #C9A84C; border-radius: 3px; }
 
-    /* ═══ MOBILE ═══════════════════════════════════════ */
-    @media (max-width: 767px) {
-      body { padding-bottom: 5rem; }
-      .max-w-7xl { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+    /* ── Sticky mobile bottom bar ── */
+    #mobile-cta-bar { display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 80; background: rgba(44,24,16,0.97); backdrop-filter: blur(12px); padding: 0.875rem 1.25rem; border-top: 1px solid rgba(201,168,76,0.2); gap: 0.75rem; }
+    @media (min-width: 768px) { #mobile-cta-bar { display: none; } }
 
-      /* Gallery hero */
-      #gallery-hero { height: 38vh; min-height: 240px; }
-      #gallery-hero h1 { font-size: clamp(2rem, 9vw, 2.8rem) !important; }
-      #gallery-hero .max-w-7xl { padding-bottom: 1.75rem !important; }
+    /* ── WhatsApp FAB ── */
+    #whatsapp-fab { bottom: 5.5rem; }
+    @media (min-width: 768px) { #whatsapp-fab { bottom: 2rem; } }
 
-      /* Filter bar: larger touch targets */
-      .filter-btn { padding: 0.75rem 1rem; font-size: 0.72rem; min-height: 44px; }
-
-      /* Masonry: 2 columns on mobile, 1 on very small */
-      .masonry { columns: 2 !important; column-gap: 0.5rem !important; }
-      .gallery-item { break-inside: avoid; margin-bottom: 0.5rem; }
-      .gallery-item img { border-radius: 0.25rem; }
-
-      /* Lightbox controls: larger tap targets */
-      #lb-prev, #lb-next { width: 3rem; height: 3rem; font-size: 1.5rem; }
-    }
-    @media (max-width: 480px) {
-      .masonry { columns: 1 !important; }
-    }
-
-    /* Sticky mobile bottom bar */
-    #mobile-cta-bar { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 80; background: rgba(44,24,16,0.97); backdrop-filter: blur(12px); padding: 0.875rem 1.25rem; border-top: 1px solid rgba(201,168,76,0.2); gap: 0.75rem; }
-    @media (max-width: 767px) {
-      body { padding-bottom: 5rem; } #mobile-cta-bar { display: flex; } }
     .mob-btn-r { flex: 1; background: #6B1A2A; color: #FAF6F0; border: none; padding: 0.8rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; text-decoration: none; border-radius: 0.25rem; }
     .mob-btn-wa { display: flex; align-items: center; justify-content: center; gap: 0.4rem; background: #25D366; color: #fff; padding: 0.8rem 1rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 0.25rem; white-space: nowrap; }
   </style>
@@ -221,7 +208,7 @@
 <body>
 
 <!-- ═══ NAVBAR ═══════════════════════════════════════════════════════════════ -->
-<header id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 px-6 md:px-12" style="background:rgba(30,10,16,0.85); backdrop-filter:blur(10px);">
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 px-5 md:px-8 lg:px-12" style="background:rgba(30,10,16,0.85); backdrop-filter:blur(10px);">
   <nav class="max-w-7xl mx-auto flex items-center justify-between">
     <a href="index.html" class="flex flex-col leading-none">
       <span style="font-family:'Cormorant Garamond',serif; font-size:1.55rem; font-weight:700; color:#FAF6F0;">Winnie's</span>
@@ -269,7 +256,7 @@
 <!-- ═══ HERO ══════════════════════════════════════════════════════════════════ -->
 <section id="gallery-hero" aria-label="Gallery hero">
   <div id="gallery-hero-bg" role="img" aria-label="Elegantly plated fine-dining dish at Winnie's Cuisine"></div>
-  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pb-14">
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-12 pb-10 md:pb-14">
     <div style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.4rem 1rem; background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.35); color:#E2C36E; font-size:0.68rem; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; backdrop-filter:blur(4px); margin-bottom:1.25rem;">
       <span>✦</span> A Visual Journey
     </div>
@@ -285,7 +272,7 @@
 
 <!-- ═══ FILTER BAR ════════════════════════════════════════════════════════════ -->
 <div id="filter-bar">
-  <div class="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 flex items-center justify-between">
     <div style="overflow-x:auto; scrollbar-width:none; display:flex;" id="filter-scroll">
       <button class="filter-btn active" data-filter="all"       onclick="filterGallery('all',this)">All Photos</button>
       <button class="filter-btn"        data-filter="food"      onclick="filterGallery('food',this)">Food &amp; Dishes</button>
@@ -298,7 +285,7 @@
 
 
 <!-- ═══ MASONRY GALLERY ═══════════════════════════════════════════════════════ -->
-<main class="max-w-7xl mx-auto px-6 md:px-12 py-10 pb-24">
+<main class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 py-8 md:py-10 pb-16 md:pb-24">
   <div id="gallery-grid" role="list" aria-label="Photo gallery">
 
     <!-- ─── FOOD & DISHES ─────────────────────────────────────────────────── -->

@@ -45,24 +45,32 @@
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; background: #FAF6F0; color: #2C2C2C; -webkit-font-smoothing: antialiased; }
+
+    /* Mobile-first: body padding clears sticky bottom bar */
+    body { font-family: 'Inter', sans-serif; background: #FAF6F0; color: #2C2C2C; -webkit-font-smoothing: antialiased; padding-bottom: 5rem; }
+    @media (min-width: 768px) { body { padding-bottom: 0; } }
 
     /* ── Shared design tokens ── */
     .section-eyebrow { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #C9A84C; }
     .section-title   { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.12; }
     .gold-rule       { display: block; width: 3rem; height: 2px; background: linear-gradient(90deg, #C9A84C, #E2C36E); border-radius: 2px; }
 
-    /* ── Navbar (shared component) ── */
+    /* ── Navbar ── */
     #navbar { transition: background 0.35s, box-shadow 0.35s, padding 0.35s; }
-    #navbar.scrolled { background: rgba(44,28,18,0.97) !important; backdrop-filter: blur(12px); box-shadow: 0 2px 24px rgba(0,0,0,0.25); padding-top: 0.75rem; padding-bottom: 0.75rem; }
+    #navbar.scrolled { background: rgba(44,28,18,0.97); backdrop-filter: blur(12px); box-shadow: 0 2px 24px rgba(0,0,0,0.25); padding-top: 0.75rem; padding-bottom: 0.75rem; }
     .nav-link { text-decoration: none; font-size: 0.8rem; letter-spacing: 0.06em; color: rgba(250,246,240,0.8); transition: color 0.2s; }
-    .nav-link:hover, .nav-link.active { color: #C9A84C !important; }
+    .nav-link:hover, .nav-link.active { color: #C9A84C; }
 
     /* ── Buttons ── */
-    .btn-primary   { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem; background: #6B1A2A; color: #FAF6F0; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #6B1A2A; text-decoration: none; transition: background 0.25s, border-color 0.25s, transform 0.2s; }
+    .btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; padding: 1rem 1.5rem; background: #6B1A2A; color: #FAF6F0; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #6B1A2A; text-decoration: none; transition: background 0.25s, border-color 0.25s, transform 0.2s; }
     .btn-primary:hover { background: #4A1020; border-color: #C9A84C; transform: translateY(-1px); }
-    .btn-gold      { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.8rem; background: transparent; color: #C9A84C; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #C9A84C; text-decoration: none; transition: background 0.25s, color 0.25s, transform 0.2s; }
+    .btn-gold { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; padding: 0.9rem 1.5rem; background: transparent; color: #C9A84C; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #C9A84C; text-decoration: none; transition: background 0.25s, color 0.25s, transform 0.2s; }
     .btn-gold:hover { background: #C9A84C; color: #FAF6F0; transform: translateY(-1px); }
+    @media (min-width: 768px) {
+      .btn-primary, .btn-gold { width: auto; justify-content: flex-start; }
+      .btn-primary { padding: 0.85rem 2rem; font-size: 0.8rem; }
+      .btn-gold    { padding: 0.8rem 1.8rem; font-size: 0.75rem; }
+    }
 
     /* ── Mobile menu ── */
     #mobile-menu { transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
@@ -70,30 +78,50 @@
     .mobile-nav-link { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 500; color: rgba(250,246,240,0.8); text-decoration: none; transition: color 0.2s; }
     .mobile-nav-link:hover { color: #C9A84C; }
 
-    /* ── Hero ── */
-    #menu-hero { position: relative; height: 52vh; min-height: 380px; display: flex; align-items: flex-end; overflow: hidden; }
+    /* ── Hero: shorter on mobile, taller on desktop ── */
+    #menu-hero { position: relative; height: 45vh; min-height: 280px; display: flex; align-items: flex-end; overflow: hidden; }
     #menu-hero-bg { position: absolute; inset: -5%; background-image: url('https://images.unsplash.com/photo-1547592180-85f173990554?w=1800&q=80'); background-size: cover; background-position: center 40%; filter: brightness(0.45) saturate(0.85); }
     #menu-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(30,10,16,0.9) 0%, rgba(30,10,16,0.4) 60%, transparent 100%); }
+    #menu-hero h1 { font-size: clamp(2.2rem, 9vw, 3rem); }
+    #menu-hero .max-w-7xl { padding-left: 1.25rem; padding-right: 1.25rem; padding-bottom: 2rem; }
+    @media (min-width: 768px) {
+      #menu-hero { height: 52vh; min-height: 380px; }
+      #menu-hero h1 { font-size: clamp(2.8rem, 6vw, 4rem); }
+      #menu-hero .max-w-7xl { padding-left: 3rem; padding-right: 3rem; padding-bottom: 3.5rem; }
+    }
 
     /* ── Category Tab Bar ── */
     #category-bar { position: sticky; top: 72px; z-index: 30; background: #fff; border-bottom: 1px solid rgba(201,168,76,0.2); }
-    .cat-tab { display: inline-flex; align-items: center; gap: 0.4rem; padding: 1rem 1.2rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #6B6B6B; white-space: nowrap; cursor: pointer; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; background: none; border-top: none; border-left: none; border-right: none; }
+    /* Mobile: smaller tab padding */
+    .cat-tab { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.875rem 0.9rem; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #6B6B6B; white-space: nowrap; cursor: pointer; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; background: none; border-top: none; border-left: none; border-right: none; }
     .cat-tab.active, .cat-tab:hover { color: #6B1A2A; border-bottom-color: #C9A84C; }
     #tab-scroll { overflow-x: auto; scrollbar-width: none; display: flex; }
     #tab-scroll::-webkit-scrollbar { display: none; }
+    @media (min-width: 768px) { .cat-tab { padding: 1rem 1.2rem; font-size: 0.75rem; } }
 
     /* ── Menu Section ── */
-    .menu-section { padding-top: 5rem; margin-top: -1px; }
+    /* Mobile: less top padding, using page horizontal padding */
+    .menu-section { padding-top: 3rem; margin-top: -1px; }
     .menu-section-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2.5rem; }
-    .menu-section-number { font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 700; color: rgba(201,168,76,0.15); line-height: 1; flex-shrink: 0; }
+    .menu-section-number { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 700; color: rgba(201,168,76,0.15); line-height: 1; flex-shrink: 0; }
+    @media (min-width: 768px) {
+      .menu-section { padding-top: 5rem; }
+      .menu-section-number { font-size: 4rem; }
+    }
 
-    /* ── Menu Item Row ── */
-    .menu-item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; padding: 1.4rem 0; border-bottom: 1px solid rgba(201,168,76,0.12); position: relative; transition: background 0.2s; }
+    /* ── Menu Item Row: mobile stacked, desktop grid ── */
+    .menu-item { display: grid; grid-template-columns: 1fr; gap: 0.4rem; align-items: start; padding: 1.1rem 0; border-bottom: 1px solid rgba(201,168,76,0.12); position: relative; transition: background 0.2s; }
     .menu-item:last-child { border-bottom: none; }
-    .menu-item:hover { background: rgba(201,168,76,0.03); margin: 0 -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem; }
-    .item-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: #2C2C2C; line-height: 1.3; }
-    .item-desc { font-size: 0.82rem; font-weight: 300; color: #6B6B6B; line-height: 1.65; margin-top: 0.3rem; max-width: 46rem; }
-    .item-price { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: #C9A84C; white-space: nowrap; padding-top: 0.1rem; }
+    .item-name { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: #2C2C2C; line-height: 1.3; }
+    .item-desc { font-size: 0.8rem; font-weight: 300; color: #6B6B6B; line-height: 1.65; margin-top: 0.3rem; max-width: 46rem; }
+    .item-price { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; color: #C9A84C; white-space: nowrap; }
+    @media (min-width: 768px) {
+      .menu-item { grid-template-columns: 1fr auto; gap: 1rem; padding: 1.4rem 0; }
+      .menu-item:hover { background: rgba(201,168,76,0.03); margin: 0 -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem; }
+      .item-name { font-size: 1.15rem; }
+      .item-desc { font-size: 0.82rem; }
+      .item-price { font-size: 1.05rem; padding-top: 0.1rem; }
+    }
 
     /* ── Dietary Tags ── */
     .tag { display: inline-flex; align-items: center; gap: 3px; padding: 0.2rem 0.55rem; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 2px; margin-right: 0.35rem; margin-top: 0.5rem; }
@@ -105,11 +133,13 @@
 
     /* ── Featured Item Card ── */
     .featured-item { background: #fff; box-shadow: 0 4px 24px rgba(107,26,42,0.08); overflow: hidden; }
-    .featured-item img { width: 100%; height: 14rem; object-fit: cover; transition: transform 0.45s ease; }
+    .featured-item img { width: 100%; height: 12rem; object-fit: cover; transition: transform 0.45s ease; }
     .featured-item:hover img { transform: scale(1.04); }
+    @media (min-width: 768px) { .featured-item img { height: 14rem; } }
 
     /* ── Beverage card ── */
-    .bev-card { background: #fff; padding: 1.8rem; border-top: 3px solid #C9A84C; box-shadow: 0 2px 16px rgba(107,26,42,0.06); }
+    .bev-card { background: #fff; padding: 1.25rem; border-top: 3px solid #C9A84C; box-shadow: 0 2px 16px rgba(107,26,42,0.06); }
+    @media (min-width: 768px) { .bev-card { padding: 1.8rem; } }
 
     /* ── Scroll reveal ── */
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
@@ -122,48 +152,14 @@
     :focus-visible { outline: 2px solid #C9A84C; outline-offset: 3px; }
     ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: #FAF6F0; } ::-webkit-scrollbar-thumb { background: #C9A84C; border-radius: 3px; }
 
-    /* ═══════════════════════════════════════════════
-       MOBILE OPTIMISATIONS
-    ═══════════════════════════════════════════════ */
-    @media (max-width: 767px) {
-      body { padding-bottom: 5rem; }
-      /* Hero */
-      #menu-hero { height: 45vh; min-height: 280px; }
-      #menu-hero .max-w-7xl { padding-left: 1.25rem !important; padding-right: 1.25rem !important; padding-bottom: 2rem !important; }
-      #menu-hero h1 { font-size: clamp(2.2rem, 9vw, 3rem) !important; }
+    /* ── Sticky mobile bottom bar: visible by default, hidden on desktop ── */
+    #mobile-cta-bar { display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 80; background: rgba(44,24,16,0.97); backdrop-filter: blur(12px); padding: 0.875rem 1.25rem; border-top: 1px solid rgba(201,168,76,0.2); gap: 0.75rem; }
+    @media (min-width: 768px) { #mobile-cta-bar { display: none; } }
 
-      /* Category bar: smaller tabs */
-      .cat-tab { padding: 0.875rem 0.9rem; font-size: 0.7rem; }
+    /* ── WhatsApp FAB ── */
+    #whatsapp-fab { bottom: 5.5rem; }
+    @media (min-width: 768px) { #whatsapp-fab { bottom: 2rem; } }
 
-      /* Section padding */
-      .menu-section { padding-top: 3rem; padding-left: 1.25rem; padding-right: 1.25rem; }
-      section.max-w-7xl, .max-w-7xl { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
-
-      /* Menu item: stack on mobile */
-      .menu-item { grid-template-columns: 1fr; gap: 0.4rem; padding: 1.1rem 0; }
-      .menu-item:hover { margin: 0; padding-left: 0; padding-right: 0; }
-      .item-name { font-size: 1.05rem; }
-      .item-price { font-size: 1rem; color: #C9A84C; }
-      .item-desc { font-size: 0.8rem; }
-      .menu-section-number { font-size: 2.5rem; }
-
-      /* Featured cards: single column */
-      .grid.md\:grid-cols-2, .grid.md\:grid-cols-3, .grid.lg\:grid-cols-3 {
-        grid-template-columns: 1fr !important;
-      }
-      .featured-item img { height: 12rem; }
-
-      /* Beverage cards */
-      .bev-card { padding: 1.25rem; }
-
-      /* Section headings */
-      h2 { font-size: clamp(1.75rem, 8vw, 2.25rem) !important; }
-    }
-
-    /* Sticky mobile bottom bar */
-    #mobile-cta-bar { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 80; background: rgba(44,24,16,0.97); backdrop-filter: blur(12px); padding: 0.875rem 1.25rem; border-top: 1px solid rgba(201,168,76,0.2); gap: 0.75rem; }
-    @media (max-width: 767px) {
-      body { padding-bottom: 5rem; } #mobile-cta-bar { display: flex; } }
     .mob-btn-r { flex: 1; background: #6B1A2A; color: #FAF6F0; border: none; padding: 0.8rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; text-decoration: none; border-radius: 0.25rem; }
     .mob-btn-wa { display: flex; align-items: center; justify-content: center; gap: 0.4rem; background: #25D366; color: #fff; padding: 0.8rem 1rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 0.25rem; white-space: nowrap; }
   </style>
@@ -171,7 +167,7 @@
 <body>
 
 <!-- ═══ NAVBAR ═══════════════════════════════════════════════════════════════ -->
-<header id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 px-6 md:px-12" style="background:rgba(30,10,16,0.85); backdrop-filter:blur(10px);">
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 px-5 md:px-8 lg:px-12" style="background:rgba(30,10,16,0.85); backdrop-filter:blur(10px);">
   <nav class="max-w-7xl mx-auto flex items-center justify-between">
     <a href="index.html" class="flex flex-col leading-none" aria-label="Winnie's Cuisine Home">
       <span style="font-family:'Cormorant Garamond',serif; font-size:1.55rem; font-weight:700; color:#FAF6F0; letter-spacing:0.02em;">Winnie's</span>
@@ -223,11 +219,11 @@
 <!-- ═══ HERO ══════════════════════════════════════════════════════════════════ -->
 <section id="menu-hero" aria-label="Menu hero">
   <div id="menu-hero-bg" role="img" aria-label="Fresh premium ingredients and plated dishes"></div>
-  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pb-14">
+  <div class="relative z-10 w-full max-w-7xl mx-auto pb-14">
     <div class="hero-badge mb-5" style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.4rem 1rem; background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.35); color:#E2C36E; font-size:0.68rem; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; backdrop-filter:blur(4px);">
       <span>✦</span> Seasonal Menu · Updated Daily
     </div>
-    <h1 style="font-family:'Cormorant Garamond',serif; font-size:clamp(2.5rem,6vw,4.5rem); font-weight:600; color:#FAF6F0; line-height:1.1; margin-bottom:1rem;">
+    <h1 style="font-family:'Cormorant Garamond',serif; font-weight:600; color:#FAF6F0; line-height:1.1; margin-bottom:1rem;">
       Our <em style="color:#C9A84C; font-style:italic;">Menu</em>
     </h1>
     <p style="color:rgba(250,246,240,0.72); font-size:1rem; font-weight:300; max-width:520px; line-height:1.75;">
@@ -239,7 +235,7 @@
 
 <!-- ═══ STICKY CATEGORY TAB BAR ═════════════════════════════════════════════ -->
 <div id="category-bar">
-  <div class="max-w-7xl mx-auto px-6 md:px-12">
+  <div class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
     <div id="tab-scroll" role="tablist" aria-label="Menu categories">
       <button class="cat-tab active" role="tab" data-target="starters"      onclick="scrollToSection('starters',this)">
         <span>01</span> Starters
@@ -265,7 +261,7 @@
 
 
 <!-- ═══ MENU CONTENT ══════════════════════════════════════════════════════════ -->
-<main class="max-w-7xl mx-auto px-6 md:px-12 pb-24">
+<main class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 pb-16 md:pb-24">
 
   <!-- Dietary legend -->
   <div class="py-6 flex flex-wrap gap-3 items-center" style="border-bottom:1px solid rgba(201,168,76,0.15);">

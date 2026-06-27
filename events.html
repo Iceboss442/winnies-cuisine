@@ -45,47 +45,87 @@
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; background: #FAF6F0; color: #2C2C2C; -webkit-font-smoothing: antialiased; }
+
+    /* Mobile-first body */
+    body { font-family: 'Inter', sans-serif; background: #FAF6F0; color: #2C2C2C; -webkit-font-smoothing: antialiased; padding-bottom: 5rem; }
+    @media (min-width: 768px) { body { padding-bottom: 0; } }
 
     .section-eyebrow { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: #C9A84C; }
     .section-title   { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.12; }
     .gold-rule       { display: block; width: 3rem; height: 2px; background: linear-gradient(90deg, #C9A84C, #E2C36E); border-radius: 2px; }
 
     #navbar { transition: background 0.35s, box-shadow 0.35s, padding 0.35s; }
-    #navbar.scrolled { background: rgba(44,28,18,0.97) !important; backdrop-filter: blur(12px); box-shadow: 0 2px 24px rgba(0,0,0,0.25); padding-top: 0.75rem; padding-bottom: 0.75rem; }
+    #navbar.scrolled { background: rgba(44,28,18,0.97); backdrop-filter: blur(12px); box-shadow: 0 2px 24px rgba(0,0,0,0.25); padding-top: 0.75rem; padding-bottom: 0.75rem; }
     .nav-link { text-decoration: none; font-size: 0.8rem; letter-spacing: 0.06em; color: rgba(250,246,240,0.8); transition: color 0.2s; }
-    .nav-link:hover, .nav-link.active { color: #C9A84C !important; }
+    .nav-link:hover, .nav-link.active { color: #C9A84C; }
 
-    .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem; background: #6B1A2A; color: #FAF6F0; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #6B1A2A; text-decoration: none; transition: background 0.25s, border-color 0.25s, transform 0.2s; cursor: pointer; }
+    /* Buttons: full-width on mobile, auto on desktop */
+    .btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; padding: 1rem 1.5rem; background: #6B1A2A; color: #FAF6F0; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #6B1A2A; text-decoration: none; transition: background 0.25s, border-color 0.25s, transform 0.2s; cursor: pointer; }
     .btn-primary:hover { background: #4A1020; border-color: #C9A84C; transform: translateY(-1px); }
-    .btn-gold    { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.8rem; background: transparent; color: #C9A84C; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #C9A84C; text-decoration: none; transition: background 0.25s, color 0.25s, transform 0.2s; }
+    .btn-gold { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; padding: 0.9rem 1.5rem; background: transparent; color: #C9A84C; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #C9A84C; text-decoration: none; transition: background 0.25s, color 0.25s, transform 0.2s; }
     .btn-gold:hover { background: #C9A84C; color: #FAF6F0; transform: translateY(-1px); }
-    .btn-white   { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem; background: #FAF6F0; color: #6B1A2A; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #FAF6F0; text-decoration: none; transition: background 0.25s, color 0.25s, transform 0.2s; }
+    .btn-white { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; padding: 1rem 1.5rem; background: #FAF6F0; color: #6B1A2A; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1.5px solid #FAF6F0; text-decoration: none; transition: background 0.25s, color 0.25s, transform 0.2s; }
     .btn-white:hover { background: transparent; color: #FAF6F0; transform: translateY(-1px); }
+    @media (min-width: 768px) {
+      .btn-primary, .btn-gold, .btn-white { width: auto; justify-content: flex-start; }
+      .btn-primary, .btn-white { padding: 0.85rem 2rem; font-size: 0.8rem; }
+      .btn-gold { padding: 0.8rem 1.8rem; font-size: 0.75rem; }
+    }
 
     #mobile-menu { transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
     #mobile-menu.open { transform: translateX(0); }
     .mobile-nav-link { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 500; color: rgba(250,246,240,0.8); text-decoration: none; transition: color 0.2s; }
     .mobile-nav-link:hover { color: #C9A84C; }
 
-    /* ── Hero ── */
-    #events-hero { position: relative; min-height: 60vh; display: flex; align-items: flex-end; overflow: hidden; }
+    /* ── Hero: shorter on mobile ── */
+    #events-hero { position: relative; min-height: 50vh; display: flex; align-items: flex-end; overflow: hidden; }
     #events-hero-bg { position: absolute; inset: -5%; background-image: url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1800&q=80'); background-size: cover; background-position: center; filter: brightness(0.35) saturate(0.9); }
     #events-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(30,10,16,0.95) 0%, rgba(30,10,16,0.5) 55%, rgba(107,26,42,0.3) 100%); }
+    @media (min-width: 768px) { #events-hero { min-height: 60vh; } }
 
-    /* ── Package Cards ── */
-    .pkg-card { position: relative; display: flex; flex-direction: column; transition: transform 0.3s, box-shadow 0.3s; }
-    .pkg-card:hover { transform: translateY(-6px); box-shadow: 0 24px 56px rgba(107,26,42,0.18); }
-    .pkg-card.featured { transform: scale(1.02); }
-    .pkg-card.featured:hover { transform: scale(1.02) translateY(-6px); }
+    /* ── Package Cards: horizontal scroll carousel on mobile, grid on desktop ── */
+    .pkg-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 1rem;
+      padding-bottom: 1.5rem;
+      margin-left: -1.25rem;
+      margin-right: -1.25rem;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+      scrollbar-width: none;
+    }
+    .pkg-grid::-webkit-scrollbar { display: none; }
+    .pkg-grid .pkg-card {
+      min-width: 82vw;
+      scroll-snap-align: start;
+      flex-shrink: 0;
+    }
+    @media (min-width: 1024px) {
+      .pkg-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        overflow-x: visible;
+        margin-left: 0; margin-right: 0;
+        padding-left: 0; padding-right: 0;
+        padding-bottom: 0;
+      }
+      .pkg-grid .pkg-card { min-width: unset; }
+      .pkg-card { transition: transform 0.3s, box-shadow 0.3s; }
+      .pkg-card:hover { transform: translateY(-6px); box-shadow: 0 24px 56px rgba(107,26,42,0.18); }
+      .pkg-card.featured { transform: scale(1.02); }
+      .pkg-card.featured:hover { transform: scale(1.02) translateY(-6px); }
+    }
 
+    .pkg-card { position: relative; display: flex; flex-direction: column; }
     .pkg-tier { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 0.5rem; }
     .pkg-name { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 600; line-height: 1.2; margin-bottom: 0.6rem; }
     .pkg-tagline { font-size: 0.85rem; font-weight: 300; line-height: 1.6; margin-bottom: 1.5rem; }
     .pkg-price { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600; line-height: 1; }
     .pkg-price-note { font-size: 0.72rem; font-weight: 400; opacity: 0.65; margin-left: 0.25rem; }
     .pkg-capacity { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.4rem; }
-
     .pkg-divider { height: 1px; margin: 1.5rem 0; }
     .pkg-feature { display: flex; align-items: flex-start; gap: 0.7rem; margin-bottom: 0.85rem; font-size: 0.85rem; line-height: 1.5; }
     .pkg-feature-icon { flex-shrink: 0; width: 1rem; height: 1rem; margin-top: 0.15rem; }
@@ -101,12 +141,13 @@
 
     /* ── FAQ ── */
     .faq-item { border-bottom: 1px solid rgba(201,168,76,0.15); }
-    .faq-trigger { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 1.25rem 0; background: none; border: none; cursor: pointer; text-align: left; }
+    .faq-trigger { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 1rem 0; background: none; border: none; cursor: pointer; text-align: left; }
     .faq-trigger:focus-visible { outline: 2px solid #C9A84C; }
     .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; }
     .faq-body.open { max-height: 20rem; padding-bottom: 1.25rem; }
     .faq-icon { transition: transform 0.3s; flex-shrink: 0; }
     .faq-item.open .faq-icon { transform: rotate(45deg); }
+    @media (min-width: 768px) { .faq-trigger { padding: 1.25rem 0; } }
 
     /* ── Reveal ── */
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
@@ -121,59 +162,14 @@
     :focus-visible { outline: 2px solid #C9A84C; outline-offset: 3px; }
     ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: #FAF6F0; } ::-webkit-scrollbar-thumb { background: #C9A84C; border-radius: 3px; }
 
-    /* ═══ MOBILE ═══════════════════════════════════════ */
-    @media (max-width: 767px) {
-      body { padding-bottom: 5rem; }
-      /* Hero */
-      .max-w-7xl { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
-      section { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+    /* ── Sticky mobile bottom bar ── */
+    #mobile-cta-bar { display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 80; background: rgba(44,24,16,0.97); backdrop-filter: blur(12px); padding: 0.875rem 1.25rem; border-top: 1px solid rgba(201,168,76,0.2); gap: 0.75rem; }
+    @media (min-width: 768px) { #mobile-cta-bar { display: none; } }
 
-      /* Package cards: horizontal scroll carousel */
-      .pkg-grid {
-        display: flex !important;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        gap: 1rem;
-        padding-bottom: 1.5rem;
-        margin-left: -1.25rem;
-        margin-right: -1.25rem;
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-        scrollbar-width: none;
-      }
-      .pkg-grid::-webkit-scrollbar { display: none; }
-      .pkg-grid .pkg-card {
-        min-width: 82vw;
-        scroll-snap-align: start;
-        flex-shrink: 0;
-        transform: none !important;
-      }
+    /* ── WhatsApp FAB ── */
+    #whatsapp-fab { bottom: 5.5rem; }
+    @media (min-width: 768px) { #whatsapp-fab { bottom: 2rem; } }
 
-      /* Event type icons grid */
-      .ev-type-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.75rem !important; }
-
-      /* Process steps */
-      .process-step { padding-left: 0 !important; }
-
-      /* Booking form */
-      .grid.md\:grid-cols-2 { grid-template-columns: 1fr !important; }
-      .form-input-dark { font-size: 1rem !important; padding: 0.875rem 1rem !important; }
-
-      /* FAQ */
-      .faq-trigger { padding: 1rem 0; }
-
-      /* Section headings */
-      h1, h2 { font-size: clamp(1.9rem, 8vw, 2.5rem) !important; }
-
-      /* Venue stats: 2 columns */
-      .venue-stats .grid { grid-template-columns: repeat(2, 1fr) !important; }
-    }
-
-    /* Sticky mobile bottom bar */
-    #mobile-cta-bar { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 80; background: rgba(44,24,16,0.97); backdrop-filter: blur(12px); padding: 0.875rem 1.25rem; border-top: 1px solid rgba(201,168,76,0.2); gap: 0.75rem; }
-    @media (max-width: 767px) {
-      body { padding-bottom: 5rem; } #mobile-cta-bar { display: flex; } }
     .mob-btn-r { flex: 1; background: #6B1A2A; color: #FAF6F0; border: none; padding: 0.8rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; text-decoration: none; border-radius: 0.25rem; }
     .mob-btn-wa { display: flex; align-items: center; justify-content: center; gap: 0.4rem; background: #25D366; color: #fff; padding: 0.8rem 1rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border-radius: 0.25rem; white-space: nowrap; }
   </style>
@@ -181,7 +177,7 @@
 <body>
 
 <!-- ═══ NAVBAR ═══════════════════════════════════════════════════════════════ -->
-<header id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 px-6 md:px-12" style="background:rgba(30,10,16,0.85); backdrop-filter:blur(10px);">
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 px-5 md:px-8 lg:px-12" style="background:rgba(30,10,16,0.85); backdrop-filter:blur(10px);">
   <nav class="max-w-7xl mx-auto flex items-center justify-between">
     <a href="index.html" class="flex flex-col leading-none">
       <span style="font-family:'Cormorant Garamond',serif; font-size:1.55rem; font-weight:700; color:#FAF6F0;">Winnie's</span>
@@ -229,7 +225,7 @@
 <!-- ═══ HERO ══════════════════════════════════════════════════════════════════ -->
 <section id="events-hero" aria-label="Events and catering hero">
   <div id="events-hero-bg" role="img" aria-label="Beautifully decorated event hall at Winnie's Cuisine"></div>
-  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pb-16 pt-32">
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-5 md:px-8 lg:px-12 pb-12 md:pb-16 pt-20 md:pt-32">
     <div style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.4rem 1rem; background:rgba(201,168,76,0.15); border:1px solid rgba(201,168,76,0.35); color:#E2C36E; font-size:0.68rem; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; backdrop-filter:blur(4px); margin-bottom:1.25rem;">
       <span>✦</span> Events &amp; Catering · Enugu
     </div>
@@ -264,7 +260,7 @@
 
 
 <!-- ═══ INTRO SECTION ═════════════════════════════════════════════════════════ -->
-<section class="py-20 px-6 md:px-12" style="background:#FAF6F0;">
+<section class="py-14 md:py-20 px-5 md:px-8 lg:px-12" style="background:#FAF6F0;">
   <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
     <div class="reveal-left">
       <p class="section-eyebrow mb-4">Why Winnie's for Your Event</p>
@@ -313,7 +309,7 @@
 
 
 <!-- ═══ PACKAGES ══════════════════════════════════════════════════════════════ -->
-<section id="packages" class="py-24 md:py-32 px-6 md:px-12" style="background:#F5EDE0;">
+<section id="packages" class="py-14 md:py-24 lg:py-32 px-5 md:px-8 lg:px-12" style="background:#F5EDE0;">
   <div class="max-w-7xl mx-auto">
     <div class="text-center mb-16 reveal">
       <p class="section-eyebrow mb-4">Choose Your Experience</p>
@@ -525,7 +521,7 @@
 
 
 <!-- ═══ VENUE SPECS ════════════════════════════════════════════════════════════ -->
-<section class="py-20 px-6 md:px-12" style="background:#FAF6F0;">
+<section class="py-14 md:py-20 px-5 md:px-8 lg:px-12" style="background:#FAF6F0;">
   <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
     <div class="reveal">
       <p class="section-eyebrow mb-4">The Space</p>
@@ -556,7 +552,7 @@
 
 
 <!-- ═══ PROCESS SECTION ═══════════════════════════════════════════════════════ -->
-<section class="py-20 px-6 md:px-12" style="background:#EAE0D0;">
+<section class="py-14 md:py-20 px-5 md:px-8 lg:px-12" style="background:#EAE0D0;">
   <div class="max-w-4xl mx-auto">
     <div class="text-center mb-14 reveal">
       <p class="section-eyebrow mb-4">How It Works</p>
@@ -621,7 +617,7 @@
 
 
 <!-- ═══ EVENT TYPES ════════════════════════════════════════════════════════════ -->
-<section class="py-20 px-6 md:px-12" style="background:#6B1A2A;">
+<section class="py-14 md:py-20 px-5 md:px-8 lg:px-12" style="background:#6B1A2A;">
   <div class="max-w-7xl mx-auto">
     <div class="text-center mb-14 reveal">
       <p class="section-eyebrow mb-4" style="color:rgba(201,168,76,0.8);">No Occasion Too Small or Grand</p>
@@ -665,7 +661,7 @@
 
 
 <!-- ═══ FAQ ═══════════════════════════════════════════════════════════════════ -->
-<section class="py-20 px-6 md:px-12" style="background:#FAF6F0;">
+<section class="py-14 md:py-20 px-5 md:px-8 lg:px-12" style="background:#FAF6F0;">
   <div class="max-w-3xl mx-auto">
     <div class="text-center mb-12 reveal">
       <p class="section-eyebrow mb-4">Common Questions</p>
@@ -714,7 +710,7 @@
 
 
 <!-- ═══ INQUIRY FORM ════════════════════════════════════════════════════════════ -->
-<section id="inquiry" class="py-24 px-6 md:px-12" style="background:linear-gradient(135deg,#4A1020 0%,#6B1A2A 100%);">
+<section id="inquiry" class="py-14 md:py-24 px-5 md:px-8 lg:px-12" style="background:linear-gradient(135deg,#4A1020 0%,#6B1A2A 100%);">
   <div class="max-w-3xl mx-auto reveal">
     <div class="text-center mb-10">
       <p class="section-eyebrow mb-4" style="color:rgba(201,168,76,0.8);">Start Planning Today</p>
@@ -723,12 +719,12 @@
       <p style="color:rgba(250,246,240,0.65); font-size:0.9rem; margin-top:1rem; line-height:1.7;">Tell us about your event and we'll get back to you within the hour with a personalised proposal.</p>
     </div>
     <form id="event-form" style="background:rgba(250,246,240,0.05); border:1px solid rgba(201,168,76,0.2); padding:2.5rem; backdrop-filter:blur(8px);" novalidate>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:1.25rem;">
+      <div class="form-grid-2">
         <div><label class="form-label-light" for="ef-name">Full Name *</label><input type="text" id="ef-name" placeholder="Your name" required class="form-input-dark" /></div>
         <div><label class="form-label-light" for="ef-phone">Phone / WhatsApp *</label><input type="tel" id="ef-phone" placeholder="+234 800 000 0000" required class="form-input-dark" /></div>
       </div>
       <div style="margin-bottom:1.25rem;"><label class="form-label-light" for="ef-email">Email Address</label><input type="email" id="ef-email" placeholder="you@example.com" class="form-input-dark" /></div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:1.25rem;">
+      <div class="form-grid-2">
         <div>
           <label class="form-label-light" for="ef-type">Event Type *</label>
           <select id="ef-type" class="form-input-dark" style="appearance:none;">
@@ -754,7 +750,7 @@
           </select>
         </div>
       </div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:1.25rem;">
+      <div class="form-grid-2">
         <div><label class="form-label-light" for="ef-date">Event Date</label><input type="date" id="ef-date" class="form-input-dark" /></div>
         <div><label class="form-label-light" for="ef-guests">Expected Guests</label><input type="number" id="ef-guests" placeholder="e.g. 80" min="2" class="form-input-dark" /></div>
       </div>
@@ -774,6 +770,9 @@
   .form-input-dark:focus { border-color:#C9A84C; }
   .form-input-dark::placeholder { color:rgba(250,246,240,0.3); }
   .form-input-dark option { background:#2C1810; color:#FAF6F0; }
+  /* Form 2-col grids: stacked on mobile, 2-col on tablet+ */
+  .form-grid-2 { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin-bottom: 1.25rem; }
+  @media (min-width: 640px) { .form-grid-2 { grid-template-columns: 1fr 1fr; } }
 </style>
 
 
