@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design System — Winnie's Cuisine &amp; Events</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #F5EDE0; color: #2C2C2C; }
+    .swatch { width: 5rem; height: 5rem; border-radius: 4px; }
+    .ds-section { background: #fff; padding: 2.5rem; margin-bottom: 2rem; }
+    .ds-heading { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 600; margin-bottom: 1.5rem; }
+    .label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #6B6B6B; margin-top: 0.5rem; }
+    code { background: #F5EDE0; padding: 0.15rem 0.4rem; font-size: 0.8rem; border-radius: 3px; font-family: monospace; }
+
+    /* Button styles (mirrored from main site) */
+    .btn-primary { display:inline-flex; align-items:center; gap:0.5rem; padding:0.85rem 2rem; background:#6B1A2A; color:#FAF6F0; font-size:0.8rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; border:1.5px solid #6B1A2A; cursor:pointer; }
+    .btn-secondary { display:inline-flex; align-items:center; gap:0.5rem; padding:0.85rem 2rem; background:transparent; color:#6B1A2A; font-size:0.8rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; border:1.5px solid rgba(107,26,42,0.4); cursor:pointer; }
+    .btn-gold { display:inline-flex; align-items:center; gap:0.5rem; padding:0.8rem 1.8rem; background:transparent; color:#C9A84C; font-size:0.75rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; border:1.5px solid #C9A84C; cursor:pointer; }
+    .gold-rule { display:block; width:3rem; height:2px; background:linear-gradient(90deg,#C9A84C,#E2C36E); border-radius:2px; }
+  </style>
+</head>
+<body class="p-8 max-w-5xl mx-auto">
+
+  <div style="background:#6B1A2A; padding:2rem 2.5rem; margin-bottom:2rem;">
+    <p style="font-size:0.65rem; font-weight:600; letter-spacing:0.25em; text-transform:uppercase; color:#C9A84C; margin-bottom:0.5rem;">Design System</p>
+    <h1 style="font-family:'Cormorant Garamond',serif; font-size:2.5rem; font-weight:700; color:#FAF6F0;">Winnie's Cuisine &amp; Events</h1>
+    <p style="color:rgba(250,246,240,0.65); font-size:0.9rem; margin-top:0.5rem;">Brand visual identity guidelines · v1.0 · Est. December 2025</p>
+  </div>
+
+  <!-- COLOUR PALETTE -->
+  <div class="ds-section">
+    <h2 class="ds-heading">01 · Colour Palette</h2>
+    <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:1.5rem;">
+
+      <div>
+        <div class="swatch" style="background:#6B1A2A; border:1px solid #0002;"></div>
+        <p class="label">Burgundy (Primary)</p>
+        <code>#6B1A2A</code>
+      </div>
+      <div>
+        <div class="swatch" style="background:#8B2438;"></div>
+        <p class="label">Burgundy Light</p>
+        <code>#8B2438</code>
+      </div>
+      <div>
+        <div class="swatch" style="background:#4A1020;"></div>
+        <p class="label">Burgundy Dark</p>
+        <code>#4A1020</code>
+      </div>
+      <div>
+        <div class="swatch" style="background:#C9A84C;"></div>
+        <p class="label">Gold (Accent)</p>
+        <code>#C9A84C</code>
+      </div>
+      <div>
+        <div class="swatch" style="background:#E2C36E;"></div>
+        <p class="label">Gold Light</p>
+        <code>#E2C36E</code>
+      </div>
+      <div>
+        <div class="swatch" style="background:#A8873A;"></div>
+        <p class="label">Gold Dark</p>
+        <code>#A8873A</code>
+      </div>
+      <div>
+        <div class="swatch" style="background:#FAF6F0; border:1px solid #DDD;"></div>
+        <p class="label">Cream (BG)</p>
+        <code>#FAF6F0</code>
+      </div>
+      <div>
+        <div class="swatch" style="background:#F5EDE0; border:1px solid #DDD;"></div>
+        <p class="label">Cream Warm</p>
+        <code>#F5EDE0</code>
+      </div>
+      <div>
+        <div class="swatch" style="background:#EAE0D0; border:1px solid #DDD;"></div>
+        <p class="label">Cream Deep</p>
+        <code>#EAE0D0</code>
+      </div>
+      <div>
+        <div class="swatch" style="background:#2C2C2C;"></div>
+        <p class="label">Charcoal (Text)</p>
+        <code>#2C2C2C</code>
+      </div>
+      <div>
+        <div class="swatch" style="background:#444444;"></div>
+        <p class="label">Charcoal Light</p>
+        <code>#444444</code>
+      </div>
+      <div>
+        <div class="swatch" style="background:#6B6B6B;"></div>
+        <p class="label">Charcoal Soft</p>
+        <code>#6B6B6B</code>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem; padding:1.5rem; background:#FAF6F0; border-left:3px solid #C9A84C;">
+      <p style="font-size:0.85rem; line-height:1.7; color:#444;">
+        <strong>Usage rules:</strong> Burgundy is the primary brand colour — used for key CTAs, headings on cream backgrounds, and decorative elements.
+        Gold is strictly an <em>accent</em>: divider lines, eyebrow labels, price text, hover states, and gold-outline buttons.
+        Never use gold as a body text colour on light backgrounds (contrast too low). Cream tones are section backgrounds only.
+        Charcoal is the default body text. White (<code>#FAF6F0</code>) text on Burgundy/dark backgrounds.
+      </p>
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="ds-section">
+    <h2 class="ds-heading">02 · Typography</h2>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem;">
+      <div>
+        <p class="label" style="margin-bottom:1rem;">Cormorant Garamond (Headings / Display)</p>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:600; line-height:1.1; color:#2C2C2C;">Where every meal<br/><em style="color:#6B1A2A;">is a masterpiece</em></p>
+        <div style="margin-top:1.5rem; space-y:0.5rem;">
+          <p style="font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:600; color:#2C2C2C;">H1 · 48–72px · Weight 600</p>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:600; color:#2C2C2C;">H2 · 36–48px · Weight 600</p>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:600; color:#2C2C2C;">H3 · 24–32px · Weight 600</p>
+          <p style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:500; color:#2C2C2C;">H4 · 20px · Weight 500</p>
+        </div>
+      </div>
+      <div>
+        <p class="label" style="margin-bottom:1rem;">Inter (Body / UI)</p>
+        <p style="font-family:'Inter',sans-serif; font-weight:300; font-size:1rem; line-height:1.8; color:#444; margin-bottom:1rem;">
+          At Winnie's, we believe every plate is an opportunity to create joy. Our chefs
+          pour passion into every preparation, sourcing the finest local and international
+          ingredients to craft dishes that nourish the body and warm the soul.
+        </p>
+        <div style="margin-top:1rem;">
+          <p style="font-family:'Inter',sans-serif; font-size:1rem; font-weight:300; color:#444;">Body · 16px · Weight 300 · Line-height 1.8</p>
+          <p style="font-family:'Inter',sans-serif; font-size:0.9rem; font-weight:400; color:#444; margin-top:0.3rem;">Small Body · 14px · Weight 400</p>
+          <p style="font-family:'Inter',sans-serif; font-size:0.7rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#C9A84C; margin-top:0.5rem;">EYEBROW LABEL · 11px · Weight 600 · 0.2em spacing</p>
+          <p style="font-family:'Inter',sans-serif; font-size:0.8rem; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:#444; margin-top:0.3rem;">BUTTON TEXT · 12–13px · Weight 500 · 0.14em spacing</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem; padding:1.5rem; background:#FAF6F0; border-left:3px solid #C9A84C;">
+      <p style="font-size:0.85rem; color:#444; line-height:1.7;">
+        <strong>Type rules:</strong> Headings always use Cormorant Garamond. Italic weight is reserved for brand taglines and emotional emphasis — never used for body text. All UI labels, navigation, buttons, and body copy use Inter. Avoid weights above 600 in Inter for body contexts.
+      </p>
+    </div>
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="ds-section">
+    <h2 class="ds-heading">03 · Buttons &amp; CTAs</h2>
+    <div style="display:flex; flex-wrap:wrap; gap:1.5rem; align-items:center; margin-bottom:1.5rem;">
+      <div>
+        <button class="btn-primary">Primary CTA</button>
+        <p class="label">btn-primary · Burgundy fill</p>
+        <p style="font-size:0.75rem; color:#666; margin-top:4px;">Book / Reserve / Send</p>
+      </div>
+      <div>
+        <button class="btn-secondary">Secondary CTA</button>
+        <p class="label">btn-secondary · Ghost burgundy</p>
+        <p style="font-size:0.75rem; color:#666; margin-top:4px;">Learn More / View All</p>
+      </div>
+      <div>
+        <button class="btn-gold">Gold Outline</button>
+        <p class="label">btn-gold · Gold border</p>
+        <p style="font-size:0.75rem; color:#666; margin-top:4px;">Inquire / Explore</p>
+      </div>
+    </div>
+    <div style="padding:2rem; background:#6B1A2A; display:flex; gap:1.5rem; flex-wrap:wrap;">
+      <div>
+        <button style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.85rem 2rem; background:#C9A84C; color:#2C2C2C; font-size:0.8rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; border:none; cursor:pointer;">Gold Fill (on dark)</button>
+        <p class="label" style="color:rgba(250,246,240,0.6);">Use on dark/Burgundy backgrounds</p>
+      </div>
+      <div>
+        <button style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.85rem 2rem; background:transparent; color:#FAF6F0; font-size:0.8rem; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; border:1.5px solid rgba(250,246,240,0.4); cursor:pointer;">Ghost White (on dark)</button>
+        <p class="label" style="color:rgba(250,246,240,0.6);">Secondary on dark backgrounds</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPACING & LAYOUT -->
+  <div class="ds-section">
+    <h2 class="ds-heading">04 · Spacing &amp; Layout</h2>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
+      <div>
+        <p class="label" style="margin-bottom:1rem;">Spacing Scale (base 8px)</p>
+        <div style="display:flex; flex-direction:column; gap:0.75rem;">
+          <div style="display:flex; align-items:center; gap:1rem;">
+            <div style="width:0.5rem; height:1rem; background:#C9A84C;"></div>
+            <code>4px</code> <span style="font-size:0.85rem; color:#666;">· xs gaps</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:1rem;">
+            <div style="width:1rem; height:1rem; background:#C9A84C;"></div>
+            <code>8px</code> <span style="font-size:0.85rem; color:#666;">· tight spacing</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:1rem;">
+            <div style="width:2rem; height:1rem; background:#C9A84C;"></div>
+            <code>16px</code> <span style="font-size:0.85rem; color:#666;">· component padding</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:1rem;">
+            <div style="width:4rem; height:1rem; background:#C9A84C;"></div>
+            <code>32px</code> <span style="font-size:0.85rem; color:#666;">· section internal gap</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:1rem;">
+            <div style="width:6rem; height:1rem; background:#C9A84C;"></div>
+            <code>48px</code> <span style="font-size:0.85rem; color:#666;">· section padding (mobile)</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:1rem;">
+            <div style="width:8rem; height:1rem; background:#C9A84C;"></div>
+            <code>96–128px</code> <span style="font-size:0.85rem; color:#666;">· section padding (desktop)</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="label" style="margin-bottom:1rem;">Grid & Max-Width</p>
+        <div style="font-size:0.85rem; line-height:2; color:#444;">
+          <p><strong>Max content width:</strong> 1280px (<code>max-w-7xl</code>)</p>
+          <p><strong>Horizontal padding:</strong> 24px mobile · 48px desktop</p>
+          <p><strong>Main grid:</strong> 12-column · gap 24px</p>
+          <p><strong>Card grid:</strong> 1 → 2 → 3 cols · gap 24px</p>
+          <p><strong>About layout:</strong> 1 → 2 cols (equal) · gap 64px</p>
+          <p><strong>Breakpoints:</strong> sm 640 · md 768 · lg 1024 · xl 1280</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPONENTS -->
+  <div class="ds-section">
+    <h2 class="ds-heading">05 · Component Guidelines</h2>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
+      <div>
+        <p class="label" style="margin-bottom:0.75rem;">Gold Rule Divider</p>
+        <span class="gold-rule"></span>
+        <p style="font-size:0.8rem; color:#666; margin-top:0.75rem;">48px wide · 2px tall · gradient <code>#C9A84C → #E2C36E</code></p>
+        <p style="font-size:0.8rem; color:#666; margin-top:0.25rem;">Always appears below eyebrow label, above section heading</p>
+      </div>
+      <div>
+        <p class="label" style="margin-bottom:0.75rem;">Eyebrow + Title Pattern</p>
+        <p style="font-size:0.65rem; font-weight:600; letter-spacing:0.22em; text-transform:uppercase; color:#C9A84C;">Our Story</p>
+        <span class="gold-rule" style="margin:0.5rem 0;"></span>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:600; color:#2C2C2C; margin-top:0.5rem;">Section Heading</p>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem;">
+      <p class="label" style="margin-bottom:1rem;">Card Shadow Levels</p>
+      <div style="display:flex; gap:1.5rem; flex-wrap:wrap;">
+        <div style="padding:1.5rem; background:#fff; box-shadow:0 4px 24px rgba(107,26,42,0.07); width:10rem;">
+          <p style="font-size:0.75rem;">Resting card<br/><code>0 4px 24px rgba(107,26,42,0.07)</code></p>
+        </div>
+        <div style="padding:1.5rem; background:#fff; box-shadow:0 20px 48px rgba(107,26,42,0.14); width:10rem;">
+          <p style="font-size:0.75rem;">Hover card<br/><code>0 20px 48px rgba(107,26,42,0.14)</code></p>
+        </div>
+        <div style="padding:1.5rem; background:#fff; box-shadow:0 8px 40px rgba(107,26,42,0.10); width:10rem;">
+          <p style="font-size:0.75rem;">Form/modal<br/><code>0 8px 40px rgba(107,26,42,0.10)</code></p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem; padding:1.5rem; background:#FAF6F0; border-left:3px solid #C9A84C;">
+      <p style="font-size:0.85rem; color:#444; line-height:1.7;">
+        <strong>Border radius:</strong> The brand uses no border-radius on most elements (sharp, architectural feel). The only exceptions are: circular avatar/icon containers (50%), floating pills/badges (9999px), and scrollbar thumbs (3px). Do not apply rounded corners to cards, buttons, or input fields.
+      </p>
+    </div>
+  </div>
+
+  <!-- PAGE STRUCTURE -->
+  <div class="ds-section">
+    <h2 class="ds-heading">06 · Full Site Page Structure</h2>
+    <div style="font-family:monospace; font-size:0.8rem; line-height:2; color:#444; background:#FAF6F0; padding:1.5rem;">
+      <p style="color:#6B1A2A; font-weight:bold;">/* index.html — Complete Page Layout */</p>
+      <br/>
+      <p>1. &lt;header&gt;  Navbar (fixed, transparent → dark on scroll)</p>
+      <p>2. &lt;section id="hero"&gt;  Hero — full-screen cinematic</p>
+      <p>3. &lt;div&gt;  Stats Band — 4-col trust metrics (burgundy bg)</p>
+      <p>4. &lt;section id="about"&gt;  About Us — 2-col image + narrative</p>
+      <p>5. &lt;section id="experiences"&gt;  3 Experience Cards</p>
+      <p>6. &lt;section id="menu"&gt;  Menu Preview — items + photography</p>
+      <p>7. &lt;section id="gallery"&gt;  Gallery Grid — 5-image mosaic</p>
+      <p>8. &lt;section id="events"&gt;  Event Space — full-bleed background</p>
+      <p>9. &lt;section&gt;  Testimonials — 3 quote cards</p>
+      <p>10. &lt;div&gt;  CTA Band — reservation push (gradient bg)</p>
+      <p>11. &lt;section id="contact"&gt;  Contact — info + inquiry form</p>
+      <p>12. &lt;footer&gt;  4-col footer with links, contact, social</p>
+      <p>13. Floating WhatsApp FAB (fixed, bottom-right)</p>
+      <p>14. Mobile drawer menu (slide-in from right)</p>
+    </div>
+
+    <div style="margin-top:1.5rem; padding:1.5rem; background:#FAF6F0; border-left:3px solid #C9A84C;">
+      <p style="font-size:0.85rem; color:#444; line-height:1.7;">
+        <strong>To extend to Next.js:</strong> Each section above maps 1:1 to a React component in <code>/components</code>.
+        Replace Tailwind CDN with <code>npm install tailwindcss</code> + <code>tailwind.config.js</code> using the same token values.
+        Form submission should POST to a Next.js API route at <code>/api/inquire</code> which sends an email + WhatsApp message via Twilio/Nodemailer.
+      </p>
+    </div>
+  </div>
+
+  <div style="text-align:center; padding:2rem; color:#6B6B6B; font-size:0.75rem;">
+    Winnie's Cuisine &amp; Events · Design System v1.0 · Enugu, Nigeria
+  </div>
+
+</body>
+</html>
