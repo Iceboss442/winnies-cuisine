@@ -99,11 +99,14 @@
     /* ─── Global Resets & Base Styles ─────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    html { overflow-x: hidden; }
+
     body {
       font-family: 'Inter', system-ui, sans-serif;
       background-color: #FAF6F0;
       color: #2C2C2C;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
       /* Mobile: body padding so content clears the sticky bottom bar */
       padding-bottom: 5rem;
     }
@@ -212,7 +215,7 @@
     }
 
     /* ─── Navbar ───────────────────────────────────────────────────────────── */
-    #navbar { transition: background 0.35s, box-shadow 0.35s, padding 0.35s; }
+    #navbar { background: transparent; transition: background 0.35s, box-shadow 0.35s, padding 0.35s; }
     #navbar.scrolled {
       background-color: rgba(44,28,18,0.97);
       backdrop-filter: blur(12px);
@@ -580,7 +583,7 @@
      NAVBAR
      Fixed, transparent on hero → darkens on scroll
 ═══════════════════════════════════════════════════════════════════════════ -->
-<header id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 px-6 md:px-12" style="background: transparent;">
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 py-5 px-6 md:px-12">
   <nav class="max-w-7xl mx-auto flex items-center justify-between">
 
     <!-- Logo -->
@@ -1572,7 +1575,6 @@
    id="whatsapp-fab"
    style="
      position: fixed;
-     bottom: 2rem;
      right: 2rem;
      z-index: 100;
      width: 3.5rem;
