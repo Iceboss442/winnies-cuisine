@@ -9,8 +9,20 @@
   <style>
     body { font-family: 'Inter', sans-serif; background: #F5EDE0; color: #2C2C2C; }
     .swatch { width: 5rem; height: 5rem; border-radius: 4px; }
-    .ds-section { background: #fff; padding: 2.5rem; margin-bottom: 2rem; }
-    .ds-heading { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 600; margin-bottom: 1.5rem; }
+
+    /* Mobile-first: tighter padding on small screens, roomier on desktop */
+    .ds-body { padding: 1.25rem; }
+    @media (min-width: 768px) { .ds-body { padding: 2rem; } }
+
+    .ds-section { background: #fff; padding: 1.5rem; margin-bottom: 1.5rem; }
+    @media (min-width: 768px) { .ds-section { padding: 2.5rem; margin-bottom: 2rem; } }
+
+    .ds-heading { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; margin-bottom: 1.25rem; }
+    @media (min-width: 768px) { .ds-heading { font-size: 1.8rem; margin-bottom: 1.5rem; } }
+
+    /* Two-column reference grids: stack on mobile, side-by-side from tablet up */
+    .ds-grid-2 { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+    @media (min-width: 640px) { .ds-grid-2 { grid-template-columns: 1fr 1fr; } }
     .label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #6B6B6B; margin-top: 0.5rem; }
     code { background: #F5EDE0; padding: 0.15rem 0.4rem; font-size: 0.8rem; border-radius: 3px; font-family: monospace; }
 
@@ -21,7 +33,7 @@
     .gold-rule { display:block; width:3rem; height:2px; background:linear-gradient(90deg,#C9A84C,#E2C36E); border-radius:2px; }
   </style>
 </head>
-<body class="p-8 max-w-5xl mx-auto">
+<body class="ds-body max-w-5xl mx-auto">
 
   <div style="background:#6B1A2A; padding:2rem 2.5rem; margin-bottom:2rem;">
     <p style="font-size:0.65rem; font-weight:600; letter-spacing:0.25em; text-transform:uppercase; color:#C9A84C; margin-bottom:0.5rem;">Design System</p>
@@ -110,10 +122,10 @@
   <div class="ds-section">
     <h2 class="ds-heading">02 · Typography</h2>
 
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem;">
+    <div class="ds-grid-2" style="gap:3rem;">
       <div>
         <p class="label" style="margin-bottom:1rem;">Cormorant Garamond (Headings / Display)</p>
-        <p style="font-family:'Cormorant Garamond',serif; font-size:3rem; font-weight:600; line-height:1.1; color:#2C2C2C;">Where every meal<br/><em style="color:#6B1A2A;">is a masterpiece</em></p>
+        <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(1.9rem,7vw,3rem); font-weight:600; line-height:1.1; color:#2C2C2C;">Where every meal<br/><em style="color:#6B1A2A;">is a masterpiece</em></p>
         <div style="margin-top:1.5rem; space-y:0.5rem;">
           <p style="font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:600; color:#2C2C2C;">H1 · 48–72px · Weight 600</p>
           <p style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:600; color:#2C2C2C;">H2 · 36–48px · Weight 600</p>
@@ -179,7 +191,7 @@
   <!-- SPACING & LAYOUT -->
   <div class="ds-section">
     <h2 class="ds-heading">04 · Spacing &amp; Layout</h2>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
+    <div class="ds-grid-2">
       <div>
         <p class="label" style="margin-bottom:1rem;">Spacing Scale (base 8px)</p>
         <div style="display:flex; flex-direction:column; gap:0.75rem;">
@@ -226,7 +238,7 @@
   <!-- COMPONENTS -->
   <div class="ds-section">
     <h2 class="ds-heading">05 · Component Guidelines</h2>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
+    <div class="ds-grid-2">
       <div>
         <p class="label" style="margin-bottom:0.75rem;">Gold Rule Divider</p>
         <span class="gold-rule"></span>

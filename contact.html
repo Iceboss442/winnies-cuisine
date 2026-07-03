@@ -136,12 +136,13 @@
     .social-icon:hover { border-color: #C9A84C; color: #C9A84C; background: rgba(201,168,76,0.1); }
 
     /* ── WhatsApp FAB: above sticky bar on mobile, normal on desktop ── */
-    #wa-fab { position: fixed; bottom: 5.5rem; right: 1.75rem; z-index: 90; width: 3.5rem; height: 3.5rem; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.5); transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; }
+    #wa-fab { position: fixed; bottom: 6.75rem; right: 1.75rem; z-index: 90; width: 3.5rem; height: 3.5rem; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.5); transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; }
     #wa-fab:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
     @media (min-width: 768px) { #wa-fab { bottom: 1.75rem; } }
 
     /* Mobile body: padded for sticky bar */
-    body { font-family: 'Inter', system-ui, sans-serif; background: #FAF6F0; color: #2C2C2C; padding-bottom: 5rem; }
+    html { overflow-x: hidden; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: #FAF6F0; color: #2C2C2C; overflow-x: hidden; padding-bottom: 5rem; }
     @media (min-width: 768px) { body { padding-bottom: 0; } }
 
     /* ── Buttons: full-width on mobile ── */
@@ -183,10 +184,10 @@
       scrollbar-width: none;
     }
     .testi-carousel::-webkit-scrollbar { display: none; }
-    .testi-carousel .testi-card { min-width: 82vw; scroll-snap-align: start; flex-shrink: 0; }
+    .testi-carousel .testi-card { flex: 0 0 82vw; scroll-snap-align: start; }
     @media (min-width: 1024px) {
       .testi-carousel { display: grid; grid-template-columns: repeat(3, 1fr); overflow-x: visible; margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0; padding-bottom: 0; }
-      .testi-carousel .testi-card { min-width: unset; }
+      .testi-carousel .testi-card { flex: unset; }
     }
 
     /* ── Sticky mobile bottom bar ── */
@@ -203,8 +204,9 @@
 ══════════════════════════════════ -->
 <nav id="navbar" role="navigation" aria-label="Main navigation">
   <div class="max-w-7xl mx-auto px-5 md:px-8 lg:px-12 flex items-center justify-between">
-    <a href="index.html" class="font-serif text-xl font-semibold text-white tracking-wide" aria-label="Winnie's Cuisine & Events — Home">
-      Winnie's <span style="color:#C9A84C;">Cuisine</span>
+    <a href="index.html" class="flex flex-col leading-none" aria-label="Winnie's Cuisine & Events — Home">
+      <span style="font-family:'Cormorant Garamond',serif; font-size:1.55rem; font-weight:700; color:#FAF6F0; letter-spacing:0.02em;">Winnie's</span>
+      <span style="font-size:0.58rem; font-weight:500; letter-spacing:0.28em; color:#C9A84C; text-transform:uppercase; margin-top:1px;">Cuisine &amp; Events</span>
     </a>
     <ul class="hidden md:flex items-center gap-8" role="list">
       <li><a href="index.html" class="nav-link">Home</a></li>
@@ -756,8 +758,9 @@
 
       <!-- Brand -->
       <div class="lg:col-span-1">
-        <a href="index.html" class="font-serif text-2xl font-semibold text-white tracking-wide" aria-label="Winnie's Cuisine & Events — Home">
-          Winnie's <span style="color:#C9A84C;">Cuisine</span>
+        <a href="index.html" class="flex flex-col leading-none" aria-label="Winnie's Cuisine & Events — Home">
+          <span style="font-family:'Cormorant Garamond',serif; font-size:1.7rem; font-weight:700; color:#FAF6F0;">Winnie's</span>
+          <span style="font-size:0.58rem; font-weight:500; letter-spacing:0.28em; color:#C9A84C; text-transform:uppercase; margin-top:2px;">Cuisine &amp; Events</span>
         </a>
         <p class="mt-4 text-sm leading-relaxed" style="color:rgba(255,255,255,0.5);">Fine dining and exceptional events at the heart of Centenary City Estate, Enugu. Opened December 2025.</p>
         <div class="flex gap-3 mt-5">
