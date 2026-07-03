@@ -99,9 +99,8 @@
     }
     .pkg-grid::-webkit-scrollbar { display: none; }
     .pkg-grid .pkg-card {
-      min-width: 82vw;
+      flex: 0 0 82vw;
       scroll-snap-align: start;
-      flex-shrink: 0;
     }
     @media (min-width: 1024px) {
       .pkg-grid {
@@ -112,7 +111,7 @@
         padding-left: 0; padding-right: 0;
         padding-bottom: 0;
       }
-      .pkg-grid .pkg-card { min-width: unset; }
+      .pkg-grid .pkg-card { flex: unset; }
       .pkg-card { transition: transform 0.3s, box-shadow 0.3s; }
       .pkg-card:hover { transform: translateY(-6px); box-shadow: 0 24px 56px rgba(107,26,42,0.18); }
       .pkg-card.featured { transform: scale(1.02); }
